@@ -1,0 +1,6 @@
+{
+  "appId": "com.ecotour.app",
+  "appName": "EcoTour",
+  "webDir": "www",
+  "bundledWebRuntime": false
+}
