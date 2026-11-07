@@ -383,11 +383,12 @@ window.onFirebaseAuthChanged = async function (user) {
   if (!user) return;
   try {
     const cloudState = await window.firebaseAuthApi.loadUserState(user.uid);
-    if (cloudState && (!state.user || !state.user.uid || state.user.uid === user.uid)) {
-      state = { ...defaultState(), ...cloudState, user: {
-        name: user.displayName || cloudState.user?.name || user.email.split('@')[0],
+    if (!state.user || !state.user.uid || state.user.uid === user.uid) {
+      state = { ...defaultState(), ...(cloudState || state), user: {
+        name: user.displayName || cloudState?.user?.name || user.email.split('@')[0],
         email: user.email, uid: user.uid
       }};
+      state.guest = false;
       saveState();
       renderUser();
       refreshAll();
