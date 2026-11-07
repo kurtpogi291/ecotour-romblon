@@ -2,7 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebas
 import { getDatabase, ref, onValue, push, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 import {
   getAuth, onAuthStateChanged, createUserWithEmailAndPassword,
-  signInWithEmailAndPassword, signOut, updateProfile, sendPasswordResetEmail
+  signInWithEmailAndPassword, signOut, updateProfile, updateEmail, sendPasswordResetEmail
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
 const firebaseConfig = {
@@ -34,6 +34,14 @@ window.firebaseAuthApi = {
   },
   signIn: async (email, password) => (await signInWithEmailAndPassword(auth, email, password)).user,
   signOut: () => signOut(auth),
+  updateUserProfile: async (name, email) => {
+    const user = auth.currentUser;
+    if (!user) throw new Error('No authenticated user');
+    await updateProfile(user, { displayName: name });
+    if (email !== user.email) await updateEmail(user, email);
+    await set(ref(db, `users/${user.uid}/profile`), { name, email, updatedAt: new Date().toISOString() });
+    return user;
+  },
   resetPassword: (email) => sendPasswordResetEmail(auth, email),
   saveUserState: (uid, data) => set(ref(db, `users/${uid}/appState`), data),
   loadUserState: async (uid) => {
