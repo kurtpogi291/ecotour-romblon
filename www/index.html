@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EcoTour - Romblon Booking & Travel</title>
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/svg+xml" href="assets/images/ecotour-logo.svg" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -16,12 +17,7 @@
   <div id="screen-splash" class="screen active">
     <div class="splash-content">
       <div class="logo-wrapper">
-        <svg class="logo-pin" viewBox="0 0 100 120" fill="none" aria-hidden="true">
-          <path d="M50 0C22.3858 0 0 22.3858 0 50C0 80 50 120 50 120C50 120 100 80 100 50C100 22.3858 77.6142 0 50 0Z" fill="#B85C38"/>
-          <path d="M50 25C36.1929 25 25 36.1929 25 50C25 63.8071 36.1929 75 50 75C63.8071 75 75 63.8071 75 50C75 36.1929 63.8071 25 50 25Z" fill="var(--card-bg)"/>
-          <path d="M30 55C30 55 45 30 65 35C65 35 55 60 30 55Z" fill="#1E6B43"/>
-          <path d="M35 52C45 48 55 42 60 38" stroke="var(--card-bg)" stroke-width="2" stroke-linecap="round"/>
-        </svg>
+        <img class="logo-pin" src="assets/images/ecotour-logo.svg" alt="EcoTour logo" />
         <h1 class="brand-name">Eco<span class="brand-highlight">Tour</span></h1>
       </div>
       <div class="loader-bar"><div class="loader-progress"></div></div>
@@ -695,7 +691,7 @@
 </div>
 
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
-<script type="module" src="firebase-init.js"></script>
-<script src="script.js"></script>
+<script type="module" src="assets/js/firebase.js"></script>
+<script src="assets/js/app.js"></script>
 </body>
 </html>
