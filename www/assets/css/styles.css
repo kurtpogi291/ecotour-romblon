@@ -536,12 +536,12 @@ body { background-color: #000; display: flex; justify-content: center; align-ite
 }
 
 
-/* Detail gallery: reference layout - simple chevrons beside the bottom thumbnail tray */
+/* Detail gallery: thumbnail tray centered on hero/body boundary, compact side arrows */
 #screen-details .gallery-thumbs-row {
   left: 50%;
   right: auto;
-  bottom: -20px;
-  transform: translateX(-50%);
+  bottom: 0;
+  transform: translate(-50%, 50%);
   width: calc(100% - 112px);
   max-width: 780px;
   justify-content: space-evenly;
@@ -554,10 +554,10 @@ body { background-color: #000; display: flex; justify-content: center; align-ite
 }
 #screen-details .gallery-arrow {
   top: auto;
-  bottom: -7px;
-  transform: none;
-  width: 44px;
-  height: 54px;
+  bottom: 0;
+  transform: translateY(50%);
+  width: 32px;
+  height: 38px;
   z-index: 9;
   padding: 0;
   font-size: 0;
@@ -573,11 +573,11 @@ body { background-color: #000; display: flex; justify-content: center; align-ite
 }
 #screen-details .gallery-arrow::before {
   content: "";
-  width: 15px;
-  height: 15px;
-  border-left: 5px solid #fff;
-  border-bottom: 5px solid #fff;
-  border-radius: 2px;
+  width: 9px;
+  height: 9px;
+  border-left: 3px solid #fff;
+  border-bottom: 3px solid #fff;
+  border-radius: 1px;
   transform: rotate(45deg);
 }
 #screen-details .gallery-arrow-next::before { transform: rotate(225deg); }
@@ -588,7 +588,7 @@ body { background-color: #000; display: flex; justify-content: center; align-ite
   outline-offset: 2px;
   border-radius: 8px;
 }
-#screen-details .details-body { padding-top: 46px; }
+#screen-details .details-body { padding-top: 56px; }
 @media (max-width: 420px) {
   #screen-details .gallery-thumbs-row {
     width: calc(100% - 98px);
@@ -597,15 +597,15 @@ body { background-color: #000; display: flex; justify-content: center; align-ite
     border-radius: 24px;
   }
   #screen-details .gallery-arrow {
-    bottom: -9px;
-    width: 38px;
-    height: 48px;
+    bottom: 0;
+    width: 30px;
+    height: 36px;
   }
   #screen-details .gallery-arrow::before {
-    width: 12px;
-    height: 12px;
-    border-left-width: 4px;
-    border-bottom-width: 4px;
+    width: 8px;
+    height: 8px;
+    border-left-width: 3px;
+    border-bottom-width: 3px;
   }
   #screen-details .gallery-arrow-prev { left: 5px; }
   #screen-details .gallery-arrow-next { right: 5px; }
