@@ -106,7 +106,7 @@ let myTrips = [
   { id: 'ROM4492A', prop: 'Binucot Beach Resort', date: 'Oct 10 - 12, 2026', status: 'Past', total: '₱845.50' }
 ];
 
-let currentUser = { name: 'Kurt Castro', email: 'kurtcastro123@gmail.com' };
+let currentUser = { name: 'Traveler', email: '', uid: null, authUser: null };
 let activeCategory = 'All';
 let currentDetailSpot = romblonSpots[0];
 let searchQuery = '';
@@ -157,17 +157,21 @@ window.onFirebaseDataLoaded = function(data) {
 };
 
 // PROFILE / ACCOUNT SETTINGS
-function saveUserProfile() {
-  const newName = document.getElementById('ep-name').value;
-  const newEmail = document.getElementById('ep-email').value;
-  currentUser.name = newName;
-  currentUser.email = newEmail;
-  
-  document.getElementById('profile-name').innerText = newName;
-  document.getElementById('home-user-name').innerText = newName.split(' ')[0];
-  document.getElementById('profile-email').innerText = newEmail;
-  
-  document.getElementById('edit-profile-modal').classList.add('hidden');
+async function saveUserProfile() {
+  const newName = document.getElementById('ep-name').value.trim();
+  if (newName.length < 2) return alert('Please enter a valid display name.');
+  if (!currentUser.authUser || !window.firebaseSaveProfile) {
+    alert('Sign in to update your account profile.');
+    return;
+  }
+  try {
+    await window.firebaseSaveProfile(currentUser.authUser, newName);
+    updateSignedInProfile(currentUser.authUser);
+    document.getElementById('edit-profile-modal').classList.add('hidden');
+  } catch (error) {
+    console.error('Profile update failed:', error);
+    alert(error.message || 'Could not update your profile.');
+  }
 }
 
 // THEME TOGGLE
@@ -191,32 +195,103 @@ function toggleTheme(forceDark = false) {
 
 // AUTH FLOW
 function skipAuth() {
-  document.getElementById('home-user-name').innerText = 'Traveler';
+  currentUser = { name: 'Traveler', email: '', uid: null, authUser: null };
+  updateSignedInProfile(null);
   switchTab('home');
 }
-function handleLoginSubmit(e) {
+
+function updateSignedInProfile(user) {
+  currentUser.uid = user ? user.uid : null;
+  currentUser.authUser = user || null;
+  currentUser.email = user ? (user.email || '') : '';
+  currentUser.name = user ? (user.displayName || user.email?.split('@')[0] || 'Traveler') : 'Traveler';
+  const firstName = currentUser.name.split(' ')[0];
+  const profileName = document.getElementById('profile-name');
+  const profileEmail = document.getElementById('profile-email');
+  const homeName = document.getElementById('home-user-name');
+  const editName = document.getElementById('ep-name');
+  const editEmail = document.getElementById('ep-email');
+  if (profileName) profileName.innerText = currentUser.name;
+  if (profileEmail) profileEmail.innerText = currentUser.email || 'Not signed in';
+  if (homeName) homeName.innerText = firstName;
+  if (editName) editName.value = currentUser.name;
+  if (editEmail) editEmail.value = currentUser.email;
+}
+window.onFirebaseAuthChanged = updateSignedInProfile;
+
+window.onFirebaseBookingsLoaded = function(bookings) {
+  myTrips = bookings.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+  renderTrips();
+};
+
+async function handleLoginSubmit(e) {
   e.preventDefault();
-  const email = document.getElementById('login-email').value;
-  currentUser.email = email;
-  document.getElementById('profile-email').innerText = email;
-  document.getElementById('ep-email').value = email;
-  switchTab('home');
+  const email = document.getElementById('login-email').value.trim();
+  const password = document.getElementById('login-pass').value;
+  if (!window.firebaseSignIn) return alert('Firebase is not ready. Check your connection and try again.');
+  try {
+    await window.firebaseSignIn(email, password);
+    switchTab('home');
+  } catch (error) {
+    console.error('Login failed:', error);
+    const messages = {
+      'auth/invalid-credential': 'Email or password is incorrect.',
+      'auth/user-not-found': 'No account exists for this email.',
+      'auth/too-many-requests': 'Too many attempts. Please try again later.',
+      'auth/network-request-failed': 'Network error. Check your internet connection.'
+    };
+    alert(messages[error.code] || error.message || 'Unable to sign in.');
+  }
 }
-function handleSignupSubmit(e) {
+
+async function handleSignupSubmit(e) {
   e.preventDefault();
-  const name = document.getElementById('reg-name').value;
-  const email = document.getElementById('reg-email').value;
-  currentUser.name = name;
-  currentUser.email = email;
-  document.getElementById('profile-name').innerText = name;
-  document.getElementById('profile-email').innerText = email;
-  document.getElementById('ep-name').value = name;
-  document.getElementById('ep-email').value = email;
-  document.getElementById('home-user-name').innerText = name.split(' ')[0];
-  switchTab('home');
+  const name = document.getElementById('reg-name').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const password = document.getElementById('reg-pass').value;
+  if (name.length < 2) return alert('Please enter your full name.');
+  if (password.length < 6) return alert('Password must be at least 6 characters.');
+  if (!window.firebaseSignUp) return alert('Firebase is not ready. Check your connection and try again.');
+  try {
+    await window.firebaseSignUp(email, password, name);
+    document.getElementById('reg-pass').value = '';
+    switchTab('home');
+  } catch (error) {
+    console.error('Signup failed:', error);
+    const messages = {
+      'auth/email-already-in-use': 'An account already exists for this email.',
+      'auth/weak-password': 'Choose a stronger password (at least 6 characters).',
+      'auth/invalid-email': 'Please enter a valid email address.',
+      'auth/network-request-failed': 'Network error. Check your internet connection.'
+    };
+    alert(messages[error.code] || error.message || 'Unable to create account.');
+  }
 }
+
+async function handlePasswordReset() {
+  const email = document.getElementById('login-email').value.trim();
+  if (!email) return alert('Enter your email address in the Email field first.');
+  if (!window.firebasePasswordReset) return alert('Firebase is not ready. Try again in a moment.');
+  try {
+    await window.firebasePasswordReset(email);
+    alert('Password reset email sent. Check your inbox.');
+  } catch (error) {
+    console.error('Password reset failed:', error);
+    alert(error.message || 'Could not send password reset email.');
+  }
+}
+
 function signOut() {
-  if(confirm('Are you sure you want to sign out?')) navigateTo('screen-welcome');
+  if (!confirm('Are you sure you want to sign out?')) return;
+  if (window.firebaseSignOut) {
+    window.firebaseSignOut().then(() => {
+      myTrips = [];
+      renderTrips();
+      navigateTo('screen-welcome');
+    }).catch(error => alert(error.message || 'Unable to sign out.'));
+  } else {
+    navigateTo('screen-welcome');
+  }
 }
 
 // SEARCH & FILTER
@@ -473,16 +548,30 @@ function saveGuestDetails() {
 
 function processPayment() { navigateTo('screen-confirmation'); }
 
-function finishBooking() {
-  const displayPrice = currentDetailSpot.price;
-  myTrips.unshift({ 
-    id: 'RMBL' + Math.floor(Math.random() * 9000 + 1000), 
-    prop: currentDetailSpot.name, 
-    date: 'Dec 1 - 2, 2026', 
-    status: 'Upcoming', 
-    total: displayPrice 
-  });
-  switchTab('trips');
+async function finishBooking() {
+  const booking = {
+    id: 'RMBL' + Math.floor(Math.random() * 9000 + 1000),
+    destinationId: currentDetailSpot.id,
+    prop: currentDetailSpot.name,
+    date: 'Dec 1 - 2, 2026',
+    status: 'Upcoming',
+    total: currentDetailSpot.price,
+    createdAt: Date.now()
+  };
+  if (!currentUser.uid || !window.firebaseSaveBooking) {
+    alert('Please sign in to save and sync a booking to your account.');
+    navigateTo('screen-login');
+    return;
+  }
+  try {
+    await window.firebaseSaveBooking(currentUser.uid, booking);
+    myTrips.unshift(booking);
+    renderTrips();
+    switchTab('trips');
+  } catch (error) {
+    console.error('Booking save failed:', error);
+    alert('Your booking could not be saved. Please try again.');
+  }
 }
 
 // CAROUSEL LOGIC
