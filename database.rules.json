@@ -1,0 +1,27 @@
+{
+  "rules": {
+    "destinations": {
+      ".read": true,
+      "$destinationId": {
+        "reviews": {
+          ".write": "auth != null",
+          "$reviewId": {
+            ".validate": "newData.hasChildren(['user', 'stars', 'comment'])"
+          }
+        }
+      }
+    },
+    "users": {
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        ".write": "auth != null && auth.uid === $uid"
+      }
+    },
+    "bookings": {
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        ".write": "auth != null && auth.uid === $uid"
+      }
+    }
+  }
+}
