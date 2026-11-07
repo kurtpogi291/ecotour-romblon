@@ -1032,9 +1032,26 @@ function openSpot(id) {
 function renderSpotGallery(spot) {
   const images = Array.isArray(spot.gallery) && spot.gallery.length ? spot.gallery : [spot.image];
   currentGalleryIndex = Math.min(currentGalleryIndex, images.length - 1);
-  $('detail-main-img').src = safeUrl(images[currentGalleryIndex]);
-  $('detail-main-img').alt = `${spot.name} photo ${currentGalleryIndex + 1}`;
-  $('gallery-thumbs').innerHTML = images.map((url, i) => `<img src="${esc(safeUrl(url))}" alt="Photo ${i + 1}" class="thumb-img ${i === currentGalleryIndex ? 'active' : ''}" data-action="set-image" data-index="${i}" data-fallback />`).join('');
+  const hero = $('detail-main-img');
+  const nextSrc = safeUrl(images[currentGalleryIndex]);
+  if (hero.getAttribute('src') !== nextSrc) {
+    hero.classList.add('gallery-changing');
+    hero.addEventListener('load', () => hero.classList.remove('gallery-changing'), { once: true });
+    hero.src = nextSrc;
+    if (hero.complete) hero.classList.remove('gallery-changing');
+  }
+  hero.alt = `${spot.name} photo ${currentGalleryIndex + 1}`;
+  const thumbs = $('gallery-thumbs');
+  if (thumbs.children.length !== images.length || thumbs.dataset.spotId !== spot.id) {
+    thumbs.innerHTML = images.map((url, i) => `<img src="${esc(safeUrl(url))}" alt="Photo ${i + 1}" class="thumb-img" data-action="set-image" data-index="${i}" data-fallback />`).join('');
+    thumbs.dataset.spotId = spot.id;
+  }
+  thumbs.querySelectorAll('.thumb-img').forEach((thumb, i) => {
+    thumb.classList.toggle('active', i === currentGalleryIndex);
+    thumb.setAttribute('aria-current', i === currentGalleryIndex ? 'true' : 'false');
+  });
+  const activeThumb = thumbs.children[currentGalleryIndex];
+  if (activeThumb) activeThumb.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
   document.querySelectorAll('.gallery-arrow').forEach((button) => { button.hidden = images.length < 2; });
 }
 function changeSpotGalleryImage(step) {
