@@ -551,12 +551,12 @@ function ensureMapRendered() {
     // Initialize map centered around Romblon
     leafletMap = L.map('map-container', { zoomControl: false }).setView([12.45, 122.25], 9.5);
     
-    // Using CARTO Raster Tiles (No API key, highly reliable, lightning-fast CDN)
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+    // Using OpenStreetMap standard raster tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-      subdomains: 'abcd',
-      noWrap: true
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      subdomains: 'abc',
+      referrerPolicy: 'origin-when-cross-origin'
     }).addTo(leafletMap);
 
     L.control.zoom({ position: 'bottomright' }).addTo(leafletMap);
