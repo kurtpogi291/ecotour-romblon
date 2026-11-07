@@ -483,3 +483,54 @@ body { background-color: #000; display: flex; justify-content: center; align-ite
     max-height: 44px;
   }
 }
+
+
+/* Figma-inspired destination gallery controls and active thumbnail motion */
+#screen-details .details-hero { isolation: isolate; }
+#screen-details .details-hero > #detail-main-img { transition: opacity 180ms ease; }
+#screen-details .details-hero > #detail-main-img.gallery-changing { opacity: .45; }
+#screen-details .details-nav-overlay { top: 14px; left: 14px; right: 14px; z-index: 9; pointer-events: none; }
+#screen-details .details-nav-overlay button { pointer-events: auto; }
+#screen-details .details-nav-overlay > .icon-btn {
+  width: 44px; height: 44px; flex: 0 0 44px;
+  display: grid; place-items: center; border-radius: 50%;
+  background: rgba(255,255,255,.96); color: #14263b;
+  border: 1px solid rgba(15,23,42,.18);
+  box-shadow: 0 3px 14px rgba(0,0,0,.28);
+}
+#screen-details .details-nav-overlay > .icon-btn svg { width: 23px; height: 23px; stroke: #14263b; }
+#screen-details .gallery-arrow {
+  top: 44%; width: 42px; height: 42px; z-index: 7;
+  font-size: 32px; background: rgba(17,45,61,.72);
+  border: 2px solid rgba(255,255,255,.85);
+  box-shadow: 0 3px 12px rgba(0,0,0,.22);
+}
+#screen-details .gallery-arrow-prev { left: 12px; }
+#screen-details .gallery-arrow-next { right: 12px; }
+#screen-details .gallery-thumbs-row {
+  bottom: 10px; z-index: 8; overflow-x: auto; overflow-y: visible;
+  padding: 11px 9px 8px; gap: 8px;
+  scrollbar-width: none; align-items: center;
+}
+#screen-details .gallery-thumbs-row::-webkit-scrollbar { display: none; }
+#screen-details .gallery-thumbs-row .thumb-img {
+  box-sizing: border-box; flex-shrink: 0;
+  border: 2px solid #24354a; border-radius: 11px;
+  transform: translateY(0) scale(1);
+  transition: transform 260ms cubic-bezier(.2,1.45,.45,1), border-color 200ms, box-shadow 200ms;
+  will-change: transform;
+}
+#screen-details .gallery-thumbs-row .thumb-img.active {
+  border: 3px solid #3987ff;
+  transform: translateY(-5px) scale(1.09);
+  box-shadow: 0 6px 12px rgba(0,0,0,.28);
+}
+#screen-details .details-body { padding-top: 30px; }
+@media (max-width: 420px) {
+  #screen-details .gallery-thumbs-row { gap: 6px; padding: 10px 7px 7px; }
+  #screen-details .gallery-arrow { width: 38px; height: 38px; font-size: 29px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #screen-details .gallery-thumbs-row .thumb-img,
+  #screen-details .details-hero > #detail-main-img { transition: none; }
+}
