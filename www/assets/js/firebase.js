@@ -1,9 +1,9 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getDatabase, ref, onValue, push, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js";
+import { getDatabase, ref, onValue, push, set } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-database.js";
 import {
   getAuth, onAuthStateChanged, createUserWithEmailAndPassword,
   signInWithEmailAndPassword, signOut, updateProfile, updateEmail, sendPasswordResetEmail
-} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/13.1.0/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB7eY5nqafzmfHAgtIBethkUgoiXdeRmD0",
@@ -45,7 +45,7 @@ window.firebaseAuthApi = {
   resetPassword: (email) => sendPasswordResetEmail(auth, email),
   saveUserState: (uid, data) => set(ref(db, `users/${uid}/appState`), data),
   loadUserState: async (uid) => {
-    const { get } = await import("https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js");
+    const { get } = await import("https://www.gstatic.com/firebasejs/13.1.0/firebase-database.js");
     const snapshot = await get(ref(db, `users/${uid}/appState`));
     return snapshot.exists() ? snapshot.val() : null;
   }
