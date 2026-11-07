@@ -159,6 +159,14 @@ body { background-color: #000; display: flex; justify-content: center; align-ite
 .gallery-thumbs-row { position: absolute; bottom: -16px; left: 20px; right: 20px; display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
 .thumb-img { width: 56px; height: 56px; border-radius: var(--radius-sm); object-fit: cover; cursor: pointer; border: 2px solid var(--card-bg); box-shadow: var(--shadow-sm); }
 .thumb-img.active { border-color: var(--primary-brand); }
+
+.gallery-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 4; width: 34px; height: 34px; border: 1px solid rgba(255,255,255,.65); border-radius: 50%; background: rgba(15,23,42,.35); color: #fff; font-size: 27px; line-height: 1; display: grid; place-items: center; cursor: pointer; backdrop-filter: blur(6px); }
+.gallery-arrow-prev { left: 12px; }
+.gallery-arrow-next { right: 12px; }
+.gallery-arrow[hidden] { display: none; }
+.gallery-thumbs-row { z-index: 6; justify-content: center; background: rgba(255,255,255,.88); border: 1px solid rgba(255,255,255,.65); border-radius: 18px; padding: 7px 10px 9px; left: 12%; right: 12%; bottom: -20px; box-shadow: 0 5px 16px rgba(0,0,0,.16); }
+.thumb-img { flex: 0 0 56px; }
+@media (max-width: 420px) { .gallery-thumbs-row { left: 10%; right: 10%; gap: 6px; } .thumb-img { width: 48px; height: 48px; flex-basis: 48px; } }
 .details-body { padding: 30px 20px 16px; background: var(--bg-canvas); }
 .tags-row { display: flex; flex-wrap: wrap; gap: 8px; }
 .tag { background: var(--card-bg); padding: 4px 8px; border-radius: 4px; font-size: 10px; font-weight: 700; color: var(--text-main); border: 1px solid var(--border-color); }
