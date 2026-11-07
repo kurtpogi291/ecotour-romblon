@@ -5,7 +5,7 @@ const romblonSpots =
     description: 'Famous for its long, curving white sandbar connecting to Bang-og Island at low tide. Crystal clear waters ideal for swimming and sunset watching.',
     price: 'Free Entry', rawPrice: 0, rating: 4.9, 
     image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80',
-    gallery: ['https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80'],
+    gallery: ['https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1506953823976-52e1fdc0149a?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1473116763249-2faaef81ccda?auto=format&fit=crop&w=900&q=85'],
     highlights: ['White Sandbar', 'Sunset Point'], lat: 12.5833, lng: 122.2625,
     reviews: [{ user: 'Maria S.', stars: 5, comment: 'Breathtaking sandbar!' }]
   },
@@ -14,7 +14,7 @@ const romblonSpots =
     description: 'A serene beachfront escape with cozy, air-conditioned rooms overlooking the sea or pool. Ideal for kayaking and scuba diving.',
     price: '₱845.50 / Night', rawPrice: 845.50, rating: 4.7, 
     image: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=600&q=80',
-    gallery: ['https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=600&q=80'],
+    gallery: ['https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=900&q=85'],
     highlights: ['Pool', 'Beachfront'], lat: 12.3833, lng: 121.9667,
     reviews: [{ user: 'Erika R.', stars: 4, comment: 'Great coastal drive and calm waters.' }]
   },
@@ -23,7 +23,7 @@ const romblonSpots =
     description: 'Quiet beachfront spot with simple bungalows, poolside dining, and a relaxed atmosphere under coconut palms.',
     price: '₱1,120.00 / Night', rawPrice: 1120.00, rating: 4.8, 
     image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80',
-    gallery: ['https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80'],
+    gallery: ['https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=900&q=85'],
     highlights: ['Bungalows', 'Bar'], lat: 12.5283, lng: 121.9861,
     reviews: [{ user: 'Leonard F.', stars: 5, comment: 'Awesome relaxing vibe!' }]
   },
@@ -32,7 +32,7 @@ const romblonSpots =
     description: 'Known as "G2", featuring knife-edge ridges and incredible untouched biodiversity. A must for serious hikers.',
     price: '₱500 Permit', rawPrice: 500.00, rating: 4.8, 
     image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80',
-    gallery: ['https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80'],
+    gallery: ['https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1464278533981-50106e6176b1?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=900&q=85'],
     highlights: ['Hiking', 'Wildlife'], lat: 12.4161, lng: 122.5694,
     reviews: [{ user: 'Alex H.', stars: 5, comment: 'Challenging but unforgettable.' }]
   },
@@ -41,7 +41,7 @@ const romblonSpots =
     description: 'A protected marine sanctuary featuring a floating pontoon where you can swim and feed hundreds of colorful tropical fish.',
     price: '₱100 Entry', rawPrice: 100.00, rating: 4.6, 
     image: 'https://images.unsplash.com/photo-1682687220199-d0124f48f95b?auto=format&fit=crop&w=600&q=80',
-    gallery: ['https://images.unsplash.com/photo-1682687220199-d0124f48f95b?auto=format&fit=crop&w=600&q=80'],
+    gallery: ['https://images.unsplash.com/photo-1682687220199-d0124f48f95b?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1546026423-cc4642628d2b?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=900&q=85'],
     highlights: ['Snorkeling', 'Marine Life'], lat: 12.2570, lng: 121.9961,
     reviews: [{ user: 'Samantha', stars: 5, comment: 'Lots of fish right off the dock!' }]
   },
@@ -50,7 +50,7 @@ const romblonSpots =
     description: 'Often called Boracay’s quieter sister island. Famous for untouched white sand beaches and cliff diving spots.',
     price: '₱50 Envi Fee', rawPrice: 50.00, rating: 4.9, 
     image: 'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=600&q=80',
-    gallery: ['https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=600&q=80'],
+    gallery: ['https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=900&q=85'],
     highlights: ['Pristine Sand', 'Cliff Diving'], lat: 12.0667, lng: 121.9333,
     reviews: [{ user: 'Jake M.', stars: 5, comment: 'Just like Boracay before the crowds.' }]
   },
@@ -59,7 +59,7 @@ const romblonSpots =
     description: 'A sprawling resort tucked into a cove with beautiful white sand and a scenic hillside viewpoint perfect for photography.',
     price: '₱1,500.00 / Night', rawPrice: 1500.00, rating: 4.5, 
     image: 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=600&q=80',
-    gallery: ['https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=600&q=80'],
+    gallery: ['https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=900&q=85'],
     highlights: ['Scenic View', 'White Sand'], lat: 12.2858, lng: 122.0544,
     reviews: [{ user: 'Chris P.', stars: 4, comment: 'Great sunset view from the hill.' }]
   },
@@ -68,7 +68,7 @@ const romblonSpots =
     description: 'Awarded as one of the cleanest inland bodies of water in the Philippines. Features cool, crystal-clear water and diving platforms.',
     price: '₱30 Entry', rawPrice: 30.00, rating: 4.8, 
     image: 'https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=600&q=80',
-    gallery: ['https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=600&q=80'],
+    gallery: ['https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=85'],
     highlights: ['Crystal Clear', 'Cliff Diving'], lat: 12.3551, lng: 122.5684,
     reviews: [{ user: 'Daniel', stars: 5, comment: 'The water is so cold and refreshing!' }]
   },
@@ -77,7 +77,7 @@ const romblonSpots =
     description: 'A popular local beach with fine white sand and gentle waves, located very close to the town center. Great for picnics and family outings.',
     price: '₱50 Entry', rawPrice: 50.00, rating: 4.4, 
     image: 'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=600&q=80',
-    gallery: ['https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=600&q=80'],
+    gallery: ['https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=900&q=85'],
     highlights: ['Family Friendly', 'Fine Sand'], lat: 12.5700, lng: 122.2541,
     reviews: [{ user: 'Anna L.', stars: 4, comment: 'Nice beach very near the town proper.' }]
   },
@@ -86,7 +86,7 @@ const romblonSpots =
     description: 'A tranquil waterfall surrounded by lush tropical jungle. Offers cool, refreshing natural pools perfect for a quick dip.',
     price: '₱20 Entry', rawPrice: 20.00, rating: 4.5, 
     image: 'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=600&q=80',
-    gallery: ['https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=600&q=80'],
+    gallery: ['https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=900&q=85'],
     highlights: ['Waterfalls', 'Nature Trail'], lat: 12.5333, lng: 122.0167,
     reviews: [{ user: 'Leo', stars: 5, comment: 'Very peaceful and secluded.' }]
   },
@@ -95,7 +95,7 @@ const romblonSpots =
     description: 'A stunning "hidden sea" consisting of saltwater lakes surrounded by dramatic limestone karst cliffs, accessible by boat.',
     price: '₱500 Boat Tour', rawPrice: 500.00, rating: 4.8, 
     image: 'https://images.unsplash.com/photo-1505993597083-3bd19fa85e54?auto=format&fit=crop&w=600&q=80',
-    gallery: ['https://images.unsplash.com/photo-1505993597083-3bd19fa85e54?auto=format&fit=crop&w=600&q=80'],
+    gallery: ['https://images.unsplash.com/photo-1505993597083-3bd19fa85e54?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=900&q=85'],
     highlights: ['Hidden Lake', 'Limestone Cliffs'], lat: 12.6000, lng: 122.0667,
     reviews: [{ user: 'Sarah J.', stars: 5, comment: 'Reminds me of Palawan or El Nido!' }]
   }
@@ -128,6 +128,7 @@ let activeCategory = 'All';
 let searchQuery = '';
 let sortMode = 'featured';
 let currentSpot = null;
+let currentGalleryIndex = 0;
 let navStack = [];
 let currentScreen = 'screen-splash';
 let returnTo = null;
@@ -1010,7 +1011,8 @@ function openSpot(id) {
   if (!s) return;
   currentSpot = s;
   closeModalsAll();
-  $('detail-main-img').src = safeUrl(s.image);
+  currentGalleryIndex = 0;
+  $('detail-main-img').src = safeUrl((s.gallery && s.gallery[0]) || s.image);
   $('detail-main-img').alt = s.name;
   $('detail-title').textContent = s.name;
   $('detail-location').textContent = s.location;
@@ -1018,13 +1020,28 @@ function openSpot(id) {
   $('detail-desc').textContent = s.description;
   renderDetailEcoScore(s);
   $('detail-tags').innerHTML = `<span class="tag">${esc(s.category)}</span>${ratingFor(s) >= 4.7 ? '<span class="tag">Top Rated</span>' : ''}`;
-  $('gallery-thumbs').innerHTML = (s.gallery.length > 1 ? s.gallery : []).map((url, i) => `<img src="${esc(safeUrl(url))}" alt="Photo ${i + 1}" class="thumb-img ${i === 0 ? 'active' : ''}" data-action="set-image" data-url="${esc(safeUrl(url))}" data-fallback />`).join('');
+  renderSpotGallery(s);
   $('detail-highlights').innerHTML = (s.highlights || []).map((h) => `<span class="tag">✓ ${esc(h)}</span>`).join('') || '<span class="text-muted">No highlights listed.</span>';
   renderReviews();
   updateFavoriteButton();
   refreshDetailPricing();
   navigateTo('screen-details');
   $('screen-details').scrollTop = 0;
+}
+
+function renderSpotGallery(spot) {
+  const images = Array.isArray(spot.gallery) && spot.gallery.length ? spot.gallery : [spot.image];
+  currentGalleryIndex = Math.min(currentGalleryIndex, images.length - 1);
+  $('detail-main-img').src = safeUrl(images[currentGalleryIndex]);
+  $('detail-main-img').alt = `${spot.name} photo ${currentGalleryIndex + 1}`;
+  $('gallery-thumbs').innerHTML = images.map((url, i) => `<img src="${esc(safeUrl(url))}" alt="Photo ${i + 1}" class="thumb-img ${i === currentGalleryIndex ? 'active' : ''}" data-action="set-image" data-index="${i}" data-fallback />`).join('');
+  document.querySelectorAll('.gallery-arrow').forEach((button) => { button.hidden = images.length < 2; });
+}
+function changeSpotGalleryImage(step) {
+  if (!currentSpot) return;
+  const images = Array.isArray(currentSpot.gallery) && currentSpot.gallery.length ? currentSpot.gallery : [currentSpot.image];
+  currentGalleryIndex = (currentGalleryIndex + step + images.length) % images.length;
+  renderSpotGallery(currentSpot);
 }
 
 function renderReviews() {
@@ -1593,11 +1610,9 @@ const actions = {
   'cancel-trip': cancelTrip,
   'open-spot': (el) => openSpot(el.dataset.id),
   'toggle-favorite': (el) => toggleFavorite(el.dataset.id),
-  'set-image': (el) => {
-    $('detail-main-img').src = el.dataset.url;
-    document.querySelectorAll('.thumb-img').forEach((t) => t.classList.remove('active'));
-    el.classList.add('active');
-  }
+  'set-image': (el) => { currentGalleryIndex = Number(el.dataset.index) || 0; renderSpotGallery(currentSpot); },
+  'prev-image': () => changeSpotGalleryImage(-1),
+  'next-image': () => changeSpotGalleryImage(1)
 };
 
 function bindEvents() {
