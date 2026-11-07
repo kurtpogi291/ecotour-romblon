@@ -4,8 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>EcoTour - Romblon Booking & Travel</title>
-  <meta name="theme-color" content="#14532d" />
-  <link rel="icon" type="image/svg+xml" href="assets/ecotour-favicon.svg" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="src/styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -59,13 +57,13 @@
         <form class="auth-form" onsubmit="handleLoginSubmit(event)">
           <div class="input-group">
             <label>Email</label>
-            <input type="email" id="login-email" autocomplete="email" placeholder="you@example.com" required />
+            <input type="email" id="login-email" value="kurtcastro123@gmail.com" required />
           </div>
           <div class="input-group">
             <label>Password</label>
-            <input type="password" id="login-pass" autocomplete="current-password" placeholder="Your password" required />
+            <input type="password" id="login-pass" value="password123" required />
           </div>
-          <p class="forgot-pass" onclick="handlePasswordReset()">Forgot Password?</p>
+          <p class="forgot-pass" onclick="alert('Password reset link sent!')">Forgot Password?</p>
           <button type="submit" class="btn btn-primary btn-block btn-lg">Log In</button>
         </form>
       </div>
@@ -104,7 +102,7 @@
     <div id="screen-home" class="screen">
       <div class="home-hero-bg">
         <header class="home-top-bar">
-          <div class="header-brand-light"><img src="assets/ecotour-logo.svg" alt="" />Eco<span class="brand-highlight">Tour</span></div>
+          <div class="header-brand-light">Eco<span class="brand-highlight">Tour</span></div>
           <div class="header-actions">
             <button class="theme-toggle-btn" onclick="toggleTheme()" id="theme-btn">🌙</button>
             <button class="profile-avatar-btn" onclick="switchTab('profile')">
@@ -184,7 +182,6 @@
         </div>
       </div>
       <div id="map-container" style="flex: 1; height: 100%; width: 100%; z-index: 1;"></div>
-      <div class="map-location-controls"><button id="locate-me-btn" class="map-locate-btn" type="button" onclick="locateUserOnMap()">◎ <span>Use my location</span></button><p id="map-location-status" class="map-location-status" role="status" aria-live="polite">Your location is only accessed when you tap the button.</p></div>
     </div>
 
     <!-- 8. TRIPS SCREEN -->
@@ -535,8 +532,7 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getDatabase, ref, onValue, push, set, update } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
-    import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, signOut, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { getDatabase, ref, onValue, push, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
     const firebaseConfig = {
       apiKey: "AIzaSyB7eY5nqafzmfHAgtIBethkUgoiXdeRmD0",
       authDomain: "ecotour-romblon.firebaseapp.com",
@@ -549,43 +545,14 @@
     try {
       const app = initializeApp(firebaseConfig);
       const db = getDatabase(app);
-      const auth = getAuth(app);
-      window.firebaseDb = db;
-      window.firebaseRef = ref;
-      window.firebaseOnValue = onValue;
-      window.firebasePush = push;
-      window.firebaseSet = set;
-      window.firebaseUpdate = update;
-      window.firebaseAuth = auth;
-      window.firebaseSignIn = (email, password) => signInWithEmailAndPassword(auth, email, password);
-      window.firebaseSignUp = async (email, password, displayName) => {
-        const credential = await createUserWithEmailAndPassword(auth, email, password);
-        await updateProfile(credential.user, { displayName });
-        return credential;
-      };
-      window.firebaseSignOut = () => signOut(auth);
-      window.firebasePasswordReset = (email) => sendPasswordResetEmail(auth, email);
-      onAuthStateChanged(auth, async (user) => {
-        if (typeof window.onFirebaseAuthChanged === 'function') window.onFirebaseAuthChanged(user);
-        if (user) {
-          try {
-            await update(ref(db, 'users/' + user.uid), {
-              displayName: user.displayName || '',
-              email: user.email || '',
-              lastSeenAt: Date.now()
-            });
-          } catch (error) {
-            console.warn('Could not update user profile in Realtime Database:', error);
-          }
-        }
-      });
-      onValue(ref(db, 'destinations'), (snapshot) => {
+      window.firebaseDb = db; window.firebaseRef = ref; window.firebaseOnValue = onValue;
+      window.firebasePush = push; window.firebaseSet = set;
+      const destRef = ref(db, 'destinations');
+      onValue(destRef, (snapshot) => {
         const data = snapshot.val();
         if (data && typeof window.onFirebaseDataLoaded === 'function') window.onFirebaseDataLoaded(data);
-      }, (error) => console.warn('Destination sync failed. Check Realtime Database rules:', error));
-    } catch (error) {
-      console.error('Firebase initialization failed:', error);
-    }
+      });
+    } catch (e) { console.warn("Firebase offline:", e); }
   </script>
   <script src="src/script.js"></script>
 </body>
