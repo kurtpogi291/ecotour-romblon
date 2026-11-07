@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>EcoTour - Romblon Booking & Travel</title>
+  <meta name="theme-color" content="#14532d" />
+  <link rel="icon" type="image/svg+xml" href="assets/ecotour-logo.svg" />
+  <link rel="apple-touch-icon" href="assets/ecotour-logo.svg" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="src/styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -57,13 +60,13 @@
         <form class="auth-form" onsubmit="handleLoginSubmit(event)">
           <div class="input-group">
             <label>Email</label>
-            <input type="email" id="login-email" value="kurtcastro123@gmail.com" required />
+            <input type="email" id="login-email" autocomplete="email" placeholder="you@example.com" required />
           </div>
           <div class="input-group">
             <label>Password</label>
-            <input type="password" id="login-pass" value="password123" required />
+            <input type="password" id="login-pass" autocomplete="current-password" placeholder="Your password" required />
           </div>
-          <p class="forgot-pass" onclick="alert('Password reset link sent!')">Forgot Password?</p>
+          <p class="forgot-pass" onclick="handlePasswordReset()">Forgot Password?</p>
           <button type="submit" class="btn btn-primary btn-block btn-lg">Log In</button>
         </form>
       </div>
@@ -102,7 +105,7 @@
     <div id="screen-home" class="screen">
       <div class="home-hero-bg">
         <header class="home-top-bar">
-          <div class="header-brand-light">Eco<span class="brand-highlight">Tour</span></div>
+          <div class="header-brand-light"><img src="assets/ecotour-logo.svg" alt="" />Eco<span class="brand-highlight">Tour</span></div>
           <div class="header-actions">
             <button class="theme-toggle-btn" onclick="toggleTheme()" id="theme-btn">🌙</button>
             <button class="profile-avatar-btn" onclick="switchTab('profile')">
@@ -478,7 +481,7 @@
         </div>
         <div class="input-group">
           <label>Email</label>
-          <input type="email" id="ep-email" value="kurtcastro123@gmail.com" />
+          <input type="email" id="ep-email" value="" readonly aria-describedby="email-account-note" /><small id="email-account-note">Email is managed by your sign-in account.</small>
         </div>
         <div class="modal-actions">
           <button class="btn btn-secondary" onclick="document.getElementById('edit-profile-modal').classList.add('hidden')">Cancel</button>
@@ -532,7 +535,13 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getDatabase, ref, onValue, push, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+    import { getDatabase, ref, onValue, push, set, update, off } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+    import {
+      getAuth, onAuthStateChanged, signInWithEmailAndPassword,
+      createUserWithEmailAndPassword, updateProfile, signOut,
+      sendPasswordResetEmail
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
     const firebaseConfig = {
       apiKey: "AIzaSyB7eY5nqafzmfHAgtIBethkUgoiXdeRmD0",
       authDomain: "ecotour-romblon.firebaseapp.com",
@@ -542,17 +551,82 @@
       messagingSenderId: "666750765150",
       appId: "1:666750765150:web:1dd541a90c349b84934ccf"
     };
+
     try {
       const app = initializeApp(firebaseConfig);
       const db = getDatabase(app);
-      window.firebaseDb = db; window.firebaseRef = ref; window.firebaseOnValue = onValue;
-      window.firebasePush = push; window.firebaseSet = set;
-      const destRef = ref(db, 'destinations');
-      onValue(destRef, (snapshot) => {
-        const data = snapshot.val();
-        if (data && typeof window.onFirebaseDataLoaded === 'function') window.onFirebaseDataLoaded(data);
+      const auth = getAuth(app);
+      let bookingsRef = null;
+      let bookingsListener = null;
+
+      window.firebaseDb = db;
+      window.firebaseRef = ref;
+      window.firebasePush = push;
+      window.firebaseSet = set;
+      window.firebaseUpdate = update;
+      window.firebaseSignIn = (email, password) => signInWithEmailAndPassword(auth, email, password);
+      window.firebaseSignUp = async (email, password, displayName) => {
+        const credential = await createUserWithEmailAndPassword(auth, email, password);
+        await updateProfile(credential.user, { displayName });
+        await set(ref(db, 'users/' + credential.user.uid), {
+          displayName, email: credential.user.email, createdAt: Date.now()
+        });
+        return credential;
+      };
+      window.firebaseSignOut = () => signOut(auth);
+      window.firebasePasswordReset = (email) => sendPasswordResetEmail(auth, email);
+      window.firebaseSaveProfile = async (user, displayName) => {
+        await updateProfile(user, { displayName });
+        await update(ref(db, 'users/' + user.uid), {
+          displayName, email: user.email || '', updatedAt: Date.now()
+        });
+      };
+      window.firebaseSaveBooking = async (uid, booking) => {
+        const bookingRef = push(ref(db, 'bookings/' + uid));
+        await set(bookingRef, booking);
+        return bookingRef.key;
+      };
+
+      onAuthStateChanged(auth, async (user) => {
+        if (bookingsRef && bookingsListener) off(bookingsRef, 'value', bookingsListener);
+        bookingsRef = null;
+        bookingsListener = null;
+
+        if (user) {
+          try {
+            await update(ref(db, 'users/' + user.uid), {
+              displayName: user.displayName || '',
+              email: user.email || '',
+              lastSeenAt: Date.now()
+            });
+          } catch (error) {
+            console.warn('Profile sync failed:', error);
+          }
+          bookingsRef = ref(db, 'bookings/' + user.uid);
+          bookingsListener = (snapshot) => {
+            const saved = snapshot.val() || {};
+            if (typeof window.onFirebaseBookingsLoaded === 'function') {
+              window.onFirebaseBookingsLoaded(Object.values(saved));
+            }
+          };
+          onValue(bookingsRef, bookingsListener, (error) => {
+            console.error('Booking sync failed:', error);
+          });
+        }
+        if (typeof window.onFirebaseAuthChanged === 'function') {
+          window.onFirebaseAuthChanged(user);
+        }
       });
-    } catch (e) { console.warn("Firebase offline:", e); }
+
+      onValue(ref(db, 'destinations'), (snapshot) => {
+        const data = snapshot.val();
+        if (data && typeof window.onFirebaseDataLoaded === 'function') {
+          window.onFirebaseDataLoaded(data);
+        }
+      }, (error) => console.warn('Destination sync failed. Check database rules:', error));
+    } catch (error) {
+      console.error('Firebase initialization failed:', error);
+    }
   </script>
   <script src="src/script.js"></script>
 </body>
