@@ -298,3 +298,5 @@ body { background-color: #000; display: flex; justify-content: center; align-ite
 .header-brand-light{display:flex;align-items:center;gap:7px}
 .header-brand-light img{width:30px;height:30px;object-fit:contain;flex-shrink:0}
 #email-account-note{display:block;margin-top:5px;color:var(--text-muted);font-size:11px}
+
+.logo-pin{width:80px;height:80px;object-fit:contain;margin-bottom:16px}
