@@ -102,7 +102,6 @@ const romblonSpots =
 ];
 
 const STORE_KEY = 'ecotour-v2';
-const ACCOUNTS_KEY = 'ecotour-accounts-v2';
 const MEMBER_DISCOUNT = 0.1;
 const TAB_SCREENS = { home: 'screen-home', saved: 'screen-saved', trips: 'screen-trips', map: 'screen-map', profile: 'screen-profile' };
 const NAV_HIDDEN = ['screen-splash', 'screen-welcome', 'screen-login', 'screen-signup', 'screen-details', 'screen-booking', 'screen-payment', 'screen-confirmation'];
@@ -193,14 +192,6 @@ function saveState() {
   }
 }
 
-function loadAccounts() {
-  try { return JSON.parse(localStorage.getItem(ACCOUNTS_KEY)) || {}; } catch (e) { return {}; }
-}
-
-function saveAccounts(accounts) {
-  try { localStorage.setItem(ACCOUNTS_KEY, JSON.stringify(accounts)); } catch (e) {}
-}
-
 const $ = (id) => document.getElementById(id);
 
 function esc(value) {
@@ -282,24 +273,6 @@ function validEmail(v) {
 
 function validPhone(v) {
   return /^\+?[0-9\s-]{7,16}$/.test(v);
-}
-
-async function hashPassword(password, salt) {
-  const text = salt + ':' + password;
-  if (window.crypto && window.crypto.subtle) {
-    const buf = await window.crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
-    return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, '0')).join('');
-  }
-  let h = 5381;
-  for (let i = 0; i < text.length; i++) h = ((h << 5) + h + text.charCodeAt(i)) >>> 0;
-  return 'x' + h.toString(16);
-}
-
-function newSalt() {
-  if (window.crypto && window.crypto.getRandomValues) {
-    return Array.from(window.crypto.getRandomValues(new Uint8Array(8))).map((b) => b.toString(16).padStart(2, '0')).join('');
-  }
-  return Math.random().toString(16).slice(2, 10);
 }
 
 function isSignedIn() {
@@ -410,7 +383,7 @@ window.onFirebaseAuthChanged = async function (user) {
   if (!user) return;
   try {
     const cloudState = await window.firebaseAuthApi.loadUserState(user.uid);
-    if (cloudState && (!state.user || state.user.uid === user.uid)) {
+    if (cloudState && (!state.user || !state.user.uid || state.user.uid === user.uid)) {
       state = { ...defaultState(), ...cloudState, user: {
         name: user.displayName || cloudState.user?.name || user.email.split('@')[0],
         email: user.email, uid: user.uid
@@ -545,7 +518,7 @@ function signOut() {
 
 function clearData() {
   if (!confirm('This removes saved places, bookings and your local account on this device. Continue?')) return;
-  try { localStorage.removeItem(STORE_KEY); localStorage.removeItem(ACCOUNTS_KEY); } catch (e) {}
+  try { localStorage.removeItem(STORE_KEY); } catch (e) {}
   state = defaultState();
   applyTheme();
   renderUser();
@@ -660,28 +633,26 @@ function openEditProfile() {
   openModal('edit-profile-modal');
 }
 
-function saveProfile() {
+async function saveProfile() {
   clearErrors($('edit-profile-modal'));
   const name = $('ep-name').value.trim();
   const email = $('ep-email').value.trim().toLowerCase();
-  let ok = true;
-  if (name.length < 2) { setError('ep-name', 'Enter your name.'); ok = false; }
-  if (!validEmail(email)) { setError('ep-email', 'Enter a valid email address.'); ok = false; }
-  if (!ok) return;
-  const accounts = loadAccounts();
-  const oldEmail = state.user.email;
-  if (email !== oldEmail && accounts[email]) { setError('ep-email', 'That email is already in use.'); return; }
-  if (accounts[oldEmail]) {
-    const record = { ...accounts[oldEmail], name };
-    delete accounts[oldEmail];
-    accounts[email] = record;
-    saveAccounts(accounts);
+  if (name.length < 2) { setError('ep-name', 'Enter your name.'); return; }
+  if (!validEmail(email)) { setError('ep-email', 'Enter a valid email address.'); return; }
+  if (!window.firebaseAuthApi || !state.user?.uid) { toast('Sign in again to update your profile.', 'error'); return; }
+  try {
+    await window.firebaseAuthApi.updateUserProfile(name, email);
+    state.user = { ...state.user, name, email };
+    if (!state.guestDetails.email || state.guestDetails.email === state.user.email) state.guestDetails.email = email;
+    saveState();
+    renderUser();
+    closeModal('edit-profile-modal');
+    toast('Profile updated.', 'success');
+  } catch (error) {
+    setError('ep-email', error.code === 'auth/requires-recent-login'
+      ? 'Please sign out and sign in again before changing your email.'
+      : 'Could not update your profile. Please try again.');
   }
-  state.user = { name, email };
-  saveState();
-  renderUser();
-  closeModal('edit-profile-modal');
-  toast('Profile updated.', 'success');
 }
 
 function openModal(id) {
