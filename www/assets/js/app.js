@@ -642,9 +642,10 @@ async function saveProfile() {
   if (!validEmail(email)) { setError('ep-email', 'Enter a valid email address.'); return; }
   if (!window.firebaseAuthApi || !state.user?.uid) { toast('Sign in again to update your profile.', 'error'); return; }
   try {
+    const previousEmail = state.user.email;
     await window.firebaseAuthApi.updateUserProfile(name, email);
     state.user = { ...state.user, name, email };
-    if (!state.guestDetails.email || state.guestDetails.email === state.user.email) state.guestDetails.email = email;
+    if (!state.guestDetails.email || state.guestDetails.email === previousEmail) state.guestDetails.email = email;
     saveState();
     renderUser();
     closeModal('edit-profile-modal');
