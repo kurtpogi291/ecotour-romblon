@@ -380,7 +380,16 @@ window.onFirebaseError = function () {
 
 
 window.onFirebaseAuthChanged = async function (user) {
-  if (!user) return;
+  if (!user) {
+    if (state.user && !state.user.uid) {
+      state.user = null;
+      state.guest = false;
+      saveState();
+      renderUser();
+      refreshAll();
+    }
+    return;
+  }
   try {
     const cloudState = await window.firebaseAuthApi.loadUserState(user.uid);
     if (!state.user || !state.user.uid || state.user.uid === user.uid) {
