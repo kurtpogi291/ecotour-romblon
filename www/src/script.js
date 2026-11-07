@@ -509,24 +509,30 @@ function renderReviews() {
   `).join('');
 }
 function submitNewReview() {
-  const user = currentUser.name || 'Anonymous';
-  const stars = parseInt(document.getElementById('new-review-rating').value);
-  const comment = document.getElementById('new-review-comment').value.trim();
-  if(!comment) return alert('Please write a comment.');
-
-  const n = { user, stars, comment };
-  currentDetailSpot.reviews.push(n);
-  renderReviews();
-
-  if (window.firebaseDb && window.firebasePush && window.firebaseRef) {
-    const ref = window.firebaseRef(window.firebaseDb, `destinations/${currentDetailSpot.id}/reviews`);
-    window.firebaseSet(window.firebasePush(ref), n);
+  if (!currentUser.uid) {
+    alert('Please sign in to submit a review.');
+    navigateTo('screen-login');
+    return;
   }
-
-  document.getElementById('review-modal').classList.add('hidden');
-  document.getElementById('new-review-comment').value = '';
+  const user = currentUser.name || 'Traveler';
+  const stars = parseInt(document.getElementById('new-review-rating').value, 10);
+  const comment = document.getElementById('new-review-comment').value.trim();
+  if (!comment) return alert('Please write a comment.');
+  const review = { user, stars, comment, createdAt: Date.now() };
+  if (!window.firebaseDb || !window.firebasePush || !window.firebaseRef || !window.firebaseSet) {
+    return alert('Firebase is not ready. Please try again.');
+  }
+  const reviewRef = window.firebaseRef(window.firebaseDb, 'destinations/' + currentDetailSpot.id + '/reviews');
+  window.firebaseSet(window.firebasePush(reviewRef), review).then(() => {
+    currentDetailSpot.reviews.push(review);
+    renderReviews();
+    document.getElementById('review-modal').classList.add('hidden');
+    document.getElementById('new-review-comment').value = '';
+  }).catch(error => {
+    console.error('Review save failed:', error);
+    alert('Your review could not be saved. Please try again.');
+  });
 }
-
 // DYNAMIC BOOKING FLOW FIX
 function proceedToBookingSummary() {
   document.getElementById('summary-title').innerText = currentDetailSpot.name;
