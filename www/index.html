@@ -2,558 +2,700 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EcoTour - Romblon Booking & Travel</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="stylesheet" href="src/styles.css" />
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
+  <link rel="stylesheet" href="styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body class="light-mode">
+<div class="app-container no-nav" id="app">
 
-  <div class="app-container">
-
-    <!-- 1. SPLASH SCREEN -->
-    <div id="screen-splash" class="screen active">
-      <div class="splash-content">
-        <div class="logo-wrapper">
-          <svg class="logo-pin" viewBox="0 0 100 120" fill="none">
-            <path d="M50 0C22.3858 0 0 22.3858 0 50C0 80 50 120 50 120C50 120 100 80 100 50C100 22.3858 77.6142 0 50 0Z" fill="#B85C38"/>
-            <path d="M50 25C36.1929 25 25 36.1929 25 50C25 63.8071 36.1929 75 50 75C63.8071 75 75 63.8071 75 50C75 36.1929 63.8071 25 50 25Z" fill="var(--card-bg)"/>
-            <path d="M30 55C30 55 45 30 65 35C65 35 55 60 30 55Z" fill="#1E6B43"/>
-            <path d="M35 52C45 48 55 42 60 38" stroke="var(--card-bg)" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-          <h1 class="brand-name">Eco<span class="brand-highlight">Tour</span></h1>
-        </div>
-        <div class="loader-bar"><div class="loader-progress"></div></div>
+  <div id="screen-splash" class="screen active">
+    <div class="splash-content">
+      <div class="logo-wrapper">
+        <svg class="logo-pin" viewBox="0 0 100 120" fill="none" aria-hidden="true">
+          <path d="M50 0C22.3858 0 0 22.3858 0 50C0 80 50 120 50 120C50 120 100 80 100 50C100 22.3858 77.6142 0 50 0Z" fill="#B85C38"/>
+          <path d="M50 25C36.1929 25 25 36.1929 25 50C25 63.8071 36.1929 75 50 75C63.8071 75 75 63.8071 75 50C75 36.1929 63.8071 25 50 25Z" fill="var(--card-bg)"/>
+          <path d="M30 55C30 55 45 30 65 35C65 35 55 60 30 55Z" fill="#1E6B43"/>
+          <path d="M35 52C45 48 55 42 60 38" stroke="var(--card-bg)" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <h1 class="brand-name">Eco<span class="brand-highlight">Tour</span></h1>
       </div>
+      <div class="loader-bar"><div class="loader-progress"></div></div>
     </div>
-
-    <!-- 2. WELCOME / AUTH CHOICE SCREEN -->
-    <div id="screen-welcome" class="screen">
-      <div class="welcome-bg"></div>
-      <div class="welcome-content">
-        <h1 class="welcome-title">Your Romblon<br>Adventure Awaits</h1>
-        <p class="welcome-sub">Book the best resorts, tours, and experiences instantly.</p>
-        
-        <button class="btn btn-primary btn-block btn-lg" onclick="navigateTo('screen-signup')">Create an Account</button>
-        <button class="btn btn-secondary btn-block btn-lg" onclick="navigateTo('screen-login')">Sign In</button>
-        <button class="btn-text" onclick="skipAuth()">Skip for now</button>
-      </div>
-    </div>
-
-    <!-- 3. LOGIN SCREEN -->
-    <div id="screen-login" class="screen auth-screen">
-      <header class="auth-header">
-        <button class="icon-btn" onclick="navigateTo('screen-welcome')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
-        </button>
-      </header>
-      <div class="auth-body">
-        <h2>Welcome back</h2>
-        <p class="text-muted">Sign in to manage your bookings</p>
-
-        <form class="auth-form" onsubmit="handleLoginSubmit(event)">
-          <div class="input-group">
-            <label>Email</label>
-            <input type="email" id="login-email" value="kurtcastro123@gmail.com" required />
-          </div>
-          <div class="input-group">
-            <label>Password</label>
-            <input type="password" id="login-pass" value="password123" required />
-          </div>
-          <p class="forgot-pass" onclick="alert('Password reset link sent!')">Forgot Password?</p>
-          <button type="submit" class="btn btn-primary btn-block btn-lg">Log In</button>
-        </form>
-      </div>
-    </div>
-
-    <!-- 4. SIGN UP SCREEN -->
-    <div id="screen-signup" class="screen auth-screen">
-      <header class="auth-header">
-        <button class="icon-btn" onclick="navigateTo('screen-welcome')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
-        </button>
-      </header>
-      <div class="auth-body">
-        <h2>Create Account</h2>
-        <p class="text-muted">Join EcoTour to unlock exclusive rates.</p>
-
-        <form class="auth-form" onsubmit="handleSignupSubmit(event)">
-          <div class="input-group">
-            <label>Full Name</label>
-            <input type="text" id="reg-name" placeholder="Juan Dela Cruz" required />
-          </div>
-          <div class="input-group">
-            <label>Email</label>
-            <input type="email" id="reg-email" placeholder="juan@email.com" required />
-          </div>
-          <div class="input-group">
-            <label>Password</label>
-            <input type="password" id="reg-pass" placeholder="••••••••" required />
-          </div>
-          <button type="submit" class="btn btn-primary btn-block btn-lg" style="margin-top: 10px;">Sign Up</button>
-        </form>
-      </div>
-    </div>
-
-    <!-- 5. HOME / SEARCH FEED SCREEN -->
-    <div id="screen-home" class="screen">
-      <div class="home-hero-bg">
-        <header class="home-top-bar">
-          <div class="header-brand-light">Eco<span class="brand-highlight">Tour</span></div>
-          <div class="header-actions">
-            <button class="theme-toggle-btn" onclick="toggleTheme()" id="theme-btn">🌙</button>
-            <button class="profile-avatar-btn" onclick="switchTab('profile')">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            </button>
-          </div>
-        </header>
-        <h2 class="home-hero-title">Where to next, <span id="home-user-name">Kurt</span>?</h2>
-      </div>
-
-      <div class="search-widget-card">
-        <div class="search-widget-input">
-          <span class="sw-icon">📍</span>
-          <input type="text" id="sw-location" placeholder="Search Romblon, Ferrol, Tablas..." oninput="handleGlobalSearch(this.value)" />
-        </div>
-        <div class="sw-divider"></div>
-        <div class="sw-row">
-          <div class="search-widget-input half">
-            <span class="sw-icon">📅</span>
-            <input type="text" id="sw-dates" placeholder="Dec 1 - Dec 2" readonly />
-          </div>
-          <div class="search-widget-input half">
-            <span class="sw-icon">👥</span>
-            <input type="text" id="sw-guests" placeholder="1 Room, 2 Guests" readonly />
-          </div>
-        </div>
-        <button class="btn btn-primary btn-block" onclick="scrollToDestinations()">Search Deals</button>
-      </div>
-
-      <div class="screen-body" style="padding-top: 0;">
-        <div class="category-tags">
-          <button class="tag-chip active" onclick="filterCategory('All', this)">All</button>
-          <button class="tag-chip" onclick="filterCategory('Resorts', this)">Resorts</button>
-          <button class="tag-chip" onclick="filterCategory('Beaches', this)">Beaches</button>
-          <button class="tag-chip" onclick="filterCategory('Mountains', this)">Mountains</button>
-        </div>
-
-        <div class="section-header">
-          <h4>Featured Deals</h4>
-          <div class="carousel-dots" id="carousel-dots"></div>
-        </div>
-        <div class="hero-carousel" id="carousel-wrapper">
-          <div class="carousel-track" id="carousel-track"></div>
-        </div>
-
-        <div class="section-header" id="destinations-anchor">
-          <h4>Explore Properties & Tours</h4>
-          <span id="db-status-badge" class="status-pill">Offline Mock</span>
-        </div>
-        <div class="destinations-grid" id="destinations-list"></div>
-      </div>
-    </div>
-
-    <!-- 6. SAVED SCREEN -->
-    <div id="screen-saved" class="screen">
-      <header class="page-header">
-        <h2>Saved Properties</h2>
-      </header>
-      <div class="screen-body">
-        <div class="search-box" style="margin-bottom: 20px;">
-          <input type="text" id="saved-search" placeholder="Filter saved items..." oninput="filterSaved(this.value)" />
-          <button class="search-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
-        </div>
-        <div class="destinations-grid" id="saved-items-list"></div>
-      </div>
-    </div>
-
-    <!-- 7. MAP TAB SCREEN -->
-    <div id="screen-map" class="screen" style="position: relative;">
-      <header class="page-header map-header">
-        <h2>Explore Map</h2>
-      </header>
-      <div class="map-search-overlay">
-        <div class="search-box">
-          <input type="text" id="map-search" placeholder="Search map..." oninput="handleGlobalSearch(this.value)" />
-          <button class="search-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
-        </div>
-      </div>
-      <div id="map-container" style="flex: 1; height: 100%; width: 100%; z-index: 1;"></div>
-    </div>
-
-    <!-- 8. TRIPS SCREEN -->
-    <div id="screen-trips" class="screen">
-      <header class="page-header">
-        <h2>My Trips</h2>
-      </header>
-      <div class="screen-body">
-        <div class="trips-tabs">
-          <span class="trip-tab active" onclick="switchTripTab(this, 'upcoming')">Upcoming</span>
-          <span class="trip-tab" onclick="switchTripTab(this, 'past')">Past</span>
-        </div>
-        <div id="trips-list" class="trips-container"></div>
-      </div>
-    </div>
-
-    <!-- 9. PROFILE & SETTINGS SCREEN -->
-    <div id="screen-profile" class="screen">
-      <header class="page-header" style="justify-content: space-between;">
-        <h2>My Profile</h2>
-        <button class="icon-btn" onclick="alert('Settings menu opened')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-        </button>
-      </header>
-
-      <div class="profile-banner">
-        <div class="profile-header-info">
-          <div class="user-avatar-large">👤</div>
-          <div style="flex:1;">
-            <h2 id="profile-name">Kurt Castro</h2>
-            <p id="profile-email">kurtcastro123@gmail.com</p>
-            <div class="vip-badge" style="margin-top: 8px; display: inline-block;">Genius <span>Level 2</span></div>
-          </div>
-          <button class="edit-profile-btn" onclick="document.getElementById('edit-profile-modal').classList.remove('hidden')">Edit</button>
-        </div>
-      </div>
-      
-      <div class="screen-body">
-        <div class="menu-card" style="margin-top:0;">
-          <h3>Account Settings</h3>
-          <ul class="menu-list">
-            <li onclick="document.getElementById('edit-profile-modal').classList.remove('hidden')"><span class="m-icon">👤</span> Personal Information</li>
-            <li onclick="alert('Payment Methods loaded')"><span class="m-icon">💳</span> Payment Methods</li>
-            <li onclick="alert('Security settings loaded')"><span class="m-icon">🔒</span> Security & Passwords</li>
-          </ul>
-        </div>
-
-        <div class="menu-card">
-          <h3>Preferences</h3>
-          <ul class="menu-list">
-            <li onclick="toggleTheme()">
-              <span class="m-icon" id="settings-theme-icon">🌙</span> Dark Mode
-              <span class="setting-status" id="theme-status-text">Off</span>
-            </li>
-            <li onclick="alert('Language changed')"><span class="m-icon">🌐</span> Language <span class="setting-status">English (US)</span></li>
-            <li onclick="alert('Currency changed')"><span class="m-icon">💵</span> Currency <span class="setting-status">PHP (₱)</span></li>
-          </ul>
-        </div>
-
-        <div class="menu-card">
-          <h3>Support & Legal</h3>
-          <ul class="menu-list">
-            <li onclick="alert('Contacting Customer Service...')"><span class="m-icon">🎧</span> Customer Service</li>
-            <li onclick="alert('Terms loaded')"><span class="m-icon">📄</span> Terms of Service</li>
-          </ul>
-        </div>
-
-        <div class="menu-card" style="border:none; background:transparent; padding:0; box-shadow:none;">
-          <button class="btn btn-secondary btn-block" style="color:#DC2626;" onclick="signOut()">Sign Out</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- 10. DETAILS SCREEN -->
-    <div id="screen-details" class="screen">
-      <div class="details-hero">
-        <img id="detail-main-img" src="" alt="Spot Preview" />
-        <div class="details-nav-overlay">
-          <button class="icon-btn blur-btn" onclick="navigateTo('screen-home')">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
-          </button>
-          <div class="overlay-actions">
-            <button class="icon-btn blur-btn fav-btn-icon" id="detail-favorite-btn" onclick="toggleFavoriteCurrent()">
-              <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            </button>
-          </div>
-        </div>
-        <div class="gallery-thumbs-row" id="gallery-thumbs"></div>
-      </div>
-
-      <div class="details-body">
-        <div class="tags-row" style="margin-bottom: 8px;">
-          <span class="tag" style="background:#1E6B43; color:white; border:none;">Eco-Certified</span>
-          <span class="tag">Top Rated</span>
-        </div>
-        <h2 id="detail-title">Destination Title</h2>
-        <div class="rating-row">
-          <span class="star-rating">★ <span id="detail-rating">4.9</span></span>
-          <span class="location-text">📍 <span id="detail-location">Location</span></span>
-        </div>
-
-        <div class="details-section">
-          <h4>About this property</h4>
-          <p class="description-p" id="detail-desc"></p>
-        </div>
-        
-        <div class="details-section">
-          <h4>Amenities / Highlights</h4>
-          <div class="tags-row" id="detail-highlights"></div>
-        </div>
-
-        <div class="details-section" id="room-selection-area">
-          <h4>Select Options</h4>
-          <div class="room-card selected">
-            <h5>Standard Option</h5>
-            <p class="text-muted" style="font-size:11px;">Perfect choice for standard budgets.</p>
-            <div class="room-price-row">
-              <strong class="text-primary" id="detail-price">₱845.50</strong>
-              <span class="badge">Selected</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="details-section">
-          <div class="section-header">
-            <h4>Guest Reviews</h4>
-            <span class="review-count-badge" id="review-count">0 reviews</span>
-          </div>
-          <div class="reviews-list" id="reviews-container"></div>
-          <button class="btn btn-secondary btn-block" style="margin-top:10px;" onclick="document.getElementById('review-modal').classList.remove('hidden')">Write a Review</button>
-        </div>
-      </div>
-
-      <div class="sticky-booking-bar">
-        <div class="price-info">
-          <span class="price-label">Price starting at</span>
-          <span class="price-val" id="bar-price">₱845.50</span>
-        </div>
-        <button class="btn btn-primary btn-book" onclick="proceedToBookingSummary()">Reserve</button>
-      </div>
-    </div>
-
-    <!-- 11. BOOKING SUMMARY & GUEST DETAILS -->
-    <div id="screen-booking" class="screen">
-      <header class="page-header">
-        <button class="icon-btn" onclick="navigateTo('screen-details')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
-        </button>
-        <h2>Booking Details</h2>
-        <div style="width: 24px;"></div>
-      </header>
-
-      <div class="screen-body">
-        <div class="room-summary-card">
-          <img id="summary-img" src="" alt="Room" class="room-img"/>
-          <div class="room-info">
-            <h3 id="summary-title">Resort Name</h3>
-            <p class="room-sub">1 x Standard Selection (2 Adults)</p>
-            <div class="value-badges">
-              <span class="v-badge green">✓ Free Cancellation</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="guest-card">
-          <div class="guest-card-header">
-            <h4>Guest Details</h4>
-            <button class="edit-btn" onclick="document.getElementById('guest-modal').classList.remove('hidden')">✏️ Edit</button>
-          </div>
-          <div class="guest-info-box">
-            <div>
-              <h5 id="guest-name-val">Shen Mea Felizario</h5>
-              <p id="guest-email-val">shenmeafelizario@gmail.com</p>
-              <p id="guest-phone-val">+63 912 345 6789</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="pricing-card">
-          <div class="pricing-row">
-            <span>Original price</span>
-            <span style="text-decoration: line-through;">₱1,120.00</span>
-          </div>
-          <div class="pricing-row text-success">
-            <span>Discount applied</span>
-            <span>- ₱274.50</span>
-          </div>
-          <hr class="price-divider"/>
-          <div class="pricing-total-row">
-            <span>Total Price</span>
-            <strong class="total-price" id="summary-total-price">₱845.50</strong>
-          </div>
-        </div>
-
-        <button class="btn btn-primary btn-block btn-lg" onclick="navigateTo('screen-payment')">Next: Final Details</button>
-      </div>
-    </div>
-
-    <!-- 12. PAYMENT SCREEN -->
-    <div id="screen-payment" class="screen">
-      <header class="page-header">
-        <button class="icon-btn" onclick="navigateTo('screen-booking')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
-        </button>
-        <h2>Payment</h2>
-        <div style="width: 24px;"></div>
-      </header>
-
-      <div class="screen-body">
-        <div class="alert-box green">
-          <span style="font-size:16px; margin-right:8px;">🔒</span> Your payment is secure.
-        </div>
-        <h3 class="payment-title" style="margin-top:16px;">How would you like to pay?</h3>
-        
-        <div class="payment-method-card active">
-          <div class="pm-header">
-            <input type="radio" checked name="paymethod" /> 
-            <strong>Credit / Debit Card</strong>
-          </div>
-          <div class="pm-body">
-            <div class="input-group">
-              <label>Cardholder Name</label>
-              <input type="text" id="pay-card-name" value="Gervy Alojado" />
-            </div>
-            <div class="input-group">
-              <label>Card Number</label>
-              <input type="text" value="**** **** **** 7898" />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="payment-sticky-bar">
-        <div class="pay-sum">
-          <span class="pay-sum-lbl">Amount to pay</span>
-          <strong class="pay-sum-val" id="pay-final-amount">₱845.50</strong>
-        </div>
-        <button class="btn btn-primary btn-book" onclick="processPayment()">Pay Now</button>
-      </div>
-    </div>
-
-    <!-- 13. CONFIRMATION SCREEN -->
-    <div id="screen-confirmation" class="screen">
-      <div class="screen-body" style="text-align: center; padding-top: 60px;">
-        <div class="success-circle">
-          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <h2 class="confirm-title" style="margin-top: 20px;">Booking Confirmed!</h2>
-        <p class="text-muted" style="margin-bottom: 30px;">We've sent the confirmation to your email.</p>
-
-        <div class="confirm-details-card" style="text-align: left;">
-          <h4 style="margin-bottom: 12px; border-bottom:1px solid var(--border-color); padding-bottom:8px;">Booking Reference: <span class="text-primary">#SJGYD093</span></h4>
-          <div class="c-row"><span class="c-lbl">Guest</span><span class="c-val" id="conf-name">Shen Mea Felizario</span></div>
-          <div class="c-row"><span class="c-lbl">Check-In</span><span class="c-val">Dec 1, 2026</span></div>
-          <div class="c-row"><span class="c-lbl">Total Paid</span><strong class="c-val">₱845.50</strong></div>
-        </div>
-
-        <button class="btn btn-primary btn-block btn-lg" onclick="finishBooking()">View My Trips</button>
-      </div>
-    </div>
-
-    <!-- BOTTOM NAVIGATION -->
-    <nav id="bottom-nav" class="bottom-nav hidden">
-      <button class="nav-item active" id="nav-home" onclick="switchTab('home')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-        <span>Search</span>
-      </button>
-      <button class="nav-item" id="nav-saved" onclick="switchTab('saved')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        <span>Saved</span>
-      </button>
-      <button class="nav-item" id="nav-trips" onclick="switchTab('trips')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 5h-2V3a1 1 0 0 0-2 0v2H9V3a1 1 0 0 0-2 0v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H5V11h14v10z"/></svg>
-        <span>Trips</span>
-      </button>
-      <button class="nav-item" id="nav-map" onclick="switchTab('map')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 7 8 11.7z"/></svg>
-        <span>Map</span>
-      </button>
-      <button class="nav-item" id="nav-profile" onclick="switchTab('profile')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
-        <span>Profile</span>
-      </button>
-    </nav>
-
-    <!-- MODALS -->
-    <!-- Edit User Profile Modal -->
-    <div id="edit-profile-modal" class="modal-overlay hidden">
-      <div class="modal-card">
-        <h3>Edit Personal Info</h3>
-        <div class="input-group">
-          <label>Display Name</label>
-          <input type="text" id="ep-name" value="Kurt Castro" />
-        </div>
-        <div class="input-group">
-          <label>Email</label>
-          <input type="email" id="ep-email" value="kurtcastro123@gmail.com" />
-        </div>
-        <div class="modal-actions">
-          <button class="btn btn-secondary" onclick="document.getElementById('edit-profile-modal').classList.add('hidden')">Cancel</button>
-          <button class="btn btn-primary" onclick="saveUserProfile()">Save Changes</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Edit Guest Modal -->
-    <div id="guest-modal" class="modal-overlay hidden">
-      <div class="modal-card">
-        <h3>Edit Guest Details</h3>
-        <div class="input-group">
-          <label>Full Name</label><input type="text" id="edit-guest-name" value="Shen Mea Felizario" />
-        </div>
-        <div class="input-group">
-          <label>Phone Number</label><input type="text" id="edit-guest-phone" value="+63 912 345 6789" />
-        </div>
-        <div class="modal-actions">
-          <button class="btn btn-secondary" onclick="document.getElementById('guest-modal').classList.add('hidden')">Cancel</button>
-          <button class="btn btn-primary" onclick="saveGuestDetails()">Save</button>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Write Review Modal -->
-    <div id="review-modal" class="modal-overlay hidden">
-      <div class="modal-card">
-        <h3>Write a Review</h3>
-        <div class="input-group">
-          <label>Rating</label>
-          <select id="new-review-rating">
-            <option value="5">⭐⭐⭐⭐⭐ (Excellent)</option>
-            <option value="4">⭐⭐⭐⭐ (Good)</option>
-            <option value="3">⭐⭐⭐ (Average)</option>
-          </select>
-        </div>
-        <div class="input-group">
-          <label>Comment</label>
-          <textarea id="new-review-comment" rows="3" style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border-color); outline:none; background:var(--card-bg); color:var(--text-main); font-family:inherit;"></textarea>
-        </div>
-        <div class="modal-actions">
-          <button class="btn btn-secondary" onclick="document.getElementById('review-modal').classList.add('hidden')">Cancel</button>
-          <button class="btn btn-primary" onclick="submitNewReview()">Post Review</button>
-        </div>
-      </div>
-    </div>
-
   </div>
 
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getDatabase, ref, onValue, push, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
-    const firebaseConfig = {
-      apiKey: "AIzaSyB7eY5nqafzmfHAgtIBethkUgoiXdeRmD0",
-      authDomain: "ecotour-romblon.firebaseapp.com",
-      databaseURL: "https://ecotour-romblon-default-rtdb.asia-southeast1.firebasedatabase.app",
-      projectId: "ecotour-romblon",
-      storageBucket: "ecotour-romblon.firebasestorage.app",
-      messagingSenderId: "666750765150",
-      appId: "1:666750765150:web:1dd541a90c349b84934ccf"
-    };
-    try {
-      const app = initializeApp(firebaseConfig);
-      const db = getDatabase(app);
-      window.firebaseDb = db; window.firebaseRef = ref; window.firebaseOnValue = onValue;
-      window.firebasePush = push; window.firebaseSet = set;
-      const destRef = ref(db, 'destinations');
-      onValue(destRef, (snapshot) => {
-        const data = snapshot.val();
-        if (data && typeof window.onFirebaseDataLoaded === 'function') window.onFirebaseDataLoaded(data);
-      });
-    } catch (e) { console.warn("Firebase offline:", e); }
-  </script>
-  <script src="src/script.js"></script>
+  <div id="screen-welcome" class="screen">
+    <div class="welcome-bg"></div>
+    <div class="welcome-content">
+      <h1 class="welcome-title">Your Romblon<br>Adventure Awaits</h1>
+      <p class="welcome-sub">Book the best resorts, tours, and experiences instantly.</p>
+      <button class="btn btn-primary btn-block btn-lg" data-nav="screen-signup">Create an Account</button>
+      <button class="btn btn-secondary btn-block btn-lg" style="margin-top:10px;" data-nav="screen-login">Sign In</button>
+      <button class="btn-text" data-action="skip-auth">Skip for now</button>
+    </div>
+  </div>
+
+  <div id="screen-login" class="screen auth-screen">
+    <header class="auth-header">
+      <button class="icon-btn" aria-label="Back" data-nav="screen-welcome">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+    </header>
+    <div class="auth-body">
+      <h2>Welcome back</h2>
+      <p class="text-muted">Sign in to manage your bookings</p>
+      <form class="auth-form" id="login-form" novalidate>
+        <div class="input-group">
+          <label for="login-email">Email</label>
+          <input type="email" id="login-email" autocomplete="email" />
+          <div class="field-error" data-error-for="login-email"></div>
+        </div>
+        <div class="input-group">
+          <label for="login-pass">Password</label>
+          <input type="password" id="login-pass" autocomplete="current-password" />
+          <div class="field-error" data-error-for="login-pass"></div>
+        </div>
+        <button type="button" class="link-btn" style="display:block; margin-left:auto; margin-bottom:16px;" data-action="forgot-password">Forgot Password?</button>
+        <button type="submit" class="btn btn-primary btn-block btn-lg">Log In</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="screen-signup" class="screen auth-screen">
+    <header class="auth-header">
+      <button class="icon-btn" aria-label="Back" data-nav="screen-welcome">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+    </header>
+    <div class="auth-body">
+      <h2>Create Account</h2>
+      <p class="text-muted">Join EcoTour to unlock member rates.</p>
+      <form class="auth-form" id="signup-form" novalidate>
+        <div class="input-group">
+          <label for="reg-name">Full Name</label>
+          <input type="text" id="reg-name" placeholder="Juan Dela Cruz" autocomplete="name" />
+          <div class="field-error" data-error-for="reg-name"></div>
+        </div>
+        <div class="input-group">
+          <label for="reg-email">Email</label>
+          <input type="email" id="reg-email" placeholder="juan@email.com" autocomplete="email" />
+          <div class="field-error" data-error-for="reg-email"></div>
+        </div>
+        <div class="input-group">
+          <label for="reg-pass">Password</label>
+          <input type="password" id="reg-pass" placeholder="At least 8 characters" autocomplete="new-password" />
+          <div class="field-error" data-error-for="reg-pass"></div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block btn-lg" style="margin-top: 10px;">Sign Up</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="screen-home" class="screen">
+    <div class="home-hero-bg">
+      <header class="home-top-bar">
+        <div class="header-brand-light">Eco<span class="brand-highlight">Tour</span></div>
+        <div class="header-actions">
+          <button class="theme-toggle-btn" data-action="toggle-theme" id="theme-btn" aria-label="Toggle dark mode">🌙</button>
+          <button class="profile-avatar-btn" data-tab="profile" aria-label="Profile">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </button>
+        </div>
+      </header>
+      <h2 class="home-hero-title">Where to next, <span id="home-user-name">Traveler</span>?</h2>
+    </div>
+
+    <div class="search-widget-card">
+      <div class="search-widget-input">
+        <span class="sw-icon">📍</span>
+        <input type="search" id="sw-location" placeholder="Search Romblon, Ferrol, Tablas..." aria-label="Search destinations" />
+      </div>
+      <div class="sw-divider"></div>
+      <div class="sw-row">
+        <div class="search-widget-input half clickable" data-action="open-trip-modal" role="button" tabindex="0">
+          <span class="sw-icon">📅</span><span class="sw-value" id="sw-dates"></span>
+        </div>
+        <div class="search-widget-input half clickable" data-action="open-trip-modal" role="button" tabindex="0">
+          <span class="sw-icon">👥</span><span class="sw-value" id="sw-guests"></span>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-block" data-action="scroll-destinations">Search Deals</button>
+    </div>
+
+    <div class="screen-body" style="padding-top: 0;">
+      <div class="signature-feature-grid">
+        <button class="signature-feature planner-feature" data-action="open-trip-planner">
+          <span class="feature-emoji">🧭</span><span><strong>Build My Trip</strong><small>Plan a getaway around your budget</small></span><b>›</b>
+        </button>
+        <button class="signature-feature experiences-feature" data-action="open-experiences">
+          <span class="feature-emoji">🏝️</span><span><strong>Local Experiences</strong><small>Discover tours and activities</small></span><b>›</b>
+        </button>
+      </div>
+      <button class="ecoscore-banner" data-action="open-ecoscore">
+        <span class="eco-leaf">🌱</span><span><strong>Travel a little greener</strong><small>Explore EcoScores and responsible travel tips</small></span><b>Explore ›</b>
+      </button>
+
+      <div class="category-tags" id="category-tags">
+        <button class="tag-chip active" data-category="All">All</button>
+        <button class="tag-chip" data-category="Resorts">Resorts</button>
+        <button class="tag-chip" data-category="Beaches">Beaches</button>
+        <button class="tag-chip" data-category="Mountains">Mountains</button>
+      </div>
+
+      <div class="section-header">
+        <h4>Featured Deals</h4>
+        <div class="carousel-dots" id="carousel-dots"></div>
+      </div>
+      <div class="hero-carousel" id="carousel-wrapper">
+        <div class="carousel-track" id="carousel-track"></div>
+      </div>
+
+      <div class="section-header" id="destinations-anchor">
+        <h4>Explore Properties & Tours</h4>
+        <span id="db-status-badge" class="status-pill">Offline</span>
+      </div>
+      <div class="toolbar-row">
+        <span class="results-count" id="results-count"></span>
+        <select id="sort-select" class="sort-select" aria-label="Sort results">
+          <option value="featured">Featured</option>
+          <option value="rating">Top rated</option>
+          <option value="price-asc">Price: low to high</option>
+          <option value="price-desc">Price: high to low</option>
+        </select>
+      </div>
+      <div class="destinations-grid" id="destinations-list"></div>
+    </div>
+  </div>
+
+  <div id="screen-saved" class="screen">
+    <header class="page-header"><h2>Saved Properties</h2></header>
+    <div class="screen-body">
+      <div class="search-box" style="margin-bottom: 20px;">
+        <input type="search" id="saved-search" placeholder="Filter saved items..." aria-label="Filter saved items" />
+      </div>
+      <div class="destinations-grid" id="saved-items-list"></div>
+    </div>
+  </div>
+
+  <div id="screen-map" class="screen" style="position: relative;">
+    <header class="page-header map-header"><h2>Explore Map</h2></header>
+    <div class="map-search-overlay">
+      <div class="search-box">
+        <input type="search" id="map-search" placeholder="Search map..." aria-label="Search map" />
+      </div>
+    </div>
+    <div id="map-container" style="flex: 1; height: 100%; width: 100%; z-index: 1;"></div>
+    <div id="map-tile-notice" class="map-tile-notice hidden">The map provider blocked tile access. You can still open the interactive map in OpenStreetMap. <a href="https://www.openstreetmap.org/#map=9/12.45/122.25" target="_blank" rel="noopener">Open full map ↗</a></div>
+  </div>
+
+  <div id="screen-trips" class="screen">
+    <header class="page-header"><h2>My Trips</h2></header>
+    <div class="screen-body">
+      <div class="trips-tabs" role="tablist">
+        <button class="trip-tab active" data-trip-tab="upcoming" role="tab" style="background:none;border:none;border-bottom:2px solid transparent;">Upcoming</button>
+        <button class="trip-tab" data-trip-tab="past" role="tab" style="background:none;border:none;border-bottom:2px solid transparent;">Past & Cancelled</button>
+      </div>
+      <div id="trips-list" class="trips-container"></div>
+    </div>
+  </div>
+
+  <div id="screen-profile" class="screen">
+    <header class="page-header">
+      <h2>My Profile</h2>
+    </header>
+    <div class="profile-banner">
+      <div class="profile-header-info">
+        <div class="user-avatar-large" id="profile-avatar">👤</div>
+        <div style="flex:1; min-width:0;">
+          <h2 id="profile-name">Traveler</h2>
+          <p id="profile-email" class="text-muted">Not signed in</p>
+          <div class="vip-badge" id="member-badge" style="margin-top: 8px; display: none;">Member</div>
+        </div>
+        <button class="edit-profile-btn" id="profile-edit-btn" data-action="open-edit-profile">Edit</button>
+      </div>
+    </div>
+    <div class="screen-body">
+      <div class="menu-card" style="margin-top:0;">
+        <h3>Account</h3>
+        <ul class="menu-list">
+          <li><button class="menu-btn" data-action="open-edit-profile"><span class="m-icon">👤</span> Personal Information <span class="menu-chevron">›</span></button></li>
+          <li><button class="menu-btn" data-tab="trips"><span class="m-icon">🧳</span> My Bookings <span class="menu-chevron">›</span></button></li>
+          <li><button class="menu-btn" data-action="open-payment-methods"><span class="m-icon">💳</span> Payment Methods <span class="menu-chevron">›</span></button></li>
+          <li><button class="menu-btn" data-tab="saved"><span class="m-icon">♡</span> Saved Places <span class="menu-chevron">›</span></button></li>
+          <li><button class="menu-btn" data-action="open-travelers"><span class="m-icon">👥</span> Traveler Profiles <span class="menu-chevron">›</span></button></li>
+        </ul>
+      </div>
+      <div class="menu-card">
+        <h3>Preferences</h3>
+        <ul class="menu-list">
+          <li><button class="menu-btn" data-action="toggle-theme"><span class="m-icon" id="settings-theme-icon">🌙</span> Dark Mode <span class="setting-status" id="theme-status-text">Off</span></button></li>
+          <li><button class="menu-btn" data-action="open-notifications"><span class="m-icon">🔔</span> Notifications <span class="menu-chevron">›</span></button></li>
+          <li><button class="menu-btn" data-action="open-help"><span class="m-icon">❔</span> Help & Support <span class="menu-chevron">›</span></button></li>
+          <li><button class="menu-btn" data-action="open-host-dashboard"><span class="m-icon">🏡</span> Host Dashboard <span class="menu-chevron">›</span></button></li>
+          <li><button class="menu-btn" data-action="clear-data"><span class="m-icon">🗑️</span> Reset Saved Data <span class="menu-chevron">›</span></button></li>
+        </ul>
+      </div>
+      <div class="menu-card" style="border:none; background:transparent; padding:0; box-shadow:none;">
+        <button class="btn btn-secondary btn-block" style="color:#DC2626;" id="auth-action-btn" data-action="sign-out">Sign Out</button>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="screen-payment-methods" class="screen">
+    <header class="page-header">
+      <button class="icon-btn" aria-label="Back to profile" data-action="back-to-profile">‹</button>
+      <h2>Payment methods</h2><span style="width:36px;"></span>
+    </header>
+    <div class="screen-body">
+      <p class="text-muted" style="margin-bottom:16px;">Manage the cards saved on this device. Payment processing is demo-only.</p>
+      <div id="saved-payment-methods"></div>
+      <button class="btn btn-primary btn-block" data-action="open-add-card">＋ Add a card</button>
+      <div class="alert-box" style="margin-top:16px;">🔒 We never save your full card number or CVV in this demo.</div>
+    </div>
+  </div>
+
+  <div id="screen-notifications" class="screen">
+    <header class="page-header">
+      <button class="icon-btn" aria-label="Back to profile" data-action="back-to-profile">‹</button>
+      <h2>Notifications</h2><span style="width:36px;"></span>
+    </header>
+    <div class="screen-body">
+      <p class="text-muted" style="margin-bottom:16px;">Choose which updates EcoTour should prepare for you.</p>
+      <div class="preference-card">
+        <div><strong>Booking updates</strong><span>Confirmation and changes to your trips</span></div>
+        <input type="checkbox" id="pref-bookingUpdates" />
+      </div>
+      <div class="preference-card">
+        <div><strong>Promotions and offers</strong><span>Deals, discounts and seasonal highlights</span></div>
+        <input type="checkbox" id="pref-promotions" />
+      </div>
+      <div class="preference-card">
+        <div><strong>Email updates</strong><span>Travel information sent to your account email</span></div>
+        <input type="checkbox" id="pref-emailUpdates" />
+      </div>
+      <p class="demo-note" style="margin-top:14px;">These preferences are stored locally. Actual push or email delivery needs a connected backend.</p>
+    </div>
+  </div>
+
+  <div id="screen-help" class="screen">
+    <header class="page-header">
+      <button class="icon-btn" aria-label="Back to profile" data-action="back-to-profile">‹</button>
+      <h2>Help & support</h2><span style="width:36px;"></span>
+    </header>
+    <div class="screen-body">
+      <div class="help-card"><strong>How do I book a place?</strong><p>Choose a destination, set your dates and guest count, then select Reserve or Book Visit.</p></div>
+      <div class="help-card"><strong>Where can I find my booking?</strong><p>Open My Trips to view your booking reference, dates, payment method and status.</p></div>
+      <div class="help-card"><strong>Can I pay online?</strong><p>This prototype simulates card and GCash checkout. It does not process real payments.</p></div>
+      <div class="help-card"><strong>Need more help?</strong><p>Contact the EcoTour administrator through the support channel provided by your project team.</p></div>
+      <div class="help-card"><strong>About EcoTour</strong><p>Explore stays, beaches and nature experiences around Romblon, Philippines.</p></div>
+    </div>
+  </div>
+
+  <div id="screen-travelers" class="screen">
+    <header class="page-header"><button class="icon-btn" data-action="back-to-profile" aria-label="Back">‹</button><h2>Traveler profiles</h2><span style="width:36px;"></span></header>
+    <div class="screen-body">
+      <p class="text-muted" style="margin-bottom:14px;">Save guest details so you can fill booking forms faster on this device.</p>
+      <div id="traveler-list"></div>
+      <div class="guest-card" style="margin-top:14px;">
+        <h3 style="margin-bottom:12px;">Add a traveler</h3>
+        <div class="input-group"><label for="traveler-name">Full name</label><input id="traveler-name" type="text" autocomplete="name" placeholder="Traveler name"></div>
+        <div class="input-group"><label for="traveler-email">Email</label><input id="traveler-email" type="email" placeholder="name@email.com"></div>
+        <div class="input-group"><label for="traveler-phone">Phone</label><input id="traveler-phone" type="tel" placeholder="09XX XXX XXXX"></div>
+        <button class="btn btn-primary btn-block" data-action="add-traveler">＋ Save traveler</button>
+      </div>
+      <p class="demo-note">Traveler profiles are stored only in this browser. Do not use a shared/public device.</p>
+    </div>
+  </div>
+
+  <div id="screen-host-dashboard" class="screen">
+    <header class="page-header"><button class="icon-btn" data-action="back-to-profile" aria-label="Back">‹</button><h2>Host dashboard</h2><span style="width:36px;"></span></header>
+    <div class="screen-body">
+      <div class="alert-box" style="margin-bottom:14px;">Demo host tools · Changes are saved locally in this browser, not shared with real guests.</div>
+      <div id="host-stats" class="host-stats"></div>
+      <h3 style="margin:18px 0 10px;">Manage availability</h3>
+      <div class="guest-card">
+        <div class="input-group"><label for="host-spot">Property / experience</label><select id="host-spot"></select></div>
+        <div class="row-2">
+          <div class="input-group"><label for="host-date">Date</label><input id="host-date" type="date"></div>
+          <div class="input-group"><label for="host-status">Availability</label><select id="host-status"><option value="available">Available</option><option value="blocked">Blocked / Unavailable</option></select></div>
+        </div>
+        <button class="btn btn-primary btn-block" data-action="save-availability">Save availability</button>
+      </div>
+      <h3 style="margin:18px 0 10px;">Recent bookings</h3>
+      <div id="host-bookings"></div>
+      <p class="demo-note">This is a front-end prototype. A real host portal needs authenticated host roles, a shared database, server-side inventory locking and audit logs.</p>
+    </div>
+  </div>
+
+  <div id="screen-trip-planner" class="screen">
+    <header class="page-header"><button class="icon-btn" data-action="back-to-home" aria-label="Back">‹</button><h2>Build My Trip</h2><span style="width:36px;"></span></header>
+    <div class="screen-body">
+      <div class="planner-intro"><span>🧭</span><div><h3>Your island getaway, planned</h3><p>Tell us your budget and interests. EcoTour will draft a practical starter itinerary from the demo listings.</p></div></div>
+      <div class="guest-card planner-form">
+        <div class="row-2">
+          <div class="input-group"><label for="planner-days">Trip duration</label><select id="planner-days"><option value="1">1 day</option><option value="2">2 days</option><option value="3" selected>3 days</option><option value="4">4 days</option><option value="5">5 days</option></select></div>
+          <div class="input-group"><label for="planner-guests">Travelers</label><select id="planner-guests"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></div>
+        </div>
+        <div class="input-group"><label for="planner-budget">Total budget (₱)</label><input id="planner-budget" type="number" min="500" step="500" value="5000" placeholder="5000"></div>
+        <div class="input-group"><label for="planner-interest">Main interest</label><select id="planner-interest"><option value="balanced">A bit of everything</option><option value="beach">Beaches & island life</option><option value="adventure">Adventure & hiking</option><option value="nature">Nature & waterfalls</option><option value="culture">Local places & community</option></select></div>
+        <button class="btn btn-primary btn-block" data-action="generate-trip">✨ Generate itinerary</button>
+      </div>
+      <div id="planner-results" class="planner-results"></div>
+      <div id="saved-itineraries" class="saved-itineraries"></div>
+      <p class="demo-note">Planner estimates are illustrative, based on sample listings. Ferry fares, transport, meals, permits and actual availability must be confirmed with local operators.</p>
+    </div>
+  </div>
+
+  <div id="screen-experiences" class="screen">
+    <header class="page-header"><button class="icon-btn" data-action="back-to-home" aria-label="Back">‹</button><h2>Local Experiences</h2><span style="width:36px;"></span></header>
+    <div class="screen-body">
+      <div class="planner-intro"><span>🤿</span><div><h3>Meet Romblon beyond the shoreline</h3><p>Explore sample activities and community-led experiences. Listings are demo content until local operators are onboarded.</p></div></div>
+      <div class="experience-filter-row"><button class="tag-chip active" data-experience-filter="All">All</button><button class="tag-chip" data-experience-filter="Water">Water</button><button class="tag-chip" data-experience-filter="Adventure">Adventure</button><button class="tag-chip" data-experience-filter="Nature">Nature</button></div>
+      <div id="experiences-list" class="experiences-grid"></div>
+    </div>
+  </div>
+
+  <div id="screen-ecoscore" class="screen">
+    <header class="page-header"><button class="icon-btn" data-action="back-to-home" aria-label="Back">‹</button><h2>EcoScore</h2><span style="width:36px;"></span></header>
+    <div class="screen-body">
+      <div class="ecoscore-hero"><span>🌿</span><h3>Explore responsibly</h3><p>EcoScore is a pilot framework for comparing sustainability practices—not an official environmental certification.</p></div>
+      <div class="eco-criteria-grid"><div><b>♻️ Waste</b><small>Waste reduction and disposal</small></div><div><b>🌊 Nature</b><small>Care for local ecosystems</small></div><div><b>🤝 Community</b><small>Local jobs and suppliers</small></div><div><b>💧 Resources</b><small>Water and energy practices</small></div></div>
+      <h3 class="subsection-title">Destination pilot scores</h3>
+      <div id="ecoscore-list" class="ecoscore-list"></div>
+      <p class="demo-note">Scores are illustrative demo values assigned to demonstrate the interface. Real scores require host evidence, transparent assessment criteria, periodic review, and a verification process.</p>
+    </div>
+  </div>
+
+  <div id="screen-details" class="screen">
+    <div class="details-hero">
+      <img id="detail-main-img" src="" alt="" />
+      <div class="details-nav-overlay">
+        <button class="icon-btn blur-btn" aria-label="Back" data-action="back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <div class="overlay-actions">
+          <button class="icon-btn blur-btn fav-btn-icon" id="detail-favorite-btn" aria-label="Save" data-action="toggle-favorite-current">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="gallery-thumbs-row" id="gallery-thumbs"></div>
+    </div>
+
+    <div class="details-body">
+      <div class="tags-row" style="margin-bottom: 8px;" id="detail-tags"></div>
+      <h2 id="detail-title"></h2>
+      <div class="rating-row">
+        <span class="star-rating">★ <span id="detail-rating">0</span></span>
+        <span class="location-text">📍 <span id="detail-location"></span></span>
+      </div>
+
+      <div class="trip-summary-line">
+        <span id="detail-trip-summary"></span>
+        <button class="link-btn" data-action="open-trip-modal">Change</button>
+      </div>
+
+      <div class="details-section">
+        <h4>About this place</h4>
+        <p class="description-p" id="detail-desc"></p>
+      </div>
+      <div class="details-section">
+        <h4>Highlights</h4>
+        <div class="tags-row" id="detail-highlights"></div>
+      </div>
+      <div class="details-section" id="detail-eco-section">
+        <h4>Responsible travel</h4>
+        <div id="detail-ecoscore" class="detail-eco-card"></div>
+      </div>
+      <div class="details-section">
+        <h4>Guest Reviews</h4>
+        <div class="section-header"><span class="review-count-badge" id="review-count"></span></div>
+        <div class="reviews-list" id="reviews-container"></div>
+        <button class="btn btn-secondary btn-block" style="margin-top:10px;" data-action="open-review-modal">Write a Review</button>
+      </div>
+    </div>
+
+    <div class="sticky-booking-bar">
+      <div class="price-info">
+        <span class="price-label" id="bar-price-label">Total</span>
+        <span class="price-val" id="bar-price"></span>
+      </div>
+      <button class="btn btn-primary btn-book" id="reserve-btn" data-action="proceed-booking">Reserve</button>
+    </div>
+  </div>
+
+  <div id="screen-booking" class="screen">
+    <header class="page-header">
+      <button class="icon-btn" aria-label="Back" data-action="back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <h2>Booking Details</h2>
+      <div style="width: 36px;"></div>
+    </header>
+    <div class="screen-body">
+      <div class="room-summary-card">
+        <img id="summary-img" src="" alt="" class="room-img"/>
+        <div class="room-info">
+          <h3 id="summary-title"></h3>
+          <p class="room-sub" id="summary-sub"></p>
+          <div class="value-badges"><span class="v-badge">✓ Free cancellation before check-in</span></div>
+        </div>
+      </div>
+
+      <div class="guest-card">
+        <div class="guest-card-header">
+          <h4>Guest Details</h4>
+          <button class="edit-btn" data-action="open-guest-modal">✏️ Edit</button>
+        </div>
+        <div class="input-group" style="margin-bottom:12px;">
+          <label for="saved-traveler-picker">Use a saved traveler</label>
+          <select id="saved-traveler-picker"><option value="">Current booking details</option></select>
+        </div>
+        <div class="guest-info-box">
+          <h5 id="guest-name-val"></h5>
+          <p id="guest-email-val"></p>
+          <p id="guest-phone-val"></p>
+        </div>
+      </div>
+
+      <div class="pricing-card" id="pricing-card"></div>
+      <button class="btn btn-primary btn-block btn-lg" id="booking-next-btn" data-action="booking-next">Continue</button>
+    </div>
+  </div>
+
+  <div id="screen-payment" class="screen">
+    <header class="page-header">
+      <button class="icon-btn" aria-label="Back" data-action="back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <h2>Payment</h2>
+      <div style="width: 36px;"></div>
+    </header>
+    <div class="screen-body">
+      <div class="alert-box green"><span style="font-size:16px; margin-right:8px;">🔒</span> Demo checkout. No real charge is made.</div>
+      <h3 class="payment-title" style="margin-top:16px; margin-bottom:12px;">How would you like to pay?</h3>
+
+      <div class="payment-method-card active" id="pm-card">
+        <label class="pm-option"><input type="radio" name="paymethod" value="card" checked /> Credit / Debit Card</label>
+        <div class="pm-body" id="pm-card-body">
+          <div class="input-group">
+            <label for="pay-card-name">Cardholder Name</label>
+            <input type="text" id="pay-card-name" autocomplete="cc-name" />
+            <div class="field-error" data-error-for="pay-card-name"></div>
+          </div>
+          <div class="input-group">
+            <label for="pay-card-number">Card Number</label>
+            <input type="text" id="pay-card-number" inputmode="numeric" autocomplete="cc-number" placeholder="1234 5678 9012 3456" maxlength="23" />
+            <div class="field-error" data-error-for="pay-card-number"></div>
+          </div>
+          <div class="row-2">
+            <div class="input-group">
+              <label for="pay-card-exp">Expiry (MM/YY)</label>
+              <input type="text" id="pay-card-exp" inputmode="numeric" autocomplete="cc-exp" placeholder="MM/YY" maxlength="5" />
+              <div class="field-error" data-error-for="pay-card-exp"></div>
+            </div>
+            <div class="input-group">
+              <label for="pay-card-cvv">CVV</label>
+              <input type="password" id="pay-card-cvv" inputmode="numeric" autocomplete="cc-csc" maxlength="4" />
+              <div class="field-error" data-error-for="pay-card-cvv"></div>
+            </div>
+          </div>
+          <p class="demo-note">Card details are validated but never stored. Only the last 4 digits are kept on your booking.</p>
+        </div>
+      </div>
+
+      <div class="payment-method-card" id="pm-gcash">
+        <label class="pm-option"><input type="radio" name="paymethod" value="gcash" /> GCash (simulated)</label>
+      </div>
+      <div class="payment-method-card" id="pm-property">
+        <label class="pm-option"><input type="radio" name="paymethod" value="property" /> Pay at the property</label>
+      </div>
+    </div>
+
+    <div class="payment-sticky-bar">
+      <div class="pay-sum">
+        <span class="pay-sum-lbl price-label">Amount to pay</span>
+        <strong class="pay-sum-val price-val" id="pay-final-amount"></strong>
+      </div>
+      <button class="btn btn-primary btn-book" id="pay-btn" data-action="process-payment">Pay Now</button>
+    </div>
+  </div>
+
+  <div id="screen-confirmation" class="screen">
+    <div class="screen-body" style="text-align: center; padding-top: 60px;">
+      <div class="success-circle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h2 class="confirm-title" style="margin-top: 20px;">Booking Confirmed!</h2>
+      <p class="text-muted" style="margin-bottom: 30px;" id="conf-sub"></p>
+      <div class="confirm-details-card" style="text-align: left;" id="conf-card"></div>
+      <button class="btn btn-secondary btn-block" data-action="print-current-receipt" style="margin-bottom:10px;">Download / Print Receipt</button>
+      <button class="btn btn-primary btn-block btn-lg" data-action="finish-booking">View My Trips</button>
+    </div>
+  </div>
+
+  <nav id="bottom-nav" class="bottom-nav hidden" aria-label="Main">
+    <button class="nav-item active" id="nav-home" data-tab="home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span>Search</span>
+    </button>
+    <button class="nav-item" id="nav-saved" data-tab="saved">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      <span>Saved</span>
+    </button>
+    <button class="nav-item" id="nav-trips" data-tab="trips">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 5h-2V3a1 1 0 0 0-2 0v2H9V3a1 1 0 0 0-2 0v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H5V11h14v10z"/></svg>
+      <span>Trips</span>
+    </button>
+    <button class="nav-item" id="nav-map" data-tab="map">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 7 8 11.7z"/></svg>
+      <span>Map</span>
+    </button>
+    <button class="nav-item" id="nav-profile" data-tab="profile">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+      <span>Profile</span>
+    </button>
+  </nav>
+
+  <div id="trip-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-label="Dates and guests">
+    <div class="modal-card">
+      <h3>Dates & Guests</h3>
+      <div class="row-2">
+        <div class="input-group">
+          <label for="tm-checkin">Check-in / Visit date</label>
+          <input type="date" id="tm-checkin" />
+        </div>
+        <div class="input-group">
+          <label for="tm-checkout">Check-out</label>
+          <input type="date" id="tm-checkout" />
+        </div>
+      </div>
+      <div class="field-error" id="tm-error"></div>
+      <div class="input-group">
+        <label>Guests</label>
+        <div class="stepper"><button type="button" data-step="guests" data-dir="-1" aria-label="Fewer guests">−</button><span id="tm-guests">2</span><button type="button" data-step="guests" data-dir="1" aria-label="More guests">+</button></div>
+      </div>
+      <div class="input-group">
+        <label>Rooms (resorts)</label>
+        <div class="stepper"><button type="button" data-step="rooms" data-dir="-1" aria-label="Fewer rooms">−</button><span id="tm-rooms">1</span><button type="button" data-step="rooms" data-dir="1" aria-label="More rooms">+</button></div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" data-close="trip-modal">Cancel</button>
+        <button class="btn btn-primary" data-action="save-trip-settings">Apply</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="edit-profile-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-label="Edit profile">
+    <div class="modal-card">
+      <h3>Edit Personal Info</h3>
+      <div class="input-group">
+        <label for="ep-name">Display Name</label>
+        <input type="text" id="ep-name" />
+        <div class="field-error" data-error-for="ep-name"></div>
+      </div>
+      <div class="input-group">
+        <label for="ep-email">Email</label>
+        <input type="email" id="ep-email" />
+        <div class="field-error" data-error-for="ep-email"></div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" data-close="edit-profile-modal">Cancel</button>
+        <button class="btn btn-primary" data-action="save-profile">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="add-card-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-label="Add payment card">
+    <div class="modal-card">
+      <h3>Add a payment card</h3>
+      <p class="demo-note" style="margin-bottom:14px;">Demo only. The full card number and security code are never stored.</p>
+      <div class="input-group">
+        <label for="saved-card-name">Cardholder name</label>
+        <input type="text" id="saved-card-name" autocomplete="cc-name" />
+      </div>
+      <div class="input-group">
+        <label for="saved-card-number">Card number</label>
+        <input type="text" id="saved-card-number" inputmode="numeric" autocomplete="cc-number" maxlength="23" placeholder="1234 5678 9012 3456" />
+      </div>
+      <div class="input-group">
+        <label for="saved-card-expiry">Expiry (MM/YY)</label>
+        <input type="text" id="saved-card-expiry" inputmode="numeric" autocomplete="cc-exp" maxlength="5" placeholder="MM/YY" />
+      </div>
+      <div class="field-error" id="saved-card-error"></div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" data-close="add-card-modal">Cancel</button>
+        <button class="btn btn-primary" data-action="add-saved-card">Save Card</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="guest-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-label="Edit guest details">
+    <div class="modal-card">
+      <h3>Guest Details</h3>
+      <div class="input-group">
+        <label for="edit-guest-name">Full Name</label>
+        <input type="text" id="edit-guest-name" />
+        <div class="field-error" data-error-for="edit-guest-name"></div>
+      </div>
+      <div class="input-group">
+        <label for="edit-guest-email">Email</label>
+        <input type="email" id="edit-guest-email" />
+        <div class="field-error" data-error-for="edit-guest-email"></div>
+      </div>
+      <div class="input-group">
+        <label for="edit-guest-phone">Phone Number</label>
+        <input type="tel" id="edit-guest-phone" placeholder="+63 912 345 6789" />
+        <div class="field-error" data-error-for="edit-guest-phone"></div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" data-close="guest-modal">Cancel</button>
+        <button class="btn btn-primary" data-action="save-guest">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="review-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-label="Write a review">
+    <div class="modal-card">
+      <h3>Write a Review</h3>
+      <div class="input-group">
+        <label>Rating</label>
+        <div class="star-picker" id="star-picker"></div>
+      </div>
+      <div class="input-group">
+        <label for="new-review-comment">Comment</label>
+        <textarea id="new-review-comment" rows="3" maxlength="400" style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border-color); outline:none; background:var(--bg-canvas); color:var(--text-main); font-family:inherit;"></textarea>
+        <div class="field-error" id="review-error"></div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" data-close="review-modal">Cancel</button>
+        <button class="btn btn-primary" data-action="submit-review">Post Review</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="trip-detail-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-label="Booking details">
+    <div class="modal-card">
+      <h3>Booking Details</h3>
+      <div id="trip-detail-body"></div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" data-close="trip-detail-modal">Close</button>
+        <button class="btn btn-danger" id="trip-cancel-btn" data-action="cancel-trip">Cancel Booking</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-wrap" id="toast-wrap" aria-live="polite"></div>
+</div>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script type="module" src="firebase-init.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
