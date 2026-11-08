@@ -5,7 +5,7 @@ const romblonSpots =
     description: 'Famous for its long, curving white sandbar connecting to Bang-og Island at low tide. Crystal clear waters ideal for swimming and sunset watching.',
     price: 'Free Entry', rawPrice: 0, rating: 4.9, 
     image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80',
-    gallery: ['https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80'],
+    gallery: ['https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1506953823976-52e1fdc0149a?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1473116763249-2faaef81ccda?auto=format&fit=crop&w=900&q=85'],
     highlights: ['White Sandbar', 'Sunset Point'], lat: 12.5833, lng: 122.2625,
     reviews: [{ user: 'Maria S.', stars: 5, comment: 'Breathtaking sandbar!' }]
   },
@@ -14,7 +14,7 @@ const romblonSpots =
     description: 'A serene beachfront escape with cozy, air-conditioned rooms overlooking the sea or pool. Ideal for kayaking and scuba diving.',
     price: '₱845.50 / Night', rawPrice: 845.50, rating: 4.7, 
     image: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=600&q=80',
-    gallery: ['https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=600&q=80'],
+    gallery: ['https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=900&q=85'],
     highlights: ['Pool', 'Beachfront'], lat: 12.3833, lng: 121.9667,
     reviews: [{ user: 'Erika R.', stars: 4, comment: 'Great coastal drive and calm waters.' }]
   },
@@ -23,7 +23,7 @@ const romblonSpots =
     description: 'Quiet beachfront spot with simple bungalows, poolside dining, and a relaxed atmosphere under coconut palms.',
     price: '₱1,120.00 / Night', rawPrice: 1120.00, rating: 4.8, 
     image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80',
-    gallery: ['https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80'],
+    gallery: ['https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=900&q=85'],
     highlights: ['Bungalows', 'Bar'], lat: 12.5283, lng: 121.9861,
     reviews: [{ user: 'Leonard F.', stars: 5, comment: 'Awesome relaxing vibe!' }]
   },
@@ -32,7 +32,7 @@ const romblonSpots =
     description: 'Known as "G2", featuring knife-edge ridges and incredible untouched biodiversity. A must for serious hikers.',
     price: '₱500 Permit', rawPrice: 500.00, rating: 4.8, 
     image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80',
-    gallery: ['https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80'],
+    gallery: ['https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1464278533981-50106e6176b1?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=900&q=85'],
     highlights: ['Hiking', 'Wildlife'], lat: 12.4161, lng: 122.5694,
     reviews: [{ user: 'Alex H.', stars: 5, comment: 'Challenging but unforgettable.' }]
   },
@@ -41,7 +41,7 @@ const romblonSpots =
     description: 'A protected marine sanctuary featuring a floating pontoon where you can swim and feed hundreds of colorful tropical fish.',
     price: '₱100 Entry', rawPrice: 100.00, rating: 4.6, 
     image: 'https://images.unsplash.com/photo-1682687220199-d0124f48f95b?auto=format&fit=crop&w=600&q=80',
-    gallery: ['https://images.unsplash.com/photo-1682687220199-d0124f48f95b?auto=format&fit=crop&w=600&q=80'],
+    gallery: ['https://images.unsplash.com/photo-1682687220199-d0124f48f95b?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1546026423-cc4642628d2b?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=900&q=85'],
     highlights: ['Snorkeling', 'Marine Life'], lat: 12.2570, lng: 121.9961,
     reviews: [{ user: 'Samantha', stars: 5, comment: 'Lots of fish right off the dock!' }]
   },
@@ -50,7 +50,7 @@ const romblonSpots =
     description: 'Often called Boracay’s quieter sister island. Famous for untouched white sand beaches and cliff diving spots.',
     price: '₱50 Envi Fee', rawPrice: 50.00, rating: 4.9, 
     image: 'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=600&q=80',
-    gallery: ['https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=600&q=80'],
+    gallery: ['https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=900&q=85'],
     highlights: ['Pristine Sand', 'Cliff Diving'], lat: 12.0667, lng: 121.9333,
     reviews: [{ user: 'Jake M.', stars: 5, comment: 'Just like Boracay before the crowds.' }]
   },
@@ -59,7 +59,7 @@ const romblonSpots =
     description: 'A sprawling resort tucked into a cove with beautiful white sand and a scenic hillside viewpoint perfect for photography.',
     price: '₱1,500.00 / Night', rawPrice: 1500.00, rating: 4.5, 
     image: 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=600&q=80',
-    gallery: ['https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=600&q=80'],
+    gallery: ['https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=900&q=85'],
     highlights: ['Scenic View', 'White Sand'], lat: 12.2858, lng: 122.0544,
     reviews: [{ user: 'Chris P.', stars: 4, comment: 'Great sunset view from the hill.' }]
   },
@@ -68,7 +68,7 @@ const romblonSpots =
     description: 'Awarded as one of the cleanest inland bodies of water in the Philippines. Features cool, crystal-clear water and diving platforms.',
     price: '₱30 Entry', rawPrice: 30.00, rating: 4.8, 
     image: 'https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=600&q=80',
-    gallery: ['https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=600&q=80'],
+    gallery: ['https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=85'],
     highlights: ['Crystal Clear', 'Cliff Diving'], lat: 12.3551, lng: 122.5684,
     reviews: [{ user: 'Daniel', stars: 5, comment: 'The water is so cold and refreshing!' }]
   },
@@ -77,7 +77,7 @@ const romblonSpots =
     description: 'A popular local beach with fine white sand and gentle waves, located very close to the town center. Great for picnics and family outings.',
     price: '₱50 Entry', rawPrice: 50.00, rating: 4.4, 
     image: 'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=600&q=80',
-    gallery: ['https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=600&q=80'],
+    gallery: ['https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=900&q=85'],
     highlights: ['Family Friendly', 'Fine Sand'], lat: 12.5700, lng: 122.2541,
     reviews: [{ user: 'Anna L.', stars: 4, comment: 'Nice beach very near the town proper.' }]
   },
@@ -86,7 +86,7 @@ const romblonSpots =
     description: 'A tranquil waterfall surrounded by lush tropical jungle. Offers cool, refreshing natural pools perfect for a quick dip.',
     price: '₱20 Entry', rawPrice: 20.00, rating: 4.5, 
     image: 'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=600&q=80',
-    gallery: ['https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=600&q=80'],
+    gallery: ['https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=900&q=85'],
     highlights: ['Waterfalls', 'Nature Trail'], lat: 12.5333, lng: 122.0167,
     reviews: [{ user: 'Leo', stars: 5, comment: 'Very peaceful and secluded.' }]
   },
@@ -94,15 +94,23 @@ const romblonSpots =
     id: 'tinagongdagat', name: 'Tinagong Dagat', location: 'Calatrava, Tablas', category: 'Beaches',
     description: 'A stunning "hidden sea" consisting of saltwater lakes surrounded by dramatic limestone karst cliffs, accessible by boat.',
     price: '₱500 Boat Tour', rawPrice: 500.00, rating: 4.8, 
-    image: 'https://images.unsplash.com/photo-1505993597083-3bd19fa85e54?auto=format&fit=crop&w=600&q=80',
-    gallery: ['https://images.unsplash.com/photo-1505993597083-3bd19fa85e54?auto=format&fit=crop&w=600&q=80'],
+    // Actual Tinagong Dagat, Calatrava photos (remotely hosted by their publishers).
+    // Sources: Municipality of Calatrava tourism portal, Journey Era / Jackson Groves,
+    // and Travel Photos PH. Obtain permission/appropriate licenses for public redistribution.
+    image: 'https://calatravaromblon.gov.ph/assets/destinations/Destinations_TinagongDagat1_web.jpg',
+    gallery: [
+      'https://calatravaromblon.gov.ph/assets/destinations/Destinations_TinagongDagat1_web.jpg',
+      'https://www.journeyera.com/wp-content/uploads/2018/04/calatrava-island-hopping-tablas-0023.jpg',
+      'https://www.journeyera.com/wp-content/uploads/2018/04/calatrava-island-hopping-tablas-0029.jpg',
+      'https://www.journeyera.com/wp-content/uploads/2018/04/calatrava-island-hopping-tablas-0038.jpg',
+      'https://travelphotosph.wordpress.com/wp-content/uploads/2016/09/romblon-tablas-island-2.jpeg?w=768'
+    ],
     highlights: ['Hidden Lake', 'Limestone Cliffs'], lat: 12.6000, lng: 122.0667,
     reviews: [{ user: 'Sarah J.', stars: 5, comment: 'Reminds me of Palawan or El Nido!' }]
   }
 ];
 
 const STORE_KEY = 'ecotour-v2';
-const ACCOUNTS_KEY = 'ecotour-accounts-v2';
 const MEMBER_DISCOUNT = 0.1;
 const TAB_SCREENS = { home: 'screen-home', saved: 'screen-saved', trips: 'screen-trips', map: 'screen-map', profile: 'screen-profile' };
 const NAV_HIDDEN = ['screen-splash', 'screen-welcome', 'screen-login', 'screen-signup', 'screen-details', 'screen-booking', 'screen-payment', 'screen-confirmation'];
@@ -129,6 +137,7 @@ let activeCategory = 'All';
 let searchQuery = '';
 let sortMode = 'featured';
 let currentSpot = null;
+let currentGalleryIndex = 0;
 let navStack = [];
 let currentScreen = 'screen-splash';
 let returnTo = null;
@@ -187,14 +196,10 @@ function loadState() {
 
 function saveState() {
   try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) {}
-}
-
-function loadAccounts() {
-  try { return JSON.parse(localStorage.getItem(ACCOUNTS_KEY)) || {}; } catch (e) { return {}; }
-}
-
-function saveAccounts(accounts) {
-  try { localStorage.setItem(ACCOUNTS_KEY, JSON.stringify(accounts)); } catch (e) {}
+  const uid = state.user && state.user.uid;
+  if (uid && window.firebaseAuthApi) {
+    window.firebaseAuthApi.saveUserState(uid, state).catch((error) => console.warn('Cloud sync failed:', error));
+  }
 }
 
 const $ = (id) => document.getElementById(id);
@@ -278,24 +283,6 @@ function validEmail(v) {
 
 function validPhone(v) {
   return /^\+?[0-9\s-]{7,16}$/.test(v);
-}
-
-async function hashPassword(password, salt) {
-  const text = salt + ':' + password;
-  if (window.crypto && window.crypto.subtle) {
-    const buf = await window.crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
-    return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, '0')).join('');
-  }
-  let h = 5381;
-  for (let i = 0; i < text.length; i++) h = ((h << 5) + h + text.charCodeAt(i)) >>> 0;
-  return 'x' + h.toString(16);
-}
-
-function newSalt() {
-  if (window.crypto && window.crypto.getRandomValues) {
-    return Array.from(window.crypto.getRandomValues(new Uint8Array(8))).map((b) => b.toString(16).padStart(2, '0')).join('');
-  }
-  return Math.random().toString(16).slice(2, 10);
 }
 
 function isSignedIn() {
@@ -401,6 +388,33 @@ window.onFirebaseError = function () {
   badge.classList.remove('online');
 };
 
+
+window.onFirebaseAuthChanged = async function (user) {
+  if (!user) {
+    if (state.user && !state.user.uid) {
+      state.user = null;
+      state.guest = false;
+      saveState();
+      renderUser();
+      refreshAll();
+    }
+    return;
+  }
+  try {
+    const cloudState = await window.firebaseAuthApi.loadUserState(user.uid);
+    if (!state.user || !state.user.uid || state.user.uid === user.uid) {
+      state = { ...defaultState(), ...(cloudState || state), user: {
+        name: user.displayName || cloudState?.user?.name || user.email.split('@')[0],
+        email: user.email, uid: user.uid
+      }};
+      state.guest = false;
+      saveState();
+      renderUser();
+      refreshAll();
+    }
+  } catch (error) { console.warn('Could not restore cloud profile:', error); }
+};
+
 function applyTheme() {
   const dark = state.theme === 'dark';
   document.body.classList.toggle('dark-mode', dark);
@@ -450,18 +464,18 @@ async function handleSignup(e) {
   const name = $('reg-name').value.trim();
   const email = $('reg-email').value.trim().toLowerCase();
   const pass = $('reg-pass').value;
-  let ok = true;
-  if (name.length < 2) { setError('reg-name', 'Enter your full name.'); ok = false; }
-  if (!validEmail(email)) { setError('reg-email', 'Enter a valid email address.'); ok = false; }
-  if (pass.length < 8) { setError('reg-pass', 'Use at least 8 characters.'); ok = false; }
-  if (!ok) return;
-  const accounts = loadAccounts();
-  if (accounts[email]) { setError('reg-email', 'An account with this email already exists.'); return; }
-  const salt = newSalt();
-  accounts[email] = { name, salt, hash: await hashPassword(pass, salt) };
-  saveAccounts(accounts);
-  completeSignIn({ name, email });
-  form.reset();
+  if (name.length < 2) { setError('reg-name', 'Enter your full name.'); return; }
+  if (!validEmail(email)) { setError('reg-email', 'Enter a valid email address.'); return; }
+  if (pass.length < 8) { setError('reg-pass', 'Use at least 8 characters.'); return; }
+  if (!window.firebaseAuthApi) { toast('Authentication is unavailable. Check your connection.', 'error'); return; }
+  try {
+    const user = await window.firebaseAuthApi.createAccount(name, email, pass);
+    completeSignIn({ name: user.displayName || name, email: user.email, uid: user.uid });
+    form.reset();
+  } catch (error) {
+    const messages = { 'auth/email-already-in-use':'An account with this email already exists.', 'auth/weak-password':'Use a stronger password.', 'auth/invalid-email':'Enter a valid email address.' };
+    setError('reg-email', messages[error.code] || 'Could not create your account. Please try again.');
+  }
 }
 
 async function handleLogin(e) {
@@ -470,17 +484,16 @@ async function handleLogin(e) {
   clearErrors(form);
   const email = $('login-email').value.trim().toLowerCase();
   const pass = $('login-pass').value;
-  let ok = true;
-  if (!validEmail(email)) { setError('login-email', 'Enter a valid email address.'); ok = false; }
-  if (!pass) { setError('login-pass', 'Enter your password.'); ok = false; }
-  if (!ok) return;
-  const account = loadAccounts()[email];
-  if (!account || (await hashPassword(pass, account.salt)) !== account.hash) {
-    setError('login-pass', 'Incorrect email or password.');
-    return;
+  if (!validEmail(email)) { setError('login-email', 'Enter a valid email address.'); return; }
+  if (!pass) { setError('login-pass', 'Enter your password.'); return; }
+  if (!window.firebaseAuthApi) { toast('Authentication is unavailable. Check your connection.', 'error'); return; }
+  try {
+    const user = await window.firebaseAuthApi.signIn(email, pass);
+    completeSignIn({ name: user.displayName || email.split('@')[0], email: user.email, uid: user.uid });
+    form.reset();
+  } catch (error) {
+    setError('login-pass', error.code === 'auth/too-many-requests' ? 'Too many attempts. Try again later.' : 'Incorrect email or password.');
   }
-  completeSignIn({ name: account.name, email });
-  form.reset();
 }
 
 function completeSignIn(user) {
@@ -507,11 +520,13 @@ function completeSignIn(user) {
 function forgotPassword() {
   const email = $('login-email').value.trim().toLowerCase();
   if (!validEmail(email)) { setError('login-email', 'Enter your email first.'); return; }
-  toast('Password reset needs a backend. This demo stores accounts on this device only.');
+  if (!window.firebaseAuthApi) { toast('Authentication is unavailable. Check your connection.', 'error'); return; }
+  window.firebaseAuthApi.resetPassword(email).then(() => toast('Password reset email sent.', 'success')).catch(() => toast('Could not send the reset email. Check the address and try again.', 'error'));
 }
 
 function signOut() {
   if (!confirm('Are you sure you want to sign out?')) return;
+  if (window.firebaseAuthApi) window.firebaseAuthApi.signOut().catch(() => {});
   state.user = null;
   state.guest = false;
   saveState();
@@ -523,7 +538,7 @@ function signOut() {
 
 function clearData() {
   if (!confirm('This removes saved places, bookings and your local account on this device. Continue?')) return;
-  try { localStorage.removeItem(STORE_KEY); localStorage.removeItem(ACCOUNTS_KEY); } catch (e) {}
+  try { localStorage.removeItem(STORE_KEY); } catch (e) {}
   state = defaultState();
   applyTheme();
   renderUser();
@@ -638,28 +653,27 @@ function openEditProfile() {
   openModal('edit-profile-modal');
 }
 
-function saveProfile() {
+async function saveProfile() {
   clearErrors($('edit-profile-modal'));
   const name = $('ep-name').value.trim();
   const email = $('ep-email').value.trim().toLowerCase();
-  let ok = true;
-  if (name.length < 2) { setError('ep-name', 'Enter your name.'); ok = false; }
-  if (!validEmail(email)) { setError('ep-email', 'Enter a valid email address.'); ok = false; }
-  if (!ok) return;
-  const accounts = loadAccounts();
-  const oldEmail = state.user.email;
-  if (email !== oldEmail && accounts[email]) { setError('ep-email', 'That email is already in use.'); return; }
-  if (accounts[oldEmail]) {
-    const record = { ...accounts[oldEmail], name };
-    delete accounts[oldEmail];
-    accounts[email] = record;
-    saveAccounts(accounts);
+  if (name.length < 2) { setError('ep-name', 'Enter your name.'); return; }
+  if (!validEmail(email)) { setError('ep-email', 'Enter a valid email address.'); return; }
+  if (!window.firebaseAuthApi || !state.user?.uid) { toast('Sign in again to update your profile.', 'error'); return; }
+  try {
+    const previousEmail = state.user.email;
+    await window.firebaseAuthApi.updateUserProfile(name, email);
+    state.user = { ...state.user, name, email };
+    if (!state.guestDetails.email || state.guestDetails.email === previousEmail) state.guestDetails.email = email;
+    saveState();
+    renderUser();
+    closeModal('edit-profile-modal');
+    toast('Profile updated.', 'success');
+  } catch (error) {
+    setError('ep-email', error.code === 'auth/requires-recent-login'
+      ? 'Please sign out and sign in again before changing your email.'
+      : 'Could not update your profile. Please try again.');
   }
-  state.user = { name, email };
-  saveState();
-  renderUser();
-  closeModal('edit-profile-modal');
-  toast('Profile updated.', 'success');
 }
 
 function openModal(id) {
@@ -1006,7 +1020,8 @@ function openSpot(id) {
   if (!s) return;
   currentSpot = s;
   closeModalsAll();
-  $('detail-main-img').src = safeUrl(s.image);
+  currentGalleryIndex = 0;
+  $('detail-main-img').src = safeUrl((s.gallery && s.gallery[0]) || s.image);
   $('detail-main-img').alt = s.name;
   $('detail-title').textContent = s.name;
   $('detail-location').textContent = s.location;
@@ -1014,13 +1029,45 @@ function openSpot(id) {
   $('detail-desc').textContent = s.description;
   renderDetailEcoScore(s);
   $('detail-tags').innerHTML = `<span class="tag">${esc(s.category)}</span>${ratingFor(s) >= 4.7 ? '<span class="tag">Top Rated</span>' : ''}`;
-  $('gallery-thumbs').innerHTML = (s.gallery.length > 1 ? s.gallery : []).map((url, i) => `<img src="${esc(safeUrl(url))}" alt="Photo ${i + 1}" class="thumb-img ${i === 0 ? 'active' : ''}" data-action="set-image" data-url="${esc(safeUrl(url))}" data-fallback />`).join('');
+  renderSpotGallery(s);
   $('detail-highlights').innerHTML = (s.highlights || []).map((h) => `<span class="tag">✓ ${esc(h)}</span>`).join('') || '<span class="text-muted">No highlights listed.</span>';
   renderReviews();
   updateFavoriteButton();
   refreshDetailPricing();
   navigateTo('screen-details');
   $('screen-details').scrollTop = 0;
+}
+
+function renderSpotGallery(spot) {
+  const images = Array.isArray(spot.gallery) && spot.gallery.length ? spot.gallery : [spot.image];
+  currentGalleryIndex = Math.min(currentGalleryIndex, images.length - 1);
+  const hero = $('detail-main-img');
+  const nextSrc = safeUrl(images[currentGalleryIndex]);
+  if (hero.getAttribute('src') !== nextSrc) {
+    hero.classList.add('gallery-changing');
+    hero.addEventListener('load', () => hero.classList.remove('gallery-changing'), { once: true });
+    hero.src = nextSrc;
+    if (hero.complete) hero.classList.remove('gallery-changing');
+  }
+  hero.alt = `${spot.name} photo ${currentGalleryIndex + 1}`;
+  const thumbs = $('gallery-thumbs');
+  if (thumbs.children.length !== images.length || thumbs.dataset.spotId !== spot.id) {
+    thumbs.innerHTML = images.map((url, i) => `<img src="${esc(safeUrl(url))}" alt="Photo ${i + 1}" class="thumb-img" data-action="set-image" data-index="${i}" data-fallback />`).join('');
+    thumbs.dataset.spotId = spot.id;
+  }
+  thumbs.querySelectorAll('.thumb-img').forEach((thumb, i) => {
+    thumb.classList.toggle('active', i === currentGalleryIndex);
+    thumb.setAttribute('aria-current', i === currentGalleryIndex ? 'true' : 'false');
+  });
+  const activeThumb = thumbs.children[currentGalleryIndex];
+  if (activeThumb) activeThumb.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
+  document.querySelectorAll('.gallery-arrow').forEach((button) => { button.hidden = images.length < 2; });
+}
+function changeSpotGalleryImage(step) {
+  if (!currentSpot) return;
+  const images = Array.isArray(currentSpot.gallery) && currentSpot.gallery.length ? currentSpot.gallery : [currentSpot.image];
+  currentGalleryIndex = (currentGalleryIndex + step + images.length) % images.length;
+  renderSpotGallery(currentSpot);
 }
 
 function renderReviews() {
@@ -1589,11 +1636,9 @@ const actions = {
   'cancel-trip': cancelTrip,
   'open-spot': (el) => openSpot(el.dataset.id),
   'toggle-favorite': (el) => toggleFavorite(el.dataset.id),
-  'set-image': (el) => {
-    $('detail-main-img').src = el.dataset.url;
-    document.querySelectorAll('.thumb-img').forEach((t) => t.classList.remove('active'));
-    el.classList.add('active');
-  }
+  'set-image': (el) => { currentGalleryIndex = Number(el.dataset.index) || 0; renderSpotGallery(currentSpot); },
+  'prev-image': () => changeSpotGalleryImage(-1),
+  'next-image': () => changeSpotGalleryImage(1)
 };
 
 function bindEvents() {

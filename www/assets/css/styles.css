@@ -159,6 +159,14 @@ body { background-color: #000; display: flex; justify-content: center; align-ite
 .gallery-thumbs-row { position: absolute; bottom: -16px; left: 20px; right: 20px; display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
 .thumb-img { width: 56px; height: 56px; border-radius: var(--radius-sm); object-fit: cover; cursor: pointer; border: 2px solid var(--card-bg); box-shadow: var(--shadow-sm); }
 .thumb-img.active { border-color: var(--primary-brand); }
+
+.gallery-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 4; width: 34px; height: 34px; border: 1px solid rgba(255,255,255,.65); border-radius: 50%; background: rgba(15,23,42,.35); color: #fff; font-size: 27px; line-height: 1; display: grid; place-items: center; cursor: pointer; backdrop-filter: blur(6px); }
+.gallery-arrow-prev { left: 12px; }
+.gallery-arrow-next { right: 12px; }
+.gallery-arrow[hidden] { display: none; }
+.gallery-thumbs-row { z-index: 6; justify-content: center; background: rgba(255,255,255,.88); border: 1px solid rgba(255,255,255,.65); border-radius: 18px; padding: 7px 10px 9px; left: 12%; right: 12%; bottom: -20px; box-shadow: 0 5px 16px rgba(0,0,0,.16); }
+.thumb-img { flex: 0 0 56px; }
+@media (max-width: 420px) { .gallery-thumbs-row { left: 10%; right: 10%; gap: 6px; } .thumb-img { width: 48px; height: 48px; flex-basis: 48px; } }
 .details-body { padding: 30px 20px 16px; background: var(--bg-canvas); }
 .tags-row { display: flex; flex-wrap: wrap; gap: 8px; }
 .tag { background: var(--card-bg); padding: 4px 8px; border-radius: 4px; font-size: 10px; font-weight: 700; color: var(--text-main); border: 1px solid var(--border-color); }
@@ -427,3 +435,166 @@ body { background-color: #000; display: flex; justify-content: center; align-ite
 .detail-eco-score span small { color:var(--text-muted); font-size:9px; }
 .detail-eco-card .link-btn { font-size:10px; }
 @media (max-width:360px) { .signature-feature-grid { gap:7px; margin-left:14px; margin-right:14px; } .signature-feature { padding:10px 7px; gap:6px; } .signature-feature strong { font-size:10px; } .signature-feature small { font-size:8px; } }
+
+
+/* Destination gallery: compact, Figma-style thumbnails.
+   Size is based on the gallery width, not the desktop browser viewport.
+   This prevents the gigantic thumbnails when the app is shown in a narrow panel. */
+#screen-details .details-hero {
+  position: relative;
+  isolation: isolate;
+  container-type: inline-size;
+}
+#screen-details .details-hero > #detail-main-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 180ms ease;
+}
+#screen-details .details-hero > #detail-main-img.gallery-changing { opacity: .45; }
+
+#screen-details .details-nav-overlay {
+  top: 14px;
+  left: 14px;
+  right: 14px;
+  z-index: 10;
+  pointer-events: none;
+}
+#screen-details .details-nav-overlay button { pointer-events: auto; }
+#screen-details .details-nav-overlay > .icon-btn {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  border-radius: 50%;
+  color: #14263b;
+  background: rgba(255,255,255,.96);
+  border: 1px solid rgba(15,23,42,.18);
+  box-shadow: 0 3px 14px rgba(0,0,0,.28);
+}
+#screen-details .details-nav-overlay > .icon-btn svg {
+  width: 23px;
+  height: 23px;
+  stroke: #14263b;
+}
+
+/* The tray is centered across the boundary of the main photo and detail area. */
+#screen-details .details-hero .gallery-thumbs-row {
+  --gallery-thumb-size: clamp(52px, calc((100cqw - 150px) / 5), 112px);
+  position: absolute;
+  top: 100%;
+  bottom: auto;
+  left: 50%;
+  right: auto;
+  transform: translate(-50%, -50%);
+  z-index: 8;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: safe center;
+  gap: 10px;
+  width: calc(100% - 84px);
+  max-width: 760px;
+  min-height: calc(var(--gallery-thumb-size) + 40px);
+  padding: 16px 12px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  border: 0;
+  border-radius: 36px;
+  background: #ececec;
+  box-shadow: 0 4px 12px rgba(0,0,0,.14);
+}
+#screen-details .gallery-thumbs-row::-webkit-scrollbar { display: none; }
+
+#screen-details .details-hero .gallery-thumbs-row .thumb-img {
+  display: block;
+  position: relative;
+  flex: 0 0 var(--gallery-thumb-size);
+  box-sizing: border-box;
+  width: var(--gallery-thumb-size);
+  min-width: var(--gallery-thumb-size);
+  max-width: var(--gallery-thumb-size);
+  height: var(--gallery-thumb-size);
+  min-height: var(--gallery-thumb-size);
+  max-height: var(--gallery-thumb-size);
+  object-fit: cover;
+  border: 3px solid #27394e;
+  border-radius: clamp(14px, 2.5cqw, 26px);
+  box-shadow: none;
+  cursor: pointer;
+  transform: translateY(0) scale(1);
+  transition: transform 260ms cubic-bezier(.2,1.4,.45,1),
+              border-color 200ms ease,
+              box-shadow 200ms ease;
+}
+#screen-details .details-hero .gallery-thumbs-row .thumb-img.active {
+  z-index: 1;
+  border: 4px solid #3987ff;
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 4px 10px rgba(0,0,0,.16);
+}
+
+/* Small standalone chevrons positioned level with the tray center. */
+#screen-details .gallery-arrow {
+  position: absolute;
+  top: 100%;
+  bottom: auto;
+  transform: translateY(-50%);
+  z-index: 9;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  color: transparent;
+  font-size: 0;
+  cursor: pointer;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,.35));
+}
+#screen-details .gallery-arrow::before {
+  content: "";
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-left: 3px solid #fff;
+  border-bottom: 3px solid #fff;
+  border-radius: 1px;
+  transform: rotate(45deg);
+}
+#screen-details .gallery-arrow-next::before { transform: rotate(225deg); }
+#screen-details .gallery-arrow-prev { left: 6px; }
+#screen-details .gallery-arrow-next { right: 6px; }
+#screen-details .gallery-arrow[hidden] { display: none; }
+#screen-details .gallery-arrow:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+#screen-details .details-body { padding-top: 90px; }
+
+@container (max-width: 440px) {
+  #screen-details .details-hero .gallery-thumbs-row {
+    gap: 6px;
+    padding: 12px 9px;
+    border-radius: 30px;
+  }
+  #screen-details .details-hero .gallery-thumbs-row .thumb-img {
+    border-radius: 16px;
+  }
+}
+@media (max-width: 600px) {
+  #screen-details .details-body { padding-top: 74px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #screen-details .gallery-thumbs-row .thumb-img,
+  #screen-details .details-hero > #detail-main-img { transition: none; }
+}
