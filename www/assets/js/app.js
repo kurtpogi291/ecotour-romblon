@@ -94,8 +94,17 @@ const romblonSpots =
     id: 'tinagongdagat', name: 'Tinagong Dagat', location: 'Calatrava, Tablas', category: 'Beaches',
     description: 'A stunning "hidden sea" consisting of saltwater lakes surrounded by dramatic limestone karst cliffs, accessible by boat.',
     price: '₱500 Boat Tour', rawPrice: 500.00, rating: 4.8, 
-    image: 'https://images.unsplash.com/photo-1505993597083-3bd19fa85e54?auto=format&fit=crop&w=600&q=80',
-    gallery: ['https://images.unsplash.com/photo-1505993597083-3bd19fa85e54?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=900&q=85'],
+    // Actual Tinagong Dagat, Calatrava photos (remotely hosted by their publishers).
+    // Sources: Municipality of Calatrava tourism portal, Journey Era / Jackson Groves,
+    // and Travel Photos PH. Obtain permission/appropriate licenses for public redistribution.
+    image: 'https://calatravaromblon.gov.ph/assets/destinations/Destinations_TinagongDagat1_web.jpg',
+    gallery: [
+      'https://calatravaromblon.gov.ph/assets/destinations/Destinations_TinagongDagat1_web.jpg',
+      'https://www.journeyera.com/wp-content/uploads/2018/04/calatrava-island-hopping-tablas-0023.jpg',
+      'https://www.journeyera.com/wp-content/uploads/2018/04/calatrava-island-hopping-tablas-0029.jpg',
+      'https://www.journeyera.com/wp-content/uploads/2018/04/calatrava-island-hopping-tablas-0038.jpg',
+      'https://travelphotosph.wordpress.com/wp-content/uploads/2016/09/romblon-tablas-island-2.jpeg?w=768'
+    ],
     highlights: ['Hidden Lake', 'Limestone Cliffs'], lat: 12.6000, lng: 122.0667,
     reviews: [{ user: 'Sarah J.', stars: 5, comment: 'Reminds me of Palawan or El Nido!' }]
   }
