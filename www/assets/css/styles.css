@@ -437,15 +437,13 @@ body { background-color: #000; display: flex; justify-content: center; align-ite
 @media (max-width:360px) { .signature-feature-grid { gap:7px; margin-left:14px; margin-right:14px; } .signature-feature { padding:10px 7px; gap:6px; } .signature-feature strong { font-size:10px; } .signature-feature small { font-size:8px; } }
 
 
-/* Destination gallery – proportional to the Figma thumbnail tray.
-   The tray and both chevrons share the exact same image/content boundary. */
-#screen-details {
-  --gallery-thumb-size: clamp(74px, 12.5vw, 166px);
-  --gallery-tray-height: calc(var(--gallery-thumb-size) + 62px);
-}
+/* Destination gallery: compact, Figma-style thumbnails.
+   Size is based on the gallery width, not the desktop browser viewport.
+   This prevents the gigantic thumbnails when the app is shown in a narrow panel. */
 #screen-details .details-hero {
   position: relative;
   isolation: isolate;
+  container-type: inline-size;
 }
 #screen-details .details-hero > #detail-main-img {
   display: block;
@@ -456,7 +454,6 @@ body { background-color: #000; display: flex; justify-content: center; align-ite
 }
 #screen-details .details-hero > #detail-main-img.gallery-changing { opacity: .45; }
 
-/* Back button stays readable against light and dark destination photos. */
 #screen-details .details-nav-overlay {
   top: 14px;
   left: 14px;
@@ -483,8 +480,9 @@ body { background-color: #000; display: flex; justify-content: center; align-ite
   stroke: #14263b;
 }
 
-/* Tall pill, centered vertically ON the bottom edge of the hero picture. */
+/* The tray is centered across the boundary of the main photo and detail area. */
 #screen-details .details-hero .gallery-thumbs-row {
+  --gallery-thumb-size: clamp(52px, calc((100cqw - 150px) / 5), 112px);
   position: absolute;
   top: 100%;
   bottom: auto;
@@ -496,22 +494,21 @@ body { background-color: #000; display: flex; justify-content: center; align-ite
   display: flex;
   align-items: center;
   justify-content: safe center;
-  width: min(72%, 920px);
-  max-width: none;
-  height: var(--gallery-tray-height);
-  gap: clamp(10px, 1.8vw, 25px);
-  padding: 23px 16px;
+  gap: 10px;
+  width: calc(100% - 84px);
+  max-width: 760px;
+  min-height: calc(var(--gallery-thumb-size) + 40px);
+  padding: 16px 12px;
   overflow-x: auto;
   overflow-y: hidden;
   scrollbar-width: none;
-  border: none;
-  border-radius: clamp(36px, 7vw, 92px);
-  background: #e8e8e8;
+  border: 0;
+  border-radius: 36px;
+  background: #ececec;
   box-shadow: 0 4px 12px rgba(0,0,0,.14);
 }
 #screen-details .gallery-thumbs-row::-webkit-scrollbar { display: none; }
 
-/* Square photographs with a dark Figma-style frame. */
 #screen-details .details-hero .gallery-thumbs-row .thumb-img {
   display: block;
   position: relative;
@@ -525,32 +522,32 @@ body { background-color: #000; display: flex; justify-content: center; align-ite
   max-height: var(--gallery-thumb-size);
   object-fit: cover;
   border: 3px solid #27394e;
-  border-radius: clamp(15px, 2.25vw, 28px);
+  border-radius: clamp(14px, 2.5cqw, 26px);
   box-shadow: none;
   cursor: pointer;
   transform: translateY(0) scale(1);
-  transition: transform 270ms cubic-bezier(.2,1.4,.45,1),
-              border-color 200ms ease, box-shadow 200ms ease;
-  will-change: transform;
+  transition: transform 260ms cubic-bezier(.2,1.4,.45,1),
+              border-color 200ms ease,
+              box-shadow 200ms ease;
 }
 #screen-details .details-hero .gallery-thumbs-row .thumb-img.active {
   z-index: 1;
-  border-color: #3987ff;
-  border-width: clamp(3px, .45vw, 6px);
-  transform: translateY(-6px) scale(1.08);
-  box-shadow: 0 4px 9px rgba(0,0,0,.15);
+  border: 4px solid #3987ff;
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 4px 10px rgba(0,0,0,.16);
 }
 
-/* Small unboxed white chevrons, aligned with the middle of the tray. */
+/* Small standalone chevrons positioned level with the tray center. */
 #screen-details .gallery-arrow {
+  position: absolute;
   top: 100%;
   bottom: auto;
   transform: translateY(-50%);
   z-index: 9;
   display: grid;
   place-items: center;
-  width: 40px;
-  height: 44px;
+  width: 30px;
+  height: 34px;
   padding: 0;
   border: 0;
   border-radius: 0;
@@ -566,43 +563,36 @@ body { background-color: #000; display: flex; justify-content: center; align-ite
 #screen-details .gallery-arrow::before {
   content: "";
   display: block;
-  width: 13px;
-  height: 13px;
-  border-left: 4px solid #fff;
-  border-bottom: 4px solid #fff;
+  width: 10px;
+  height: 10px;
+  border-left: 3px solid #fff;
+  border-bottom: 3px solid #fff;
   border-radius: 1px;
   transform: rotate(45deg);
 }
 #screen-details .gallery-arrow-next::before { transform: rotate(225deg); }
-#screen-details .gallery-arrow-prev { left: 3.7%; }
-#screen-details .gallery-arrow-next { right: 3.7%; }
+#screen-details .gallery-arrow-prev { left: 6px; }
+#screen-details .gallery-arrow-next { right: 6px; }
 #screen-details .gallery-arrow[hidden] { display: none; }
 #screen-details .gallery-arrow:focus-visible {
   outline: 2px solid #fff;
   outline-offset: 2px;
   border-radius: 8px;
 }
+#screen-details .details-body { padding-top: 90px; }
 
-/* Reserve room for the portion of the tray extending over destination details. */
-#screen-details .details-body {
-  padding-top: clamp(96px, calc(6.25vw + 59px), 142px);
-}
-
-@media (max-width: 600px) {
+@container (max-width: 440px) {
   #screen-details .details-hero .gallery-thumbs-row {
-    width: calc(100% - 94px);
-    gap: 9px;
-    padding: 21px 10px;
+    gap: 6px;
+    padding: 12px 9px;
+    border-radius: 30px;
   }
-  #screen-details .gallery-arrow { width: 30px; height: 36px; }
-  #screen-details .gallery-arrow::before {
-    width: 10px;
-    height: 10px;
-    border-left-width: 3px;
-    border-bottom-width: 3px;
+  #screen-details .details-hero .gallery-thumbs-row .thumb-img {
+    border-radius: 16px;
   }
-  #screen-details .gallery-arrow-prev { left: 6px; }
-  #screen-details .gallery-arrow-next { right: 6px; }
+}
+@media (max-width: 600px) {
+  #screen-details .details-body { padding-top: 74px; }
 }
 @media (prefers-reduced-motion: reduce) {
   #screen-details .gallery-thumbs-row .thumb-img,
