@@ -29,7 +29,7 @@
 
   <div id="screen-login" class="screen auth-screen">
     <header class="auth-header">
-      <button class="icon-btn" aria-label="Back" data-nav="screen-welcome">
+      <button type="button" class="icon-btn back-btn" aria-label="Back" data-nav="screen-welcome">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
       </button>
     </header>
@@ -55,7 +55,7 @@
 
   <div id="screen-signup" class="screen auth-screen">
     <header class="auth-header">
-      <button class="icon-btn" aria-label="Back" data-nav="screen-welcome">
+      <button type="button" class="icon-btn back-btn" aria-label="Back" data-nav="screen-welcome">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
       </button>
     </header>
@@ -98,9 +98,10 @@
     </div>
 
     <div class="search-widget-card">
-      <div class="search-widget-input">
-        <span class="sw-icon">📍</span>
-        <input type="search" id="sw-location" placeholder="Search Romblon, Ferrol, Tablas..." aria-label="Search destinations" />
+      <div class="search-widget-input search-combobox">
+        <span class="sw-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4 4"/></svg></span>
+        <input type="search" id="sw-location" placeholder="Search places in Romblon..." aria-label="Search destinations" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="home-search-suggestions" />
+        <div id="home-search-suggestions" class="search-suggestions" role="listbox" aria-label="Matching destinations" hidden></div>
       </div>
       <button class="btn btn-primary btn-block" data-action="scroll-destinations">Explore Destinations</button>
     </div>
@@ -108,24 +109,24 @@
     <div class="screen-body" style="padding-top: 0;">
       <div class="signature-feature-grid">
         <button class="signature-feature planner-feature" data-action="open-trip-planner">
-          <span class="feature-emoji">🧭</span><span><strong>Build My Trip</strong><small>Plan a getaway around your budget</small></span><b>›</b>
+          <span class="feature-emoji" aria-hidden="true">01</span><span><strong>Build My Trip</strong><small>Plan a getaway around your budget</small></span><b>›</b>
         </button>
         <button class="signature-feature experiences-feature" data-action="open-experiences">
-          <span class="feature-emoji">🏝️</span><span><strong>Local Experiences</strong><small>Discover tours and activities</small></span><b>›</b>
+          <span class="feature-emoji" aria-hidden="true">02</span><span><strong>Local Experiences</strong><small>Discover tours and activities</small></span><b>›</b>
         </button>
       </div>
       <button class="ecoscore-banner" data-action="open-ecoscore">
-        <span class="eco-leaf">🌱</span><span><strong>Travel a little greener</strong><small>Explore EcoScores and responsible travel tips</small></span><b>Explore ›</b>
+        <span class="eco-leaf" aria-hidden="true">03</span><span><strong>Travel a little greener</strong><small>Explore EcoScores and responsible travel tips</small></span><b>Explore ›</b>
       </button>
 
       <section class="island-filter-panel" aria-labelledby="island-filter-title">
         <div class="island-filter-heading"><h3 id="island-filter-title">Explore by island</h3><span>Find your next stop</span></div>
         <div class="island-filters" id="island-filters" role="group" aria-label="Choose island">
-          <button type="button" class="island-chip active" data-island="All" aria-pressed="true">🌊 All</button>
-          <button type="button" class="island-chip" data-island="Tablas" aria-pressed="false">🏝️ Tablas</button>
-          <button type="button" class="island-chip" data-island="Romblon" aria-pressed="false">☀️ Romblon</button>
-          <button type="button" class="island-chip" data-island="Sibuyan" aria-pressed="false">🌿 Sibuyan</button>
-          <button type="button" class="island-chip" data-island="Carabao" aria-pressed="false">🐚 Carabao</button>
+          <button type="button" class="island-chip active" data-island="All" aria-pressed="true">All islands</button>
+          <button type="button" class="island-chip" data-island="Tablas" aria-pressed="false">Tablas</button>
+          <button type="button" class="island-chip" data-island="Romblon" aria-pressed="false">Romblon</button>
+          <button type="button" class="island-chip" data-island="Sibuyan" aria-pressed="false">Sibuyan</button>
+          <button type="button" class="island-chip" data-island="Carabao" aria-pressed="false">Carabao</button>
         </div>
       </section>
       <div class="category-tags" id="category-tags">
@@ -161,10 +162,11 @@
   <div id="screen-saved" class="screen">
     <header class="page-header"><h2>Saved Places</h2></header>
     <div class="screen-body">
-      <div class="search-box" style="margin-bottom: 20px;">
-        <input type="search" id="saved-search" placeholder="Filter saved items..." aria-label="Filter saved items" />
+      <div class="search-box search-combobox" style="margin-bottom: 20px;">
+        <input type="search" id="saved-search" placeholder="Search saved places..." aria-label="Search saved items" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="saved-search-suggestions" />
+        <div id="saved-search-suggestions" class="search-suggestions" role="listbox" aria-label="Matching saved destinations" hidden></div>
       </div>
-      <p class="offline-guide-note">📖 Saved place text remains available offline on this device. Photos, updates, and maps need internet.</p>
+      <p class="offline-guide-note">Saved place text remains available offline on this device. Photos, updates, and maps need internet.</p>
       <div class="destinations-grid" id="saved-items-list"></div>
     </div>
   </div>
@@ -172,8 +174,9 @@
   <div id="screen-map" class="screen" style="position: relative;">
     <header class="page-header map-header"><h2>Explore Map</h2></header>
     <div class="map-search-overlay">
-      <div class="search-box">
-        <input type="search" id="map-search" placeholder="Search map..." aria-label="Search map" />
+      <div class="search-box search-combobox">
+        <input type="search" id="map-search" placeholder="Search places on the map..." aria-label="Search map" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="map-search-suggestions" />
+        <div id="map-search-suggestions" class="search-suggestions" role="listbox" aria-label="Matching map destinations" hidden></div>
       </div>
     </div>
     <div id="map-container" style="flex: 1; height: 100%; width: 100%; z-index: 1;"></div>
@@ -183,11 +186,11 @@
   <div id="screen-guide" class="screen">
     <header class="page-header"><h2>Travel Guide</h2></header>
     <div class="screen-body">
-      <div class="guide-intro"><span>🧭</span><h3>Explore Romblon your way</h3><p>Plan a route, discover local highlights, and learn about responsible island travel.</p></div>
-      <button class="guide-entry" data-action="open-trip-planner"><span>🗓️</span><span><strong>Build an itinerary</strong><small>Create and save a sample travel plan</small></span><b>›</b></button>
-      <button class="guide-entry" data-action="open-experiences"><span>🏝️</span><span><strong>Local experiences</strong><small>Find activities and places worth exploring</small></span><b>›</b></button>
-      <button class="guide-entry" data-action="open-ecoscore"><span>🌱</span><span><strong>Responsible travel</strong><small>Explore illustrative sustainability scores</small></span><b>›</b></button>
-      <button class="guide-entry" data-tab="saved"><span>📖</span><span><strong>Offline saved guides</strong><small>Read saved destination details without data</small></span><b>›</b></button>
+      <div class="guide-intro"><span class="guide-mark" aria-hidden="true">GUIDE</span><h3>Explore Romblon your way</h3><p>Plan a route, discover local highlights, and learn about responsible island travel.</p></div>
+      <button class="guide-entry" data-action="open-trip-planner"><span class="guide-entry-mark" aria-hidden="true">01</span><span><strong>Build an itinerary</strong><small>Create and save a sample travel plan</small></span><b>›</b></button>
+      <button class="guide-entry" data-action="open-experiences"><span class="guide-entry-mark" aria-hidden="true">02</span><span><strong>Local experiences</strong><small>Find activities and places worth exploring</small></span><b>›</b></button>
+      <button class="guide-entry" data-action="open-ecoscore"><span class="guide-entry-mark" aria-hidden="true">03</span><span><strong>Responsible travel</strong><small>Explore illustrative sustainability scores</small></span><b>›</b></button>
+      <button class="guide-entry" data-tab="saved"><span class="guide-entry-mark" aria-hidden="true">04</span><span><strong>Offline saved guides</strong><small>Read saved destination details without data</small></span><b>›</b></button>
       <p class="guide-note">TOURismo does not collect bookings or payments. Always confirm visits and current conditions with local contacts.</p>
     </div>
   </div>
@@ -235,9 +238,9 @@
 
 
   <div id="screen-travel-preferences" class="screen">
-    <header class="page-header"><button class="icon-btn" aria-label="Back to profile" data-action="back-to-profile">‹</button><h2>Travel Preferences</h2><span style="width:36px;"></span></header>
+    <header class="page-header"><button type="button" class="icon-btn back-btn" aria-label="Back to profile" data-action="back" ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button><h2>Travel Preferences</h2><span style="width:36px;"></span></header>
     <div class="screen-body travel-preferences-body">
-      <div class="preferences-intro"><span>🧭</span><h3>Make Romblon yours</h3><p>Choose a favorite island and interests to personalize discovery and trip planning.</p></div>
+      <div class="preferences-intro"><span class="guide-mark" aria-hidden="true">TRAVEL</span><h3>Make Romblon yours</h3><p>Choose a favorite island and interests to personalize discovery and trip planning.</p></div>
       <div class="preferences-panel">
         <div class="input-group"><label for="pref-island">Preferred island</label><select id="pref-island">
           <option value="All">All islands</option><option value="Tablas">Tablas</option><option value="Romblon">Romblon Island</option><option value="Sibuyan">Sibuyan</option><option value="Carabao">Carabao Island</option>
@@ -253,7 +256,7 @@
   </div>
 
   <div id="screen-help" class="screen">
-    <header class="page-header"><button class="icon-btn" aria-label="Back to profile" data-action="back-to-profile">‹</button><h2>Help & Support</h2><span style="width:36px;"></span></header>
+    <header class="page-header"><button type="button" class="icon-btn back-btn" aria-label="Back to profile" data-action="back" ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button><h2>Help & Support</h2><span style="width:36px;"></span></header>
     <div class="screen-body">
       <div class="help-card"><strong>What is TOURismo?</strong><p>A Romblon tourism guide for discovering attractions, exploring photos, and finding directions.</p></div>
       <div class="help-card"><strong>How can I contact a destination?</strong><p>Open a place and use its Facebook page or linked tourism office where available. Social-media searches are not official accounts.</p></div>
@@ -263,9 +266,9 @@
   </div>
 
   <div id="screen-trip-planner" class="screen">
-    <header class="page-header"><button class="icon-btn" data-action="back-to-home" aria-label="Back">‹</button><h2>Build My Trip</h2><span style="width:36px;"></span></header>
+    <header class="page-header"><button type="button" class="icon-btn back-btn"  data-action="back" aria-label="Back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button><h2>Build My Trip</h2><span style="width:36px;"></span></header>
     <div class="screen-body">
-      <div class="planner-intro"><span>🧭</span><div><h3>Your island getaway, planned</h3><p>Tell us your budget and interests. TOURismo will draft a practical starter itinerary from the demo listings.</p></div></div>
+      <div class="planner-intro"><span class="guide-mark" aria-hidden="true">PLAN</span><div><h3>Your island getaway, planned</h3><p>Tell us your budget and interests. TOURismo will draft a practical starter itinerary from the demo listings.</p></div></div>
       <div class="guest-card planner-form">
         <div class="row-2">
           <div class="input-group"><label for="planner-days">Trip duration</label><select id="planner-days"><option value="1">1 day</option><option value="2">2 days</option><option value="3" selected>3 days</option><option value="4">4 days</option><option value="5">5 days</option></select></div>
@@ -273,7 +276,7 @@
         </div>
         <div class="input-group"><label for="planner-budget">Total budget (₱)</label><input id="planner-budget" type="number" min="500" step="500" value="5000" placeholder="5000"></div>
         <div class="input-group"><label for="planner-interest">Main interest</label><select id="planner-interest"><option value="balanced">A bit of everything</option><option value="beach">Beaches & island life</option><option value="adventure">Adventure & hiking</option><option value="nature">Nature & waterfalls</option><option value="culture">Local places & community</option></select></div>
-        <button class="btn btn-primary btn-block" data-action="generate-trip">✨ Generate itinerary</button>
+        <button class="btn btn-primary btn-block" data-action="generate-trip">Generate itinerary</button>
       </div>
       <div id="planner-results" class="planner-results"></div>
       <div id="saved-itineraries" class="saved-itineraries"></div>
@@ -282,18 +285,18 @@
   </div>
 
   <div id="screen-experiences" class="screen">
-    <header class="page-header"><button class="icon-btn" data-action="back-to-home" aria-label="Back">‹</button><h2>Local Experiences</h2><span style="width:36px;"></span></header>
+    <header class="page-header"><button type="button" class="icon-btn back-btn"  data-action="back" aria-label="Back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button><h2>Local Experiences</h2><span style="width:36px;"></span></header>
     <div class="screen-body">
-      <div class="planner-intro"><span>🤿</span><div><h3>Meet Romblon beyond the shoreline</h3><p>Explore sample activities and community-led experiences. Listings are demo content until local operators are onboarded.</p></div></div>
+      <div class="planner-intro"><span class="guide-mark" aria-hidden="true">LOCAL</span><div><h3>Meet Romblon beyond the shoreline</h3><p>Explore sample activities and community-led experiences. Listings are demo content until local operators are onboarded.</p></div></div>
       <div class="experience-filter-row"><button class="tag-chip active" data-experience-filter="All">All</button><button class="tag-chip" data-experience-filter="Water">Water</button><button class="tag-chip" data-experience-filter="Adventure">Adventure</button><button class="tag-chip" data-experience-filter="Nature">Nature</button></div>
       <div id="experiences-list" class="experiences-grid"></div>
     </div>
   </div>
 
   <div id="screen-ecoscore" class="screen">
-    <header class="page-header"><button class="icon-btn" data-action="back-to-home" aria-label="Back">‹</button><h2>EcoScore</h2><span style="width:36px;"></span></header>
+    <header class="page-header"><button type="button" class="icon-btn back-btn"  data-action="back" aria-label="Back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button><h2>EcoScore</h2><span style="width:36px;"></span></header>
     <div class="screen-body">
-      <div class="ecoscore-hero"><span>🌿</span><h3>Explore responsibly</h3><p>EcoScore is a pilot framework for comparing sustainability practices—not an official environmental certification.</p></div>
+      <div class="ecoscore-hero"><span class="guide-mark" aria-hidden="true">ECO</span><h3>Explore responsibly</h3><p>EcoScore is a pilot framework for comparing sustainability practices—not an official environmental certification.</p></div>
       <div class="eco-criteria-grid"><div><b>♻️ Waste</b><small>Waste reduction and disposal</small></div><div><b>🌊 Nature</b><small>Care for local ecosystems</small></div><div><b>🤝 Community</b><small>Local jobs and suppliers</small></div><div><b>💧 Resources</b><small>Water and energy practices</small></div></div>
       <h3 class="subsection-title">Destination pilot scores</h3>
       <div id="ecoscore-list" class="ecoscore-list"></div>
@@ -307,7 +310,7 @@
       <button class="gallery-arrow gallery-arrow-prev" type="button" data-action="prev-image" aria-label="Previous photo">‹</button>
       <button class="gallery-arrow gallery-arrow-next" type="button" data-action="next-image" aria-label="Next photo">›</button>
       <div class="details-nav-overlay">
-        <button class="icon-btn blur-btn" aria-label="Back" data-action="back">
+        <button class="icon-btn blur-btn back-btn" aria-label="Back" data-action="back">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
         <div class="overlay-actions">

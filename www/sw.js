@@ -1,6 +1,6 @@
 // TOURismo: prefer fresh app assets online, retain an offline fallback.
 // External maps, images and social links are not cached.
-const CACHE = 'tourismo-shell-v2';
+const CACHE = 'tourismo-shell-v3';
 const ASSETS = ['./', './index.html', './assets/js/app.js', './assets/css/styles.css', './assets/images/ecotour-logo.svg'];
 
 self.addEventListener('install', event => {

@@ -71,3 +71,9 @@ Google route URLs generated in the map popup and detail page share `routeForSpot
 - **Bonbon Beach pin** corrected from the offshore sandbar (12.57091, 122.24214) to the actual beach area (12.57254, 122.24461), cross-checked with Open Earth (approx. 12.572, 122.246) and latlong.net. The road destination remains the mapped beach access entrance (12.57239, 122.24816).
 - **Looc Fish Sanctuary pin** corrected from Port of Looc (12.25495, 121.99104) to the reported offshore sanctuary point (approx. 12.24616, 121.98259). Source: traveltoph.fun tourist spot listing; **not field verified**. Road directions still end at the Port of Looc, which the regional tourism source identifies as the boat departure point. The popup explicitly distinguishes the approximate floating attraction from the port. These points MUST be validated by the Looc tourism office before relying on them for on-water navigation.
 - Existing other source-matched site coordinates were retained rather than reverting to known broad-area placeholders. An OpenStreetMap POI coordinate is not a field-surveyed entrance; review locally before production deployment.
+
+## Presentation polish — search suggestions and navigation
+- Explore, Map, and Saved Places searches now display local dropdown suggestions by matching place name, locality, island or category/highlight. Use mouse/touch or Arrow Up/Down + Enter. Escape or outside tap closes the dropdown; empty searches hide it. No external geocoding or invented results.
+- All five secondary page headers use matching SVG chevron back buttons and page-history navigation; theme-aware foreground/background fixes the invisible dark-mode glyph.
+- Reduced decorative emojis in island chips, home feature shortcuts, travel guide links, and intro headings; kept location/visitor cues where useful.
+- Web offline service-worker cache bumped to v3 to avoid older app shell files hiding the updates.

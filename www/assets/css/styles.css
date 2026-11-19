@@ -759,3 +759,63 @@ body.dark-mode .spot-island-label {background:rgba(133,221,200,.15);color:#A9E4D
 .header-brand-light { display: inline-flex; align-items: center; column-gap: 8px; white-space: nowrap; }
 .header-brand-wordmark { display: inline-flex; align-items: baseline; gap: 0; white-space: nowrap; letter-spacing: -0.4px; }
 .header-brand-wordmark .brand-highlight { margin: 0; padding: 0; }
+
+
+/* TOURismo search suggestions: keyboard friendly, readable in light and dark themes. */
+.search-combobox { position: relative; overflow: visible; }
+.search-widget-input.search-combobox { position: relative; }
+.search-combobox input { min-width: 0; }
+.search-combobox:focus-within { border-color: var(--primary-brand); }
+.search-suggestions[hidden] { display: none !important; }
+.search-suggestions {
+  position: absolute;
+  top: calc(100% + 7px);
+  left: 0;
+  right: 0;
+  z-index: 900;
+  max-height: min(350px, 44dvh);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 6px;
+  border-radius: 15px;
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  background: var(--card-bg);
+  box-shadow: 0 12px 32px rgba(2, 21, 31, .22);
+}
+#screen-home .search-widget-card { z-index: 50; }
+#screen-map .map-search-overlay { z-index: 550; }
+.search-box.search-combobox { overflow: visible; }
+.search-suggestion {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 51px;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text-main);
+  text-align: left;
+  cursor: pointer;
+  gap: 4px;
+}
+.search-suggestion + .search-suggestion { border-top: 1px solid var(--border-color); }
+.search-suggestion:is(:hover,.active,:focus-visible) { background: var(--bg-canvas); outline: none; }
+.search-suggestion-name { font-size: 13px; font-weight: 800; line-height: 1.35; }
+.search-suggestion-place { font-size: 11px; color: var(--text-muted); line-height: 1.4; }
+.search-no-results { padding: 17px 12px; font-size: 12px; line-height: 1.5; color: var(--text-muted); }
+.sw-icon { display: inline-flex; align-items: center; justify-content: center; color: var(--primary-brand); flex: none; }
+.sw-icon svg { display: block; }
+/* Theme-aware, consistent back arrow for all subpages. */
+.icon-btn.back-btn { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 40px; width: 40px; height: 40px; border-radius: 12px; background: var(--card-bg); color: var(--text-main); border: 1px solid var(--border-color); }
+.icon-btn.back-btn svg { display: block; width: 21px; height: 21px; stroke: currentColor; }
+.page-header .back-btn { box-shadow: none; }
+.auth-header .back-btn { box-shadow: none; }
+#screen-details .details-nav-overlay .back-btn { border-radius: 50%; background: rgba(255,255,255,.96); color: #14263b; }
+#screen-details .details-nav-overlay .back-btn svg { stroke: #14263b; }
+/* Restrained functional icon language in place of decorative emojis. */
+.feature-emoji,.eco-leaf { width: 30px; height: 30px; flex: 0 0 30px; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: var(--primary-brand); background: rgba(8,102,117,.1); border-radius: 9px; }
+.guide-entry-mark { width: 32px; height: 32px; flex: 0 0 32px; border-radius: 9px; display: inline-flex; align-items: center; justify-content: center; font-size: 11px !important; font-weight: 800; color: var(--primary-brand); background: var(--bg-canvas); }
+.guide-mark { display: inline-flex !important; align-items: center; justify-content: center; width: fit-content; min-width: 48px; height: 27px; padding: 3px 10px; font-size: 10px !important; letter-spacing: .1em; font-weight: 800; color: #086675; background: rgba(8,102,117,.11); border-radius: 9px; }
+@media(max-width:360px) {.search-suggestion{padding:10px}.search-suggestions{max-height:38dvh}}

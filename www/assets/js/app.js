@@ -415,6 +415,7 @@ window.onFirebaseDataLoaded = function (data) {
   badge.textContent = 'Places Loaded';
   badge.classList.add('online');
   refreshAll();
+  if (searchSuggestionState.source) renderSearchSuggestions(searchSuggestionState.source);
   if (currentScreen === 'screen-details' && currentSpot) renderReviews();
 };
 
@@ -662,6 +663,106 @@ function filteredSpots() {
   return list;
 }
 
+
+const SEARCH_FIELDS = {
+  home: { input:'sw-location', popup:'home-search-suggestions' },
+  map: { input:'map-search', popup:'map-search-suggestions' },
+  saved: { input:'saved-search', popup:'saved-search-suggestions' }
+};
+let searchSuggestionState = { source:null, items:[], active:-1 };
+
+function normalizeDestinationQuery(value) {
+  return String(value || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim().replace(/\s+/g, ' ');
+}
+
+function matchingDestinations(value, source='home') {
+  const query = normalizeDestinationQuery(value);
+  if (!query) return [];
+  const words = query.split(' ').filter(Boolean);
+  const candidates = source === 'saved' ? allSavedSpots() : romblonSpots;
+  return candidates.map(spot => {
+    const name = normalizeDestinationQuery(spot.name);
+    const place = normalizeDestinationQuery(spot.location);
+    const island = normalizeDestinationQuery(islandForSpot(spot));
+    const other = normalizeDestinationQuery([spot.category, ...(spot.highlights || [])].join(' '));
+    const searchable = [name,place,island,other].join(' ');
+    if (!words.every(word => searchable.includes(word))) return null;
+    let rank = 5;
+    if (name === query) rank = 0;
+    else if (name.startsWith(query)) rank = 1;
+    else if (name.includes(query)) rank = 2;
+    else if (place.startsWith(query)) rank = 3;
+    else if (place.includes(query)) rank = 4;
+    return {spot,rank};
+  }).filter(Boolean).sort((a,b) => a.rank - b.rank || a.spot.name.localeCompare(b.spot.name)).slice(0,6).map(x => x.spot);
+}
+
+function closeSearchSuggestions() {
+  Object.values(SEARCH_FIELDS).forEach(field => {
+    const input = $(field.input), popup = $(field.popup);
+    if (popup) { popup.hidden = true; popup.innerHTML = ''; }
+    if (input) { input.setAttribute('aria-expanded','false'); input.removeAttribute('aria-activedescendant'); }
+  });
+  searchSuggestionState = {source:null,items:[],active:-1};
+}
+
+function renderSearchSuggestions(source) {
+  const field = SEARCH_FIELDS[source];
+  if (!field) return;
+  const input = $(field.input);
+  const value = input.value.trim();
+  if (!value) { closeSearchSuggestions(); return; }
+  const matches = matchingDestinations(value,source);
+  closeSearchSuggestions();
+  const popup = $(field.popup);
+  searchSuggestionState = {source,items:matches,active:-1};
+  popup.innerHTML = matches.length
+    ? matches.map((spot,i) => `<button type="button" role="option" aria-selected="false" tabindex="-1" class="search-suggestion" id="${field.popup}-option-${i}" data-action="search-pick" data-search-source="${source}" data-id="${esc(spot.id)}"><span class="search-suggestion-name">${esc(spot.name)}</span><span class="search-suggestion-place">${esc(spot.location)} · ${esc(islandForSpot(spot))}</span></button>`).join('')
+    : '<div class="search-no-results">No matching places. Try another name or island.</div>';
+  popup.hidden = false;
+  input.setAttribute('aria-expanded','true');
+}
+
+function chooseSearchSuggestion(source,id) {
+  const spot = (source === 'saved' ? allSavedSpots() : romblonSpots).find(item => String(item.id) === String(id));
+  if (!spot) return;
+  closeSearchSuggestions();
+  const input = $(SEARCH_FIELDS[source].input);
+  if (input && input.blur) input.blur();
+  openSpot(spot.id);
+}
+
+function handleSearchSuggestionKeys(event,source) {
+  const state = searchSuggestionState;
+  if (event.key === 'Escape') {
+    if (state.source === source) { event.preventDefault(); event.stopPropagation(); closeSearchSuggestions(); }
+    return;
+  }
+  if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp' && event.key !== 'Enter') return;
+  if (state.source !== source || !state.items.length) {
+    if (event.key === 'ArrowDown' && $(SEARCH_FIELDS[source].input).value.trim()) {
+      event.preventDefault(); renderSearchSuggestions(source);
+    }
+    return;
+  }
+  event.preventDefault();
+  if (event.key === 'Enter') {
+    chooseSearchSuggestion(source,state.items[Math.max(0,state.active)].id);
+    return;
+  }
+  const next = event.key === 'ArrowDown' ? (state.active + 1) % state.items.length
+    : (state.active - 1 + state.items.length) % state.items.length;
+  state.active = next;
+  const field = SEARCH_FIELDS[source];
+  const input = $(field.input), popup = $(field.popup);
+  input.setAttribute('aria-activedescendant',field.popup+'-option-'+next);
+  popup.querySelectorAll('[role="option"]').forEach((node,i) => {
+    node.classList.toggle('active', i===next);
+    node.setAttribute('aria-selected',String(i===next));
+    if (i===next) node.scrollIntoView?.({block:'nearest'});
+  });
+}
+
 function handleSearch(value, source) {
   searchQuery = value.trim().toLowerCase();
   if (source !== 'sw-location') $('sw-location').value = value;
@@ -700,8 +801,8 @@ function cardHtml(s, withDesc) {
       <img src="${esc(safeUrl(s.image))}" alt="${esc(s.name)}" loading="lazy" data-fallback />
       <div class="spot-card-info">
         <h5>${esc(s.name)}</h5>
-        <p class="spot-location">📍 ${esc(s.location)}</p>
-        <span class="spot-island-label">🏝 ${islandForSpot(s) === 'Other' ? 'Romblon province' : esc(islandForSpot(s))}</span>
+        <p class="spot-location">${esc(s.location)}</p>
+        <span class="spot-island-label">${islandForSpot(s) === 'Other' ? 'Romblon province' : esc(islandForSpot(s))}</span>
         ${withDesc ? `<p class="spot-desc">${esc(s.description)}</p>` : ''}
         <div class="spot-meta"><span class="spot-rating">★ ${ratingFor(s)}</span><span class="spot-category">${esc(s.category)}</span></div>
       </div>
@@ -1254,6 +1355,7 @@ function closeModalsAll() {
 }
 
 function navigateTo(screenId, opts = {}) {
+  closeSearchSuggestions();
   const push = opts.push !== false;
   if (push && currentScreen && currentScreen !== screenId && currentScreen !== 'screen-welcome') navStack.push(currentScreen);
   document.querySelectorAll('.screen').forEach((s) => s.classList.remove('active'));
@@ -1324,6 +1426,7 @@ const actions = {
   'submit-review': submitReview,
   'pick-star': (el) => { reviewRating = Number(el.dataset.value); renderStarPicker(); },
   'open-spot': (el) => openSpot(el.dataset.id),
+  'search-pick': (el) => chooseSearchSuggestion(el.dataset.searchSource, el.dataset.id),
   'toggle-favorite': (el) => toggleFavorite(el.dataset.id),
   'set-image': (el) => { currentGalleryIndex = Number(el.dataset.index) || 0; renderSpotGallery(currentSpot); },
   'prev-image': () => changeSpotGalleryImage(-1),
@@ -1332,6 +1435,7 @@ const actions = {
 
 function bindEvents() {
   document.addEventListener('click', (e) => {
+    if (!e.target.closest('.search-combobox')) closeSearchSuggestions();
     const closeBtn = e.target.closest('[data-close]');
     if (closeBtn) { closeModal(closeBtn.dataset.close); return; }
     if (e.target.classList && e.target.classList.contains('modal-overlay')) { closeModal(e.target.id); return; }
@@ -1353,6 +1457,8 @@ function bindEvents() {
     }
   });
   document.addEventListener('keydown', (e) => {
+    const source = Object.keys(SEARCH_FIELDS).find(key => SEARCH_FIELDS[key].input === e.target.id);
+    if (source) { handleSearchSuggestionKeys(e,source); if (e.defaultPrevented) return; }
     if (e.key === 'Escape') closeTopModal();
     if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches('[role="button"][data-action], [role="button"][data-nav]')) {
       e.preventDefault(); e.target.click();
@@ -1363,9 +1469,14 @@ function bindEvents() {
   }, true);
   $('login-form').addEventListener('submit', handleLogin);
   $('signup-form').addEventListener('submit', handleSignup);
-  $('sw-location').addEventListener('input', (e) => handleSearch(e.target.value, 'sw-location'));
-  $('map-search').addEventListener('input', (e) => handleSearch(e.target.value, 'map-search'));
-  $('saved-search').addEventListener('input', renderSaved);
+  $('sw-location').addEventListener('input', (e) => { handleSearch(e.target.value, 'sw-location'); renderSearchSuggestions('home'); });
+  $('map-search').addEventListener('input', (e) => { handleSearch(e.target.value, 'map-search'); renderSearchSuggestions('map'); });
+  $('saved-search').addEventListener('input', () => { renderSaved(); renderSearchSuggestions('saved'); });
+  Object.keys(SEARCH_FIELDS).forEach(source => {
+    $(SEARCH_FIELDS[source].input).addEventListener('focus', () => {
+      if ($(SEARCH_FIELDS[source].input).value.trim()) renderSearchSuggestions(source);
+    });
+  });
   $('sort-select').addEventListener('change', (e) => { sortMode = e.target.value; renderDestinations(); });
   // Travel preferences are persisted by the explicit Save button.
 }
