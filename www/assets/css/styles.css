@@ -754,3 +754,8 @@ body.dark-mode .spot-island-label {background:rgba(133,221,200,.15);color:#A9E4D
 #screen-profile .menu-card h3 {font-size:14px}
 :is(.btn,.icon-btn,.nav-item,.island-chip,.tag-chip,.spot-card,.guide-entry,.place-social-link,.guide-cta,select):focus-visible {outline:3px solid var(--accent-yellow);outline-offset:2px}
 @media(max-width:360px){.visit-info-grid{grid-template-columns:1fr}.spot-card>img{width:107px}.spot-card-info{padding-right:38px}.island-chip{font-size:11px;padding:9px 11px}}
+
+/* Keep the brand as one continuous word; spacing applies only after the icon. */
+.header-brand-light { display: inline-flex; align-items: center; column-gap: 8px; white-space: nowrap; }
+.header-brand-wordmark { display: inline-flex; align-items: baseline; gap: 0; white-space: nowrap; letter-spacing: -0.4px; }
+.header-brand-wordmark .brand-highlight { margin: 0; padding: 0; }
