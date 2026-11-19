@@ -6,7 +6,7 @@ const romblonSpots =
     price: 'Free Entry', rawPrice: 0, rating: 4.9, 
     image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80',
     gallery: ['https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1506953823976-52e1fdc0149a?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1473116763249-2faaef81ccda?auto=format&fit=crop&w=900&q=85'],
-    highlights: ['White Sandbar', 'Sunset Point'], lat: 12.57091, lng: 122.24214,
+    highlights: ['White Sandbar', 'Sunset Point'], lat: 12.57254, lng: 122.24461,
     socials: { website: 'https://cms-romblon-lgu.e.gov.ph/tourism' },
     reviews: [{ user: 'Maria S.', stars: 5, comment: 'Breathtaking sandbar!' }]
   },
@@ -43,7 +43,7 @@ const romblonSpots =
     price: '₱100 Entry', rawPrice: 100.00, rating: 4.6, 
     image: 'https://images.unsplash.com/photo-1682687220199-d0124f48f95b?auto=format&fit=crop&w=600&q=80',
     gallery: ['https://images.unsplash.com/photo-1682687220199-d0124f48f95b?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1546026423-cc4642628d2b?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=900&q=85'],
-    highlights: ['Snorkeling', 'Marine Life'], lat: 12.25495, lng: 121.99104,
+    highlights: ['Snorkeling', 'Marine Life'], lat: 12.24616, lng: 121.98259,
     reviews: [{ user: 'Samantha', stars: 5, comment: 'Lots of fish right off the dock!' }]
   },
   {
@@ -751,14 +751,15 @@ function updateFavoriteButton() {
 }
 
 // Navigation policy for mapped places, reviewed against named OSM / Mapcarta features.
-// GPS points represent the attraction (except Looc: Port of Looc = verified boat departure).
+// GPS points represent attractions; Looc Sanctuary's floating platform position is approximate
+// pending local confirmation. Its road route ends at the verified Port of Looc.
 // Never send a road-navigation engine directly to floating platforms, summits, offshore lakes,
 // or an island interior. Routes stop at a verified road/port access point whenever possible.
 const ROUTE_ACCESS = Object.freeze({
   bonbon: {
     kind:'road', lat:12.57239, lng:122.24816,
     label:'Directions to beach entrance',
-    note:'Pin shows Bonbon Sandbar. Directions end at the mapped Bonbon Beach entrance; continue on foot, checking tide conditions.'
+    note:'Pin shows Bonbon Beach, not the offshore sandbar. Directions end at a mapped beach entrance; continue on foot and check tides.'
   },
   binucot: { kind:'road', label:'Directions to resort', note:'Pin matches the mapped Binucot Beach Resort location in Ferrol, Tablas.' },
   footprints: { kind:'road', label:'Directions to resort', note:'Pin matches the mapped Footprints Beach Resort in Agpudlos, San Andres.' },
@@ -768,8 +769,9 @@ const ROUTE_ACCESS = Object.freeze({
     note:'This pin shows the mountain summit, NOT a road destination. Arrange permits and a local guide with DENR before hiking.'
   },
   looc: {
-    kind:'road', label:'Directions to Looc Port',
-    note:'This pin marks Port of Looc, the verified boat departure point, NOT the floating sanctuary. A boat is required from the port.'
+    kind:'road', lat:12.25495, lng:121.99104,
+    label:'Directions to Looc Port',
+    note:'Pin approximately marks the floating fish sanctuary in Looc Bay. Driving directions go to Looc Port, then take an arranged boat; do not navigate by road to the pin.'
   },
   carabao: {
     kind:'lookup', query:'San Jose Port Carabao Island Hambil Romblon',
@@ -826,7 +828,7 @@ function routeForSpot(spot) {
 }
 
 // The visible attraction coordinates and the navigation endpoint may deliberately differ.
-// For boat destinations the map pin is either the lake/island location OR a named access pier.
+// The map pin represents the attraction, while the navigation target may be a road/boat access point.
 function mappedPointForSpot(spot) {
   if (!isValidMapPoint(spot.lat,spot.lng)) return null;
   // Local seed listings have source-reviewed points. New Firebase records need explicit confirmation.
