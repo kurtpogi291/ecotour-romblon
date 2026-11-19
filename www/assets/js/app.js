@@ -95,7 +95,7 @@ const romblonSpots =
   {
     id: 'tinagongdagat', name: 'Tinagong Dagat', location: 'Calatrava, Tablas', category: 'Beaches',
     description: 'A stunning "hidden sea" consisting of saltwater lakes surrounded by dramatic limestone karst cliffs, accessible by boat.',
-    price: '₱500 Boat Tour', rawPrice: 500.00, rating: 4.8, 
+    price: '₱25 entrance (LGU guide; confirm locally)', rawPrice: 25.00, rating: 4.8, 
     // Actual Tinagong Dagat, Calatrava photos (remotely hosted by their publishers).
     // Sources: Municipality of Calatrava tourism portal, Journey Era / Jackson Groves,
     // and Travel Photos PH. Obtain permission/appropriate licenses for public redistribution.

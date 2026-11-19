@@ -38,10 +38,12 @@ Run `npm ci`, `npx cap sync android`, then rebuild/install the Android app. A na
 - "Plan your visit": island, unverified listed cost, placeholder hours, suggested access reminders, and optional responsible travel guidance. Fees and schedules are **not verified**.
 - Profile now includes Travel Preferences (island, preferred interest, display travel tips), replacing unimplemented notifications.
 - Saved text guides have a local snapshot in `localStorage`. Maps, Firebase updates, and remote pictures are **not offline**. Browser use relies on a service worker after first online load over HTTPS; installed Android Capacitor assets already live on-device.
-- Verified municipal info links for Bonbon Beach and Tiamban Beach: https://cms-romblon-lgu.e.gov.ph/tourism ; this is general municipal tourism information, **not** a place's official Facebook page. Tinagong Dagat retains the Calatrava Tourism Council link on https://calatravaromblon.gov.ph/ .
+- Official provincial tourism information links for Bonbon Beach and Tiamban Beach: https://cms-romblon-lgu.e.gov.ph/tourism ; this is general provincial tourism information, **not** a place's official Facebook page. Tinagong Dagat retains the Calatrava Tourism Council link on https://calatravaromblon.gov.ph/ .
 - Teal/ocean styling, clearer card hierarchy, modern island chips, accessible focus states. Original map and gallery behavior retained.
 
 Example Firebase destination fields:
 ```json
 {"island":"Tablas","visitorInfo":{"hours":"Confirm locally","access":"Ask tourism staff for access details"}}
 ```
+
+**Tinagong Dagat source note:** the Calatrava LGU website lists a ₱25 entrance charge (https://calatravaromblon.gov.ph/index.html), distinct from operator boat-tour rates. The prototype now labels this as a reference requiring confirmation, not a payment or booking quote. The prior seeded ₱500 boat-tour figure was unverified and removed.
