@@ -47,3 +47,22 @@ Example Firebase destination fields:
 ```
 
 **Tinagong Dagat source note:** the Calatrava LGU website lists a ₱25 entrance charge (https://calatravaromblon.gov.ph/index.html), distinct from operator boat-tour rates. The prototype now labels this as a reference requiring confirmation, not a payment or booking quote. The prior seeded ₱500 boat-tour figure was unverified and removed.
+
+## Location verification and safe directions (2026-11-19)
+Pinned feature points were checked against named OpenStreetMap features visible on Mapcarta; these are mapped feature positions, **not surveyed entrances or guaranteed step-by-step routes**. Google Maps may provide incomplete driving paths on island roads. The Get Directions links use verified road/port waypoints where applicable.
+
+| Place | Map pin latitude, longitude | Navigation behavior / source |
+|---|---|---|
+| Bonbon Sandbar | 12.57091, 122.24214 | Driving destination **entrance** 12.57239, 122.24816, OSM node 13518301444; mapcarta.com/W655831693 and /N13518301444 |
+| Binucot Beach Resort | 12.31002, 121.92418 | Road to mapped resort, mapcarta.com/N5075100658 |
+| Footprints Beach Resort | 12.55446, 122.00452 | Road to mapped resort, mapcarta.com/N10956614559 |
+| Mount Guiting-Guiting | 12.41635, 122.56879 | Summit marker ONLY, mapcarta.com/N11915888197; **search for DENR registration office in Tampayan instead of routing to summit** |
+| Looc Fish Sanctuary | 12.25495, 121.99104 | **Pin is explicitly the Port of Looc**, not the floating fish sanctuary; boat from port, mapcarta.com/W28010905 |
+| Carabao Island (Hambil) | 12.06394, 121.93669 | Island position only; **search for San Jose boat arrival port**, not driving to island interior, mapcarta.com/15782782 |
+| Aglicay Beach Resort | 12.22250, 122.04631 | Road to mapped resort, mapcarta.com/N4113539689 |
+| Cantingas River Resort visitor area | 12.32739, 122.57911 | Road to mapped visitor area, mapcarta.com/N5300220024 |
+| Tiamban Beach | 12.56880, 122.24976 | Road to mapped beach, mapcarta.com/W55179805 |
+| Mablaran Falls park | 12.55957, 122.02916 | Pin shows mapped park; **search for trail access**, not driving to waterfall, mapcarta.com/N10956655893 |
+| Tinagong Dagat | 12.67340, 122.11200 | Lake feature, mapcarta.com/W925528972; road directions instead to **Calatrava Port** 12.62173, 122.06818 (mapcarta.com/N7658011605); onward boat must be arranged with Calatrava tourism office |
+
+Google route URLs generated in the map popup and detail page share `routeForSpot()`. The itinerary route refuses to produce a single false road journey spanning separate islands or requiring boat/trail access. Newly created Firebase destinations require `locationVerified:true` with checked WGS84 coordinates before displaying a map pin or offering coordinate-based road directions; otherwise only a place-name search is provided. Review road access, port arrangements and seasonal conditions with the relevant local LGU before relying on public navigation data.

@@ -6,7 +6,7 @@ const romblonSpots =
     price: 'Free Entry', rawPrice: 0, rating: 4.9, 
     image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80',
     gallery: ['https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1506953823976-52e1fdc0149a?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1473116763249-2faaef81ccda?auto=format&fit=crop&w=900&q=85'],
-    highlights: ['White Sandbar', 'Sunset Point'], lat: 12.5833, lng: 122.2625,
+    highlights: ['White Sandbar', 'Sunset Point'], lat: 12.57091, lng: 122.24214,
     socials: { website: 'https://cms-romblon-lgu.e.gov.ph/tourism' },
     reviews: [{ user: 'Maria S.', stars: 5, comment: 'Breathtaking sandbar!' }]
   },
@@ -16,7 +16,7 @@ const romblonSpots =
     price: '₱845.50 / Night', rawPrice: 845.50, rating: 4.7, 
     image: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=600&q=80',
     gallery: ['https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=900&q=85'],
-    highlights: ['Pool', 'Beachfront'], lat: 12.3833, lng: 121.9667,
+    highlights: ['Pool', 'Beachfront'], lat: 12.31002, lng: 121.92418,
     reviews: [{ user: 'Erika R.', stars: 4, comment: 'Great coastal drive and calm waters.' }]
   },
   {
@@ -25,7 +25,7 @@ const romblonSpots =
     price: '₱1,120.00 / Night', rawPrice: 1120.00, rating: 4.8, 
     image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80',
     gallery: ['https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=900&q=85'],
-    highlights: ['Bungalows', 'Bar'], lat: 12.5283, lng: 121.9861,
+    highlights: ['Bungalows', 'Bar'], lat: 12.55446, lng: 122.00452,
     reviews: [{ user: 'Leonard F.', stars: 5, comment: 'Awesome relaxing vibe!' }]
   },
   {
@@ -34,7 +34,7 @@ const romblonSpots =
     price: '₱500 Permit', rawPrice: 500.00, rating: 4.8, 
     image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80',
     gallery: ['https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1464278533981-50106e6176b1?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=900&q=85'],
-    highlights: ['Hiking', 'Wildlife'], lat: 12.4161, lng: 122.5694,
+    highlights: ['Hiking', 'Wildlife'], lat: 12.41635, lng: 122.56879,
     reviews: [{ user: 'Alex H.', stars: 5, comment: 'Challenging but unforgettable.' }]
   },
   {
@@ -43,7 +43,7 @@ const romblonSpots =
     price: '₱100 Entry', rawPrice: 100.00, rating: 4.6, 
     image: 'https://images.unsplash.com/photo-1682687220199-d0124f48f95b?auto=format&fit=crop&w=600&q=80',
     gallery: ['https://images.unsplash.com/photo-1682687220199-d0124f48f95b?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1546026423-cc4642628d2b?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=900&q=85'],
-    highlights: ['Snorkeling', 'Marine Life'], lat: 12.2570, lng: 121.9961,
+    highlights: ['Snorkeling', 'Marine Life'], lat: 12.25495, lng: 121.99104,
     reviews: [{ user: 'Samantha', stars: 5, comment: 'Lots of fish right off the dock!' }]
   },
   {
@@ -52,7 +52,7 @@ const romblonSpots =
     price: '₱50 Envi Fee', rawPrice: 50.00, rating: 4.9, 
     image: 'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=600&q=80',
     gallery: ['https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=900&q=85'],
-    highlights: ['Pristine Sand', 'Cliff Diving'], lat: 12.0667, lng: 121.9333,
+    highlights: ['Pristine Sand', 'Cliff Diving'], lat: 12.06394, lng: 121.93669,
     reviews: [{ user: 'Jake M.', stars: 5, comment: 'Just like Boracay before the crowds.' }]
   },
   {
@@ -61,7 +61,7 @@ const romblonSpots =
     price: '₱1,500.00 / Night', rawPrice: 1500.00, rating: 4.5, 
     image: 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=600&q=80',
     gallery: ['https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=900&q=85'],
-    highlights: ['Scenic View', 'White Sand'], lat: 12.2858, lng: 122.0544,
+    highlights: ['Scenic View', 'White Sand'], lat: 12.2225, lng: 122.04631,
     reviews: [{ user: 'Chris P.', stars: 4, comment: 'Great sunset view from the hill.' }]
   },
   {
@@ -70,7 +70,7 @@ const romblonSpots =
     price: '₱30 Entry', rawPrice: 30.00, rating: 4.8, 
     image: 'https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=600&q=80',
     gallery: ['https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=85'],
-    highlights: ['Crystal Clear', 'Cliff Diving'], lat: 12.3551, lng: 122.5684,
+    highlights: ['Crystal Clear', 'Cliff Diving'], lat: 12.32739, lng: 122.57911,
     reviews: [{ user: 'Daniel', stars: 5, comment: 'The water is so cold and refreshing!' }]
   },
   {
@@ -79,7 +79,7 @@ const romblonSpots =
     price: '₱50 Entry', rawPrice: 50.00, rating: 4.4, 
     image: 'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=600&q=80',
     gallery: ['https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=900&q=85'],
-    highlights: ['Family Friendly', 'Fine Sand'], lat: 12.5700, lng: 122.2541,
+    highlights: ['Family Friendly', 'Fine Sand'], lat: 12.5688, lng: 122.24976,
     socials: { website: 'https://cms-romblon-lgu.e.gov.ph/tourism' },
     reviews: [{ user: 'Anna L.', stars: 4, comment: 'Nice beach very near the town proper.' }]
   },
@@ -89,7 +89,7 @@ const romblonSpots =
     price: '₱20 Entry', rawPrice: 20.00, rating: 4.5, 
     image: 'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=600&q=80',
     gallery: ['https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=900&q=85'],
-    highlights: ['Waterfalls', 'Nature Trail'], lat: 12.5333, lng: 122.0167,
+    highlights: ['Waterfalls', 'Nature Trail'], lat: 12.55957, lng: 122.02916,
     reviews: [{ user: 'Leo', stars: 5, comment: 'Very peaceful and secluded.' }]
   },
   {
@@ -107,7 +107,7 @@ const romblonSpots =
       'https://www.journeyera.com/wp-content/uploads/2018/04/calatrava-island-hopping-tablas-0038.jpg',
       'https://travelphotosph.wordpress.com/wp-content/uploads/2016/09/romblon-tablas-island-2.jpeg?w=768'
     ],
-    highlights: ['Hidden Lake', 'Limestone Cliffs'], lat: 12.6000, lng: 122.0667,
+    highlights: ['Hidden Lake', 'Limestone Cliffs'], lat: 12.6734, lng: 122.112,
     socials: { facebook: 'https://www.facebook.com/calatravatourismcouncil', website: 'https://calatravaromblon.gov.ph/destinations.html' },
     reviews: [{ user: 'Sarah J.', stars: 5, comment: 'Reminds me of Palawan or El Nido!' }]
   }
@@ -155,6 +155,7 @@ function offlineSnapshot(spot) {
     highlights:Array.isArray(spot.highlights)?spot.highlights.slice(0,12):[],
     lat:spot.lat==null?null:Number(spot.lat), lng:spot.lng==null?null:Number(spot.lng),
     socials:spot.socials&&typeof spot.socials==='object'?{...spot.socials}:{},
+    locationVerified:spot.locationVerified===true,
     visitorInfo:spot.visitorInfo&&typeof spot.visitorInfo==='object'?{...spot.visitorInfo}:{},
     reviews:[]
   };
@@ -401,7 +402,8 @@ function mergeRemote(data) {
       reviews: remoteReviews,
       socials: s.socials && typeof s.socials === 'object' ? s.socials : {},
       island: ISLAND_OPTIONS.includes(s.island) && s.island !== 'All' ? s.island : '',
-      visitorInfo: s.visitorInfo && typeof s.visitorInfo === 'object' ? s.visitorInfo : {}
+      visitorInfo: s.visitorInfo && typeof s.visitorInfo === 'object' ? s.visitorInfo : {},
+      locationVerified: s.locationVerified === true
     });
   });
 }
@@ -748,14 +750,100 @@ function updateFavoriteButton() {
   b.setAttribute('aria-pressed', String(on));
 }
 
+// Navigation policy for mapped places, reviewed against named OSM / Mapcarta features.
+// GPS points represent the attraction (except Looc: Port of Looc = verified boat departure).
+// Never send a road-navigation engine directly to floating platforms, summits, offshore lakes,
+// or an island interior. Routes stop at a verified road/port access point whenever possible.
+const ROUTE_ACCESS = Object.freeze({
+  bonbon: {
+    kind:'road', lat:12.57239, lng:122.24816,
+    label:'Directions to beach entrance',
+    note:'Pin shows Bonbon Sandbar. Directions end at the mapped Bonbon Beach entrance; continue on foot, checking tide conditions.'
+  },
+  binucot: { kind:'road', label:'Directions to resort', note:'Pin matches the mapped Binucot Beach Resort location in Ferrol, Tablas.' },
+  footprints: { kind:'road', label:'Directions to resort', note:'Pin matches the mapped Footprints Beach Resort in Agpudlos, San Andres.' },
+  g2: {
+    kind:'lookup', query:'DENR Guiting Guiting Natural Park Office Tampayan Magdiwang Sibuyan Romblon',
+    label:'Find park registration office',
+    note:'This pin shows the mountain summit, NOT a road destination. Arrange permits and a local guide with DENR before hiking.'
+  },
+  looc: {
+    kind:'road', label:'Directions to Looc Port',
+    note:'This pin marks Port of Looc, the verified boat departure point, NOT the floating sanctuary. A boat is required from the port.'
+  },
+  carabao: {
+    kind:'lookup', query:'San Jose Port Carabao Island Hambil Romblon',
+    label:'Find island arrival port',
+    note:'This pin marks Carabao Island generally, not a road address. Confirm the boat landing and schedules before traveling.'
+  },
+  aglicay: { kind:'road', label:'Directions to resort', note:'Pin matches the mapped Aglicay Beach Resort in Alcantara, Tablas.' },
+  catingas: {
+    kind:'road', label:'Directions to river resort',
+    note:'Pin marks the mapped Cantingas River Resort visitor area near San Fernando; verify river access and conditions locally.'
+  },
+  tiamban: { kind:'road', label:'Directions to Tiamban Beach', note:'Pin matches the mapped Tiamban Beach area. Confirm the actual public entrance when you arrive.' },
+  mablaran: {
+    kind:'lookup', query:'Mablaran Falls Linawan San Andres Romblon',
+    label:'Find falls access route',
+    note:'Pin marks the mapped Mablaran Falls park. The last road/trail entrance needs local confirmation; do not drive to the falls coordinates.'
+  },
+  tinagongdagat: {
+    kind:'road', lat:12.62173, lng:122.06818,
+    label:'Directions to Calatrava Port',
+    note:'Pin shows the actual Tinagong Dagat lake. Directions go to Calatrava Port; arrange the onward pump-boat ride with local tourism staff.'
+  }
+});
+
+function isValidMapPoint(lat, lng) {
+  return Number.isFinite(Number(lat)) && Number.isFinite(Number(lng)) &&
+    lat !== null && lng !== null && lat !== '' && lng !== '' &&
+    Number(lat) >= -90 && Number(lat) <= 90 &&
+    Number(lng) >= -180 && Number(lng) <= 180 &&
+    !(Number(lat) === 0 && Number(lng) === 0);
+}
+
+function routeForSpot(spot) {
+  const policy = ROUTE_ACCESS[spot.id];
+  const search = (term) => 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(term);
+  // New Firebase destinations must be deliberately checked before auto-routing to entered coordinates.
+  if (!policy) {
+    const name = String(spot.name || '') + ' ' + String(spot.location || '') + ' Romblon Philippines';
+    if (spot.locationVerified === true && isValidMapPoint(spot.lat,spot.lng)) {
+      return {
+        kind:'road', label:'Get directions', note:'Confirm the final entrance and road conditions locally.',
+        lat:Number(spot.lat), lng:Number(spot.lng),
+        url:'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(spot.lat+','+spot.lng) + '&travelmode=driving'
+      };
+    }
+    return {kind:'lookup',label:'Find verified access',note:'Location has not been field-verified; confirm with the operator before departing.',url:search(name)};
+  }
+  if (policy.kind==='lookup') return {...policy,url:search(policy.query+' Philippines')};
+  const lat=policy.lat ?? spot.lat, lng=policy.lng ?? spot.lng;
+  if (!isValidMapPoint(lat,lng)) return {kind:'lookup',label:'Find destination',note:'An exact navigation waypoint is not available.',url:search(spot.name+' '+spot.location+' Romblon Philippines')};
+  return {...policy,lat:Number(lat),lng:Number(lng),
+    url:'https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(lat+','+lng)+'&travelmode=driving'
+  };
+}
+
+// The visible attraction coordinates and the navigation endpoint may deliberately differ.
+// For boat destinations the map pin is either the lake/island location OR a named access pier.
+function mappedPointForSpot(spot) {
+  if (!isValidMapPoint(spot.lat,spot.lng)) return null;
+  // Local seed listings have source-reviewed points. New Firebase records need explicit confirmation.
+  if (!Object.prototype.hasOwnProperty.call(ROUTE_ACCESS,spot.id) && spot.locationVerified !== true) return null;
+  return {lat:Number(spot.lat),lng:Number(spot.lng)};
+}
+
 function mapPopup(s) {
+  const route = routeForSpot(s);
   return `
     <div class="map-popup-card" data-action="open-spot" data-id="${esc(s.id)}">
       <img src="${esc(safeUrl(s.image))}" class="map-popup-img" alt="" />
       <div class="map-popup-info">
         <strong>${esc(s.name)}</strong>
         <p class="map-popup-loc">📍 ${esc(s.location)}</p>
-        <button class="map-popup-btn" type="button">View Details</button><a class="map-directions-link" href="https://www.google.com/maps/dir/?api=1&destination=${Number(s.lat)},${Number(s.lng)}" target="_blank" rel="noopener">Get directions ↗</a>
+        <p class="map-popup-loc">${esc(route.note)}</p>
+        <button class="map-popup-btn" type="button">View Details</button><a class="map-directions-link" href="${esc(route.url)}" target="_blank" rel="noopener noreferrer">${esc(route.label)} ↗</a>
       </div>
     </div>`;
 }
@@ -796,14 +884,15 @@ function updateMarkers(fit) {
   const bounds = new maplibregl.LngLatBounds();
   let count = 0;
   filteredSpots().forEach((spot) => {
-    if (typeof spot.lat !== 'number' || typeof spot.lng !== 'number') return;
+    const point = mappedPointForSpot(spot);
+    if (!point) return; // No inaccurate or unreviewed pins for newly added places.
     const popup = new maplibregl.Popup({ offset: 24, maxWidth: '260px' }).setHTML(mapPopup(spot));
     const marker = new maplibregl.Marker({ color: '#B85C38' })
-      .setLngLat([spot.lng, spot.lat])
+      .setLngLat([point.lng, point.lat])
       .setPopup(popup)
       .addTo(leafletMap);
     mapMarkersGroup.push(marker);
-    bounds.extend([spot.lng, spot.lat]);
+    bounds.extend([point.lng, point.lat]);
     count += 1;
   });
   if (fit && count > 0) leafletMap.fitBounds(bounds, { padding: 50, maxZoom: 11, duration: 500 });
@@ -847,10 +936,11 @@ function renderSpotSocial(spot) {
 }
 
 function setDetailsDirections(spot) {
-  const hasCoords = Number.isFinite(Number(spot.lat)) && Number.isFinite(Number(spot.lng)) && spot.lat != null && spot.lng != null;
-  $('detail-directions-link').href = hasCoords
-    ? 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(spot.lat + ',' + spot.lng)
-    : 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(spot.name + ' ' + spot.location + ' Romblon');
+  const route = routeForSpot(spot);
+  const button = $('detail-directions-link');
+  button.href = route.url;
+  button.textContent = '🧭 ' + route.label;
+  button.title = route.note;
 }
 
 function renderVisitInfo(spot) {
@@ -1028,9 +1118,21 @@ function generateTripPlan() {
 function openPlanRoute() {
   if (!currentGeneratedPlan || !currentGeneratedPlan.items.length) { toast('Generate an itinerary first.', 'error'); return; }
   const places = currentGeneratedPlan.items.map(item => romblonSpots.find(s => s.id === item.spotId)).filter(Boolean);
-  const coords = places.map(s => `${s.lat},${s.lng}`);
-  const url = `https://www.google.com/maps/dir/${coords.map(encodeURIComponent).join('/')}`;
-  window.open(url, '_blank', 'noopener');
+  if (!places.length) return;
+  const islands = new Set(places.map(s=>islandForSpot(s)));
+  const routes = places.map(routeForSpot);
+  // Never invent a continuous driving journey across islands, offshore destinations, or mountain trails.
+  if (islands.size !== 1 || routes.some(r=>r.kind!=='road')) {
+    toast('This itinerary includes a ferry/boat/trail or island transfer. Open each place’s directions individually for verified access.', 'error');
+    return;
+  }
+  if (routes.length === 1) { window.open(routes[0].url, '_blank', 'noopener'); return; }
+  const coords = routes.map(r=>r.lat+','+r.lng);
+  const url = 'https://www.google.com/maps/dir/?api=1&origin=' + encodeURIComponent(coords[0]) +
+    '&destination=' + encodeURIComponent(coords[coords.length-1]) +
+    (coords.length>2 ? '&waypoints=' + encodeURIComponent(coords.slice(1,-1).join('|')) : '') +
+    '&travelmode=driving';
+  window.open(url,'_blank','noopener');
 }
 
 function saveGeneratedTrip() {
