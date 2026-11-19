@@ -106,30 +106,24 @@ const romblonSpots =
       'https://travelphotosph.wordpress.com/wp-content/uploads/2016/09/romblon-tablas-island-2.jpeg?w=768'
     ],
     highlights: ['Hidden Lake', 'Limestone Cliffs'], lat: 12.6000, lng: 122.0667,
+    socials: { facebook: 'https://www.facebook.com/calatravatourismcouncil', website: 'https://calatravaromblon.gov.ph/destinations.html' },
     reviews: [{ user: 'Sarah J.', stars: 5, comment: 'Reminds me of Palawan or El Nido!' }]
   }
 ];
 
 const STORE_KEY = 'ecotour-v2';
-const MEMBER_DISCOUNT = 0.1;
-const TAB_SCREENS = { home: 'screen-home', saved: 'screen-saved', trips: 'screen-trips', map: 'screen-map', profile: 'screen-profile' };
-const NAV_HIDDEN = ['screen-splash', 'screen-welcome', 'screen-login', 'screen-signup', 'screen-details', 'screen-booking', 'screen-payment', 'screen-confirmation'];
+const TAB_SCREENS = { home: 'screen-home', saved: 'screen-saved', guide: 'screen-guide', map: 'screen-map', profile: 'screen-profile' };
+const NAV_HIDDEN = ['screen-welcome', 'screen-login', 'screen-signup', 'screen-details'];
 const FALLBACK_IMG = 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400"><rect width="100%" height="100%" fill="#CBD5E1"/><text x="50%" y="50%" font-family="sans-serif" font-size="28" fill="#64748B" text-anchor="middle" dominant-baseline="middle">Image unavailable</text></svg>');
 
 const defaultState = () => ({
   user: null,
   guest: false,
   favorites: [],
-  trips: [],
   localReviews: {},
-  paymentMethods: [],
-  travelers: [],
-  availability: {},
   savedItineraries: [],
-  preferences: { bookingUpdates: true, promotions: false, emailUpdates: true },
-  theme: 'light',
-  trip: { checkIn: '', checkOut: '', guests: 2, rooms: 1 },
-  guestDetails: { name: '', email: '', phone: '' }
+  preferences: { travelTips: true, emailUpdates: false },
+  theme: 'light'
 });
 
 let state = loadState();
@@ -139,7 +133,7 @@ let sortMode = 'featured';
 let currentSpot = null;
 let currentGalleryIndex = 0;
 let navStack = [];
-let currentScreen = 'screen-splash';
+let currentScreen = 'screen-welcome';
 let returnTo = null;
 let leafletMap = null;
 let mapMarkersGroup = [];
@@ -147,8 +141,6 @@ let slideIndex = 0;
 let carouselTimer = null;
 let carouselBound = false;
 let reviewRating = 5;
-let tripDetailId = null;
-let tripTab = 'upcoming';
 let remoteLoaded = false;
 let searchTimer = null;
 let currentGeneratedPlan = null;
@@ -175,26 +167,28 @@ const ecoProfiles = {
   tinagongdagat:{waste:3,nature:4,community:3,resources:3}
 };
 
+function sanitizeState(raw) {
+  const base = defaultState();
+  const src = raw && typeof raw === 'object' ? raw : {};
+  return {
+    ...base,
+    user: src.user && typeof src.user === 'object' ? src.user : null,
+    guest: Boolean(src.guest),
+    favorites: Array.isArray(src.favorites) ? src.favorites : [],
+    localReviews: src.localReviews && typeof src.localReviews === 'object' ? src.localReviews : {},
+    savedItineraries: Array.isArray(src.savedItineraries) ? src.savedItineraries : [],
+    preferences: { ...base.preferences, ...(src.preferences || {}) },
+    theme: src.theme === 'dark' ? 'dark' : 'light'
+  };
+}
+
 function loadState() {
-  try {
-    const raw = localStorage.getItem(STORE_KEY);
-    if (!raw) return defaultState();
-    const parsed = JSON.parse(raw);
-    return { ...defaultState(), ...parsed,
-      trip: { ...defaultState().trip, ...(parsed.trip || {}) },
-      guestDetails: { ...defaultState().guestDetails, ...(parsed.guestDetails || {}) },
-      paymentMethods: Array.isArray(parsed.paymentMethods) ? parsed.paymentMethods : [],
-      travelers: Array.isArray(parsed.travelers) ? parsed.travelers : [],
-      availability: parsed.availability && typeof parsed.availability === 'object' ? parsed.availability : {},
-      savedItineraries: Array.isArray(parsed.savedItineraries) ? parsed.savedItineraries : [],
-      preferences: { ...defaultState().preferences, ...(parsed.preferences || {}) }
-    };
-  } catch (e) {
-    return defaultState();
-  }
+  try { return sanitizeState(JSON.parse(localStorage.getItem(STORE_KEY) || '{}')); }
+  catch (e) { return defaultState(); }
 }
 
 function saveState() {
+  state = sanitizeState(state);
   try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) {}
   const uid = state.user && state.user.uid;
   if (uid && window.firebaseAuthApi) {
@@ -250,12 +244,6 @@ function today() {
   return toISO(new Date());
 }
 
-function ensureTripDefaults() {
-  const t = state.trip;
-  if (!t.checkIn || t.checkIn < today()) t.checkIn = addDays(today(), 1);
-  if (!t.checkOut || t.checkOut <= t.checkIn) t.checkOut = addDays(t.checkIn, 1);
-}
-
 function toast(message, type = '') {
   const wrap = $('toast-wrap');
   const el = document.createElement('div');
@@ -307,35 +295,6 @@ function spotReviews(spot) {
   });
 }
 
-function isResort(spot) {
-  return spot.category === 'Resorts';
-}
-
-function priceUnit(spot) {
-  if (spot.rawPrice === 0) return 'free';
-  return isResort(spot) ? 'night' : 'person';
-}
-
-function quote(spot) {
-  const t = state.trip;
-  const unit = priceUnit(spot);
-  const nights = isResort(spot) ? Math.max(1, diffDays(t.checkIn, t.checkOut)) : 1;
-  const rooms = isResort(spot) ? t.rooms : 1;
-  let subtotal = 0;
-  let line = '';
-  if (unit === 'night') {
-    subtotal = spot.rawPrice * nights * rooms;
-    line = `${peso(spot.rawPrice)} × ${nights} night${nights > 1 ? 's' : ''} × ${rooms} room${rooms > 1 ? 's' : ''}`;
-  } else if (unit === 'person') {
-    subtotal = spot.rawPrice * t.guests;
-    line = `${peso(spot.rawPrice)} × ${t.guests} guest${t.guests > 1 ? 's' : ''}`;
-  } else {
-    line = 'No entry fee';
-  }
-  const discount = isSignedIn() && subtotal > 0 ? Math.round(subtotal * MEMBER_DISCOUNT * 100) / 100 : 0;
-  return { unit, nights, rooms, subtotal, discount, total: subtotal - discount, line };
-}
-
 function mergeRemote(data) {
   if (!data || typeof data !== 'object') return;
   Object.keys(data).forEach((key) => {
@@ -344,6 +303,7 @@ function mergeRemote(data) {
     const remoteReviews = s.reviews ? Object.values(s.reviews).filter((r) => r && r.comment) : [];
     const existing = romblonSpots.find((x) => x.id === key);
     if (existing) {
+      if (s.socials && typeof s.socials === 'object') existing.socials = { ...(existing.socials || {}), ...s.socials };
       const known = new Set((existing.reviews || []).map((r) => `${r.user}|${r.stars}|${r.comment}`));
       remoteReviews.forEach((r) => {
         const k = `${r.user}|${r.stars}|${r.comment}`;
@@ -366,7 +326,8 @@ function mergeRemote(data) {
       highlights: Array.isArray(s.highlights) ? s.highlights : [],
       lat: Number(s.lat) || null,
       lng: Number(s.lng) || null,
-      reviews: remoteReviews
+      reviews: remoteReviews,
+      socials: s.socials && typeof s.socials === 'object' ? s.socials : {}
     });
   });
 }
@@ -375,7 +336,7 @@ window.onFirebaseDataLoaded = function (data) {
   mergeRemote(data);
   remoteLoaded = true;
   const badge = $('db-status-badge');
-  badge.textContent = 'Live Deals';
+  badge.textContent = 'Places Loaded';
   badge.classList.add('online');
   refreshAll();
   if (currentScreen === 'screen-details' && currentSpot) renderReviews();
@@ -403,10 +364,10 @@ window.onFirebaseAuthChanged = async function (user) {
   try {
     const cloudState = await window.firebaseAuthApi.loadUserState(user.uid);
     if (!state.user || !state.user.uid || state.user.uid === user.uid) {
-      state = { ...defaultState(), ...(cloudState || state), user: {
+      state = sanitizeState({ ...(cloudState || state), user: {
         name: user.displayName || cloudState?.user?.name || user.email.split('@')[0],
         email: user.email, uid: user.uid
-      }};
+      }});
       state.guest = false;
       saveState();
       renderUser();
@@ -441,7 +402,7 @@ function renderUser() {
   $('profile-name').textContent = signedIn ? state.user.name : 'Traveler';
   $('profile-email').textContent = signedIn ? state.user.email : 'Not signed in';
   $('member-badge').style.display = signedIn ? 'inline-block' : 'none';
-  $('member-badge').textContent = `Member · ${Math.round(MEMBER_DISCOUNT * 100)}% off`;
+  $('member-badge').textContent = 'Romblon Explorer';
   $('profile-edit-btn').style.display = signedIn ? '' : 'none';
   const btn = $('auth-action-btn');
   btn.textContent = signedIn ? 'Sign Out' : 'Sign In or Create Account';
@@ -499,8 +460,6 @@ async function handleLogin(e) {
 function completeSignIn(user) {
   state.user = user;
   state.guest = false;
-  if (!state.guestDetails.name) state.guestDetails.name = user.name;
-  if (!state.guestDetails.email) state.guestDetails.email = user.email;
   saveState();
   renderUser();
   toast(`Welcome, ${firstName()}!`, 'success');
@@ -510,8 +469,7 @@ function completeSignIn(user) {
     navStack = [];
     refreshAll();
     navigateTo(target.screen, { push: false });
-    if (target.screen === 'screen-details' || target.screen === 'screen-booking') navStack = ['screen-home'];
-    if (target.screen === 'screen-booking') prepareBooking();
+    if (target.screen === 'screen-details') navStack = ['screen-home'];
     return;
   }
   switchTab('home');
@@ -537,12 +495,11 @@ function signOut() {
 }
 
 function clearData() {
-  if (!confirm('This removes saved places, bookings and your local account on this device. Continue?')) return;
+  if (!confirm('This removes your saved places, itineraries, and local account details on this device. Continue?')) return;
   try { localStorage.removeItem(STORE_KEY); } catch (e) {}
   state = defaultState();
   applyTheme();
   renderUser();
-  ensureTripDefaults();
   refreshAll();
   navStack = [];
   navigateTo('screen-welcome', { push: false });
@@ -551,89 +508,13 @@ function clearData() {
 
 
 function openAccountPage(screenId) {
-  if (screenId === 'screen-payment-methods') renderPaymentMethods();
   if (screenId === 'screen-notifications') renderPreferences();
   navigateTo(screenId);
 }
 
-function cardBrand(number) {
-  if (/^4/.test(number)) return 'Visa';
-  if (/^(5[1-5]|2[2-7])/.test(number)) return 'Mastercard';
-  if (/^3[47]/.test(number)) return 'American Express';
-  return 'Bank card';
-}
-
-function renderPaymentMethods() {
-  const host = $('saved-payment-methods');
-  const methods = state.paymentMethods || [];
-  if (!methods.length) {
-    host.innerHTML = '<div class="empty-state"><span class="emoji">💳</span>No saved payment methods yet.<br>Add a card to make future demo checkouts quicker.</div>';
-    return;
-  }
-  host.innerHTML = methods.map((m) => `
-    <div class="saved-method-card">
-      <div class="saved-method-icon">💳</div>
-      <div class="saved-method-copy">
-        <strong>${esc(m.brand)} •••• ${esc(m.last4)}</strong>
-        <span>Expires ${esc(m.expiry)}${m.default ? ' · Default' : ''}</span>
-      </div>
-      <button class="link-btn danger-link" data-action="remove-payment-method" data-id="${esc(m.id)}">Remove</button>
-    </div>`).join('');
-}
-
-function openAddCardModal() {
-  if (!isSignedIn()) {
-    toast('Sign in to manage payment methods.');
-    navigateTo('screen-welcome');
-    return;
-  }
-  $('saved-card-name').value = state.user.name || '';
-  $('saved-card-number').value = '';
-  $('saved-card-expiry').value = '';
-  $('saved-card-error').textContent = '';
-  openModal('add-card-modal');
-}
-
-function addSavedCard() {
-  const name = $('saved-card-name').value.trim();
-  const number = $('saved-card-number').value.replace(/\D/g, '');
-  const expiry = $('saved-card-expiry').value.trim();
-  const match = /^(\d{2})\/(\d{2})$/.exec(expiry);
-  let error = '';
-  if (name.length < 2) error = 'Enter the cardholder name.';
-  else if (!/^\d{13,19}$/.test(number) || !luhn(number)) error = 'Enter a valid card number.';
-  else if (!match || Number(match[1]) < 1 || Number(match[1]) > 12) error = 'Use MM/YY for expiry.';
-  else {
-    const expiryDate = new Date(2000 + Number(match[2]), Number(match[1]), 0, 23, 59, 59);
-    if (expiryDate < new Date()) error = 'This card has expired.';
-  }
-  if (error) { $('saved-card-error').textContent = error; return; }
-  const method = {
-    id: 'pm_' + Date.now().toString(36),
-    brand: cardBrand(number),
-    last4: number.slice(-4),
-    expiry,
-    holder: name,
-    default: !(state.paymentMethods || []).length
-  };
-  state.paymentMethods = [...(state.paymentMethods || []), method];
-  saveState();
-  closeModal('add-card-modal');
-  renderPaymentMethods();
-  toast('Card added. Only its brand, last four digits and expiry are saved.', 'success');
-}
-
-function removePaymentMethod(id) {
-  state.paymentMethods = (state.paymentMethods || []).filter((m) => m.id !== id);
-  if (state.paymentMethods.length && !state.paymentMethods.some((m) => m.default)) state.paymentMethods[0].default = true;
-  saveState();
-  renderPaymentMethods();
-  toast('Payment method removed.');
-}
-
 function renderPreferences() {
   const p = state.preferences || {};
-  ['bookingUpdates', 'promotions', 'emailUpdates'].forEach((key) => {
+  ['travelTips', 'emailUpdates'].forEach((key) => {
     const el = $('pref-' + key);
     if (el) el.checked = Boolean(p[key]);
   });
@@ -700,8 +581,6 @@ function matchesSearch(spot) {
 function filteredSpots() {
   const list = romblonSpots.filter((s) => (activeCategory === 'All' || s.category === activeCategory) && matchesSearch(s));
   if (sortMode === 'rating') list.sort((a, b) => ratingFor(b) - ratingFor(a));
-  else if (sortMode === 'price-asc') list.sort((a, b) => a.rawPrice - b.rawPrice);
-  else if (sortMode === 'price-desc') list.sort((a, b) => b.rawPrice - a.rawPrice);
   return list;
 }
 
@@ -732,7 +611,7 @@ function cardHtml(s, withDesc) {
         <h5>${esc(s.name)}</h5>
         <p class="spot-location">📍 ${esc(s.location)}</p>
         ${withDesc ? `<p class="spot-desc">${esc(s.description)}</p>` : ''}
-        <div class="spot-meta"><span class="spot-rating">★ ${ratingFor(s)}</span><span class="spot-price">${esc(s.price)}</span></div>
+        <div class="spot-meta"><span class="spot-rating">★ ${ratingFor(s)}</span><span class="spot-category">${esc(s.category)}</span></div>
       </div>
       <button class="fav-btn ${fav ? 'active' : ''}" aria-label="${fav ? 'Remove from saved' : 'Save'}" aria-pressed="${fav}" data-action="toggle-favorite" data-id="${esc(s.id)}">
         <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
@@ -776,153 +655,6 @@ function updateFavoriteButton() {
   const on = state.favorites.includes(currentSpot.id);
   b.classList.toggle('active', on);
   b.setAttribute('aria-pressed', String(on));
-}
-
-function tripStatus(t) {
-  if (t.status === 'Cancelled') return 'Cancelled';
-  if (t.status === 'Refund requested') return 'Refund requested';
-  return t.checkOut < today() ? 'Past' : 'Upcoming';
-}
-
-function renderTrips() {
-  const container = $('trips-list');
-  document.querySelectorAll('.trip-tab').forEach((t) => {
-    const on = t.dataset.tripTab === tripTab;
-    t.classList.toggle('active', on);
-    t.style.borderBottomColor = on ? 'var(--primary-brand)' : 'transparent';
-    t.setAttribute('aria-selected', String(on));
-  });
-  const trips = state.trips.filter((t) => (tripTab === 'upcoming' ? tripStatus(t) === 'Upcoming' : tripStatus(t) !== 'Upcoming'));
-  if (!trips.length) {
-    container.innerHTML = `<div class="empty-state"><span class="emoji">🧳</span>No ${tripTab === 'upcoming' ? 'upcoming' : 'past or cancelled'} trips.${tripTab === 'upcoming' ? '<br><button class="btn btn-primary" data-tab="home">Find a place to stay</button>' : ''}</div>`;
-    return;
-  }
-  container.innerHTML = trips.map((t) => {
-    const st = tripStatus(t);
-    const cls = st === 'Upcoming' ? 'status-upcoming' : st === 'Cancelled' ? 'status-cancelled' : 'status-past';
-    const dates = t.nights > 0 && t.isStay ? `${fmtShort(t.checkIn)} - ${fmtDate(t.checkOut)}` : fmtDate(t.checkIn);
-    return `
-      <div class="trip-card">
-        <div class="trip-header">
-          <span style="font-size:12px; font-weight:700;">Ref: #${esc(t.id)}</span>
-          <span class="trip-status ${cls}">${st}</span>
-        </div>
-        <div class="trip-body">
-          <h3>${esc(t.prop)}</h3>
-          <p>📅 ${dates}</p>
-          <p>👥 ${t.guests} guest${t.guests > 1 ? 's' : ''}</p>
-          <p style="font-weight:700; color:var(--primary-brand); margin-top:4px;">Total: ${peso(t.total)}</p>
-          <div class="trip-actions"><button class="btn btn-secondary" data-action="view-trip" data-id="${esc(t.id)}">Manage Booking</button></div>
-        </div>
-      </div>`;
-  }).join('');
-}
-
-function viewTrip(id) {
-  const t = state.trips.find((x) => x.id === id);
-  if (!t) return;
-  tripDetailId = id;
-  const st = tripStatus(t);
-  const rows = [
-    ['Reference', '#' + t.id],
-    ['Status', st],
-    ['Place', t.prop],
-    [t.isStay ? 'Check-in' : 'Visit date', fmtDate(t.checkIn)]
-  ];
-  if (t.isStay) rows.push(['Check-out', fmtDate(t.checkOut)], ['Rooms', t.rooms]);
-  rows.push(['Guests', t.guests], ['Guest name', t.guestName], ['Payment', t.method], ['Total', peso(t.total)], ['Refund', t.refundStatus || (t.status === 'Cancelled' ? 'Not specified' : 'Not requested')]);
-  if (t.cardLast4) rows.push(['Card', '•••• ' + t.cardLast4]);
-  $('trip-detail-body').innerHTML = rows.map((r) => `<div class="detail-kv"><span>${esc(r[0])}</span><span>${esc(r[1])}</span></div>`).join('');
-  $('trip-cancel-btn').style.display = st === 'Upcoming' ? '' : 'none';
-  $('trip-cancel-btn').textContent = 'Request cancellation / refund';
-  let extra = $('trip-receipt-btn');
-  if (!extra) { extra = document.createElement('button'); extra.id = 'trip-receipt-btn'; extra.className = 'btn btn-secondary'; extra.textContent = 'Print receipt'; extra.dataset.action = 'print-trip-receipt'; $('trip-detail-modal').querySelector('.modal-actions').prepend(extra); }
-  extra.dataset.id = t.id;
-  openModal('trip-detail-modal');
-}
-
-function cancelTrip() {
-  const t = state.trips.find((x) => x.id === tripDetailId);
-  if (!t) return;
-  const checkDate = t.checkIn ? fromISO(t.checkIn) : new Date();
-  const hoursUntil = (checkDate - new Date()) / 3600000;
-  const policy = hoursUntil >= 48 ? 'This booking is within the demo free-cancellation window (48+ hours before check-in). A refund request will be marked for review.' : 'This booking is inside the 48-hour window. Cancellation can be requested, but a refund is not guaranteed.';
-  if (!confirm(policy + '\n\nContinue?')) return;
-  t.status = 'Cancelled';
-  t.refundStatus = hoursUntil >= 48 ? 'Refund requested · eligible for review' : 'Refund not guaranteed · review required';
-  t.cancelledAt = new Date().toISOString();
-  saveState();
-  closeModal('trip-detail-modal');
-  renderTrips();
-  toast('Cancellation saved. Refund status is recorded for review.');
-}
-
-function isAvailable(spotId, checkIn, checkOut, isStay) {
-  const overrides = state.availability || {};
-  const dates = [];
-  let d = checkIn;
-  const end = isStay ? checkOut : addDays(checkIn, 1);
-  while (d < end) { dates.push(d); d = addDays(d, 1); }
-  const manuallyBlocked = dates.some((date) => overrides[spotId + ':' + date] === 'blocked');
-  if (manuallyBlocked) return false;
-  if (!isStay) return true;
-  return !state.trips.some((booking) => {
-    if (booking.spotId !== spotId || booking.status === 'Cancelled') return false;
-    const bookingEnd = booking.isStay ? booking.checkOut : addDays(booking.checkIn, 1);
-    return checkIn < bookingEnd && end > booking.checkIn;
-  });
-}
-
-function renderTravelers() {
-  const host = $('traveler-list');
-  const list = state.travelers || [];
-  host.innerHTML = list.length ? list.map((t) => `<div class="saved-method-card"><div class="saved-method-icon">👤</div><div class="saved-method-copy"><strong>${esc(t.name)}</strong><span>${esc(t.email || 'No email')} · ${esc(t.phone || 'No phone')}</span></div><button class="link-btn danger-link" data-action="remove-traveler" data-id="${esc(t.id)}">Remove</button></div>`).join('') : '<div class="empty-state">No saved travelers yet.</div>';
-}
-
-function addTraveler() {
-  const name = $('traveler-name').value.trim();
-  const email = $('traveler-email').value.trim();
-  const phone = $('traveler-phone').value.trim();
-  if (name.length < 2 || (email && !validEmail(email))) { toast('Enter a valid name and email.', 'error'); return; }
-  state.travelers = [...(state.travelers || []), { id: 'trav_' + Date.now().toString(36), name, email, phone }];
-  saveState(); $('traveler-name').value = ''; $('traveler-email').value = ''; $('traveler-phone').value = '';
-  renderTravelers(); toast('Traveler profile saved.', 'success');
-}
-
-function removeTraveler(id) {
-  state.travelers = (state.travelers || []).filter((t) => t.id !== id); saveState(); renderTravelers();
-}
-
-function openHostDashboard() {
-  const stats = $('host-stats');
-  const active = state.trips.filter((t) => t.status !== 'Cancelled');
-  const revenue = active.reduce((sum, t) => sum + Number(t.total || 0), 0);
-  stats.innerHTML = `<div class="host-stat"><strong>${state.trips.length}</strong><span>Total bookings</span></div><div class="host-stat"><strong>${active.length}</strong><span>Active bookings</span></div><div class="host-stat"><strong>${peso(revenue)}</strong><span>Booked value</span></div>`;
-  $('host-spot').innerHTML = romblonSpots.map((spot) => `<option value="${esc(spot.id)}">${esc(spot.name)}</option>`).join('');
-  $('host-date').min = today(); $('host-date').value = addDays(today(), 1);
-  $('host-bookings').innerHTML = state.trips.length ? state.trips.slice(0, 10).map((t) => `<div class="saved-method-card"><div class="saved-method-icon">🧾</div><div class="saved-method-copy"><strong>${esc(t.prop)}</strong><span>#${esc(t.id)} · ${esc(t.status || 'Confirmed')} · ${peso(t.total)}</span></div></div>`).join('') : '<div class="empty-state">No bookings yet.</div>';
-  navigateTo('screen-host-dashboard');
-}
-
-function saveAvailability() {
-  const spot = $('host-spot').value, date = $('host-date').value, status = $('host-status').value;
-  if (!spot || !date || date < today()) { toast('Choose a valid future date.', 'error'); return; }
-  state.availability = state.availability || {};
-  state.availability[spot + ':' + date] = status;
-  saveState(); toast('Availability updated for this browser.', 'success');
-}
-
-function receiptHtml(t) {
-  const rows = [['Booking reference', '#' + t.id], ['Property / experience', t.prop], ['Guest', t.guestName], ['Email', t.guestEmail], ['Visit / check-in', fmtDate(t.checkIn)], ...(t.isStay ? [['Check-out', fmtDate(t.checkOut)], ['Rooms', t.rooms]] : []), ['Guests', t.guests], ['Payment method', t.method], ['Status', t.status || 'Confirmed'], ['Total', peso(t.total)]];
-  return `<!doctype html><html><head><meta charset="utf-8"><title>EcoTour receipt ${esc(t.id)}</title><style>body{font:14px Arial,sans-serif;max-width:680px;margin:40px auto;padding:24px;color:#172033}h1{color:#1e6b43}p{color:#64748b}.row{display:flex;justify-content:space-between;gap:24px;padding:12px 0;border-bottom:1px solid #e2e8f0}.row span:first-child{color:#64748b}.total{font-size:18px;font-weight:bold}@media print{button{display:none}}</style></head><body><h1>EcoTour</h1><h2>Booking receipt</h2><p>Thank you for choosing local experiences in Romblon.</p>${rows.map((r) => `<div class="row"><span>${esc(r[0])}</span><strong>${esc(r[1])}</strong></div>`).join('')}<p>Prototype receipt only. This is not a tax invoice or proof of a processed payment.</p><button onclick="window.print()">Print / Save as PDF</button></body></html>`;
-}
-
-function printReceipt(id) {
-  const t = state.trips.find((x) => x.id === id) || state.trips[0];
-  if (!t) { toast('No booking receipt found.', 'error'); return; }
-  const win = window.open('', '_blank');
-  if (!win) { toast('Allow pop-ups to print the receipt.', 'error'); return; }
-  win.document.open(); win.document.write(receiptHtml(t)); win.document.close();
 }
 
 function mapPopup(s) {
@@ -986,33 +718,48 @@ function updateMarkers(fit) {
   if (fit && count > 0) leafletMap.fitBounds(bounds, { padding: 50, maxZoom: 11, duration: 500 });
 }
 
-function tripSummaryText(spot) {
-  const t = state.trip;
-  if (isResort(spot)) {
-    const n = Math.max(1, diffDays(t.checkIn, t.checkOut));
-    return `${fmtShort(t.checkIn)} - ${fmtShort(t.checkOut)} · ${n} night${n > 1 ? 's' : ''} · ${t.guests} guest${t.guests > 1 ? 's' : ''} · ${t.rooms} room${t.rooms > 1 ? 's' : ''}`;
-  }
-  return `${fmtDate(t.checkIn)} · ${t.guests} guest${t.guests > 1 ? 's' : ''}`;
+// Per-place Facebook/Instagram pages may be set in the Firebase destinations/{id}/socials object.
+// Only the Tinagong Dagat tourism-office link is prefilled from an official municipal site.
+function checkedSocialUrl(value, hosts) {
+  try {
+    const url = new URL(String(value || ''));
+    if (url.protocol !== 'https:') return '';
+    return hosts.some(host => url.hostname === host || url.hostname.endsWith('.' + host)) ? url.href : '';
+  } catch (e) { return ''; }
 }
 
-function renderSearchWidget() {
-  const t = state.trip;
-  $('sw-dates').textContent = `${fmtShort(t.checkIn)} - ${fmtShort(t.checkOut)}`;
-  $('sw-guests').textContent = `${t.rooms} Room${t.rooms > 1 ? 's' : ''}, ${t.guests} Guest${t.guests > 1 ? 's' : ''}`;
+function socialLinksFor(spot) {
+  const socials = spot.socials || {};
+  const facebook = checkedSocialUrl(socials.facebook, ['facebook.com', 'fb.com']);
+  const instagram = checkedSocialUrl(socials.instagram, ['instagram.com']);
+  const website = checkedSocialUrl(socials.website, ['calatravaromblon.gov.ph']);
+  const query = encodeURIComponent(spot.name + ' ' + spot.location + ' Romblon');
+  const tag = (spot.name + 'Romblon').toLowerCase().normalize('NFKD').replace(/[^a-z0-9]/g, '');
+  return {
+    facebook, instagram, website,
+    facebookSearch: 'https://www.facebook.com/search/top/?q=' + query,
+    instagramTag: 'https://www.instagram.com/explore/tags/' + encodeURIComponent(tag || 'romblon') + '/'
+  };
 }
 
-function refreshDetailPricing() {
-  if (!currentSpot) return;
-  const q = quote(currentSpot);
-  $('detail-trip-summary').textContent = tripSummaryText(currentSpot);
-  if (q.unit === 'free') {
-    $('bar-price-label').textContent = 'Entry';
-    $('bar-price').textContent = 'Free';
-  } else {
-    $('bar-price-label').textContent = q.discount ? `Total (after ${Math.round(MEMBER_DISCOUNT * 100)}% member discount)` : 'Total';
-    $('bar-price').textContent = peso(q.total);
-  }
-  $('reserve-btn').textContent = isResort(currentSpot) ? 'Reserve' : (q.unit === 'free' ? 'Plan Visit' : 'Book Visit');
+function renderSpotSocial(spot) {
+  const links = socialLinksFor(spot);
+  const parts = [];
+  if (links.facebook) parts.push('<a class="place-social-link" target="_blank" rel="noopener noreferrer" href="' + esc(links.facebook) + '">ⓕ Local tourism Facebook</a>');
+  if (links.instagram) parts.push('<a class="place-social-link" target="_blank" rel="noopener noreferrer" href="' + esc(links.instagram) + '">◎ Instagram page</a>');
+  if (links.website) parts.push('<a class="place-social-link" target="_blank" rel="noopener noreferrer" href="' + esc(links.website) + '">🌐 Tourism website</a>');
+  parts.push('<a class="place-social-link place-social-search" target="_blank" rel="noopener noreferrer" href="' + esc(links.facebookSearch) + '">ⓕ Search Facebook photos</a>');
+  if (!links.instagram) parts.push('<a class="place-social-link place-social-search" target="_blank" rel="noopener noreferrer" href="' + esc(links.instagramTag) + '">◎ Explore Instagram tags</a>');
+  $('detail-social-links').innerHTML = parts.join('');
+  $('detail-social-footer').href = links.facebook || links.facebookSearch;
+  $('detail-social-footer').textContent = links.facebook ? 'ⓕ Ask / View Photos' : 'ⓕ Find Photos';
+}
+
+function setDetailsDirections(spot) {
+  const hasCoords = Number.isFinite(Number(spot.lat)) && Number.isFinite(Number(spot.lng)) && spot.lat != null && spot.lng != null;
+  $('detail-directions-link').href = hasCoords
+    ? 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(spot.lat + ',' + spot.lng)
+    : 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(spot.name + ' ' + spot.location + ' Romblon');
 }
 
 function openSpot(id) {
@@ -1033,7 +780,8 @@ function openSpot(id) {
   $('detail-highlights').innerHTML = (s.highlights || []).map((h) => `<span class="tag">✓ ${esc(h)}</span>`).join('') || '<span class="text-muted">No highlights listed.</span>';
   renderReviews();
   updateFavoriteButton();
-  refreshDetailPricing();
+  renderSpotSocial(s);
+  setDetailsDirections(s);
   navigateTo('screen-details');
   $('screen-details').scrollTop = 0;
 }
@@ -1119,265 +867,6 @@ function submitReview() {
   renderDestinations();
   closeModal('review-modal');
   toast('Thanks for your review!', 'success');
-}
-
-function openTripModal() {
-  ensureTripDefaults();
-  $('tm-checkin').min = today();
-  $('tm-checkin').value = state.trip.checkIn;
-  $('tm-checkout').min = addDays(state.trip.checkIn, 1);
-  $('tm-checkout').value = state.trip.checkOut;
-  $('tm-guests').textContent = state.trip.guests;
-  $('tm-rooms').textContent = state.trip.rooms;
-  $('tm-error').textContent = '';
-  syncStepperButtons();
-  openModal('trip-modal');
-}
-
-function syncStepperButtons() {
-  const g = Number($('tm-guests').textContent);
-  const r = Number($('tm-rooms').textContent);
-  document.querySelector('[data-step="guests"][data-dir="-1"]').disabled = g <= 1;
-  document.querySelector('[data-step="guests"][data-dir="1"]').disabled = g >= 12;
-  document.querySelector('[data-step="rooms"][data-dir="-1"]').disabled = r <= 1;
-  document.querySelector('[data-step="rooms"][data-dir="1"]').disabled = r >= Math.min(6, g);
-}
-
-function stepValue(kind, dir) {
-  const el = $(kind === 'guests' ? 'tm-guests' : 'tm-rooms');
-  let v = Number(el.textContent) + dir;
-  const g = kind === 'guests' ? v : Number($('tm-guests').textContent);
-  if (kind === 'guests') v = Math.min(12, Math.max(1, v));
-  else v = Math.min(6, Math.max(1, v), g);
-  el.textContent = v;
-  if (kind === 'guests' && Number($('tm-rooms').textContent) > v) $('tm-rooms').textContent = v;
-  syncStepperButtons();
-}
-
-function saveTripSettings() {
-  const ci = $('tm-checkin').value;
-  const co = $('tm-checkout').value;
-  if (!ci || ci < today()) { $('tm-error').textContent = 'Choose a date that is today or later.'; return; }
-  if (!co || co <= ci) { $('tm-error').textContent = 'Check-out must be after check-in.'; return; }
-  if (diffDays(ci, co) > 30) { $('tm-error').textContent = 'Stays are limited to 30 nights.'; return; }
-  state.trip = { checkIn: ci, checkOut: co, guests: Number($('tm-guests').textContent), rooms: Number($('tm-rooms').textContent) };
-  saveState();
-  closeModal('trip-modal');
-  renderSearchWidget();
-  refreshDetailPricing();
-  if (currentScreen === 'screen-booking') renderBooking();
-}
-
-function proceedBooking() {
-  if (currentSpot && !isAvailable(currentSpot.id, state.trip.checkIn, state.trip.checkOut, isResort(currentSpot))) { toast('Those dates are currently marked unavailable. Choose another date.', 'error'); return; }
-  if (!isSignedIn()) {
-    returnTo = { screen: 'screen-booking' };
-    toast('Sign in to complete your booking.');
-    navigateTo('screen-login');
-    return;
-  }
-  prepareBooking();
-}
-
-function prepareBooking() {
-  if (!state.guestDetails.name) state.guestDetails.name = state.user.name;
-  if (!state.guestDetails.email) state.guestDetails.email = state.user.email;
-  renderBooking();
-  navigateTo('screen-booking');
-}
-
-function renderBooking() {
-  const s = currentSpot;
-  const q = quote(s);
-  const t = state.trip;
-  $('summary-title').textContent = s.name;
-  $('summary-img').src = safeUrl(s.image);
-  $('summary-sub').textContent = tripSummaryText(s);
-  $('guest-name-val').textContent = state.guestDetails.name;
-  $('guest-email-val').textContent = state.guestDetails.email;
-  $('guest-phone-val').textContent = state.guestDetails.phone || 'No phone number added';
-  const travelerPicker = $('saved-traveler-picker');
-  if (travelerPicker) {
-    travelerPicker.innerHTML = '<option value="">Current booking details</option>' + (state.travelers || []).map((person) => `<option value="${esc(person.id)}">${esc(person.name)}</option>`).join('');
-    travelerPicker.value = '';
-  }
-  const rows = [`<div class="pricing-row"><span>${esc(q.line)}</span><span>${peso(q.subtotal)}</span></div>`];
-  if (q.discount) rows.push(`<div class="pricing-row text-success"><span>Member discount (${Math.round(MEMBER_DISCOUNT * 100)}%)</span><span>- ${peso(q.discount)}</span></div>`);
-  rows.push('<hr class="price-divider"/>', `<div class="pricing-total-row"><span>Total Price</span><strong class="total-price">${peso(q.total)}</strong></div>`);
-  $('pricing-card').innerHTML = rows.join('');
-  $('booking-next-btn').textContent = q.total === 0 ? 'Confirm Visit' : 'Next: Payment';
-  $('pay-final-amount').textContent = peso(q.total);
-  $('pm-property').style.display = isResort(s) ? '' : 'none';
-}
-
-function openGuestModal() {
-  clearErrors($('guest-modal'));
-  $('edit-guest-name').value = state.guestDetails.name;
-  $('edit-guest-email').value = state.guestDetails.email;
-  $('edit-guest-phone').value = state.guestDetails.phone;
-  openModal('guest-modal');
-}
-
-function saveGuest() {
-  clearErrors($('guest-modal'));
-  const name = $('edit-guest-name').value.trim();
-  const email = $('edit-guest-email').value.trim();
-  const phone = $('edit-guest-phone').value.trim();
-  let ok = true;
-  if (name.length < 2) { setError('edit-guest-name', 'Enter the guest name.'); ok = false; }
-  if (!validEmail(email)) { setError('edit-guest-email', 'Enter a valid email address.'); ok = false; }
-  if (phone && !validPhone(phone)) { setError('edit-guest-phone', 'Enter a valid phone number.'); ok = false; }
-  if (!ok) return;
-  state.guestDetails = { name, email, phone };
-  saveState();
-  closeModal('guest-modal');
-  renderBooking();
-}
-
-function bookingNext() {
-  const q = quote(currentSpot);
-  if (!validEmail(state.guestDetails.email) || state.guestDetails.name.length < 2) {
-    toast('Complete the guest details first.', 'error');
-    openGuestModal();
-    return;
-  }
-  if (q.total === 0) { completeBooking('No payment required', ''); return; }
-  clearErrors($('screen-payment'));
-  $('pay-card-name').value = state.guestDetails.name;
-  $('pay-card-number').value = '';
-  $('pay-card-exp').value = '';
-  $('pay-card-cvv').value = '';
-  syncPaymentMethod();
-  navigateTo('screen-payment');
-}
-
-function selectedMethod() {
-  return document.querySelector('input[name="paymethod"]:checked').value;
-}
-
-function syncPaymentMethod() {
-  const m = selectedMethod();
-  ['card', 'gcash', 'property'].forEach((k) => $('pm-' + k).classList.toggle('active', k === m));
-  $('pm-card-body').classList.toggle('hidden', m !== 'card');
-}
-
-function luhn(num) {
-  let sum = 0;
-  let alt = false;
-  for (let i = num.length - 1; i >= 0; i--) {
-    let n = Number(num[i]);
-    if (alt) { n *= 2; if (n > 9) n -= 9; }
-    sum += n;
-    alt = !alt;
-  }
-  return sum % 10 === 0;
-}
-
-function validateCard() {
-  clearErrors($('pm-card'));
-  let ok = true;
-  const name = $('pay-card-name').value.trim();
-  const num = $('pay-card-number').value.replace(/\s/g, '');
-  const exp = $('pay-card-exp').value.trim();
-  const cvv = $('pay-card-cvv').value.trim();
-  if (name.length < 2) { setError('pay-card-name', 'Enter the name on the card.'); ok = false; }
-  if (!/^\d{13,19}$/.test(num) || !luhn(num)) { setError('pay-card-number', 'Enter a valid card number.'); ok = false; }
-  const em = /^(\d{2})\/(\d{2})$/.exec(exp);
-  if (!em || Number(em[1]) < 1 || Number(em[1]) > 12) {
-    setError('pay-card-exp', 'Use MM/YY.');
-    ok = false;
-  } else {
-    const now = new Date();
-    const expDate = new Date(2000 + Number(em[2]), Number(em[1]), 0, 23, 59, 59);
-    if (expDate < now) { setError('pay-card-exp', 'This card has expired.'); ok = false; }
-  }
-  if (!/^\d{3,4}$/.test(cvv)) { setError('pay-card-cvv', 'Enter the 3 or 4 digit code.'); ok = false; }
-  return ok ? num.slice(-4) : null;
-}
-
-function processPayment() {
-  const method = selectedMethod();
-  let label = 'Pay at property';
-  let last4 = '';
-  if (method === 'card') {
-    last4 = validateCard();
-    if (!last4) return;
-    label = `Card ending ${last4}`;
-  } else if (method === 'gcash') {
-    label = 'GCash (simulated)';
-  }
-  const btn = $('pay-btn');
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span> Processing';
-  setTimeout(() => {
-    btn.disabled = false;
-    btn.textContent = 'Pay Now';
-    completeBooking(label, last4);
-  }, 1200);
-}
-
-function newReference() {
-  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-  let id;
-  do {
-    id = 'ET' + Array.from({ length: 6 }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
-  } while (state.trips.some((t) => t.id === id));
-  return id;
-}
-
-function completeBooking(methodLabel, last4) {
-  const s = currentSpot;
-  if (!s || !isAvailable(s.id, state.trip.checkIn, state.trip.checkOut, isResort(s))) {
-    toast('Availability changed. Please choose another date.', 'error');
-    if (s) navigateTo('screen-details');
-    return;
-  }
-  const q = quote(s);
-  const t = state.trip;
-  const stay = isResort(s);
-  const booking = {
-    id: newReference(),
-    spotId: s.id,
-    prop: s.name,
-    isStay: stay,
-    checkIn: t.checkIn,
-    checkOut: stay ? t.checkOut : t.checkIn,
-    nights: q.nights,
-    guests: t.guests,
-    rooms: q.rooms,
-    total: q.total,
-    discount: q.discount,
-    method: methodLabel,
-    cardLast4: last4,
-    guestName: state.guestDetails.name,
-    guestEmail: state.guestDetails.email,
-    guestPhone: state.guestDetails.phone,
-    status: 'Confirmed',
-    createdAt: new Date().toISOString()
-  };
-  state.trips.unshift(booking);
-  saveState();
-  renderConfirmation(booking);
-  navStack = [];
-  navigateTo('screen-confirmation', { push: false });
-}
-
-function renderConfirmation(b) {
-  $('conf-sub').textContent = `We've saved your booking. A confirmation would be sent to ${b.guestEmail} once email delivery is connected.`;
-  const rows = [
-    ['Guest', b.guestName],
-    ['Place', b.prop],
-    [b.isStay ? 'Check-in' : 'Visit date', fmtDate(b.checkIn)]
-  ];
-  if (b.isStay) rows.push(['Check-out', fmtDate(b.checkOut)]);
-  rows.push(['Guests', b.guests], ['Total', peso(b.total)]);
-  $('conf-card').innerHTML = `<h4 style="margin-bottom: 12px; border-bottom:1px solid var(--border-color); padding-bottom:8px;">Booking Reference: <span class="text-primary">#${esc(b.id)}</span></h4>` +
-    rows.map((r) => `<div class="c-row"><span class="c-lbl">${esc(r[0])}</span><span class="c-val">${esc(r[1])}</span></div>`).join('');
-}
-
-function finishBooking() {
-  tripTab = 'upcoming';
-  switchTab('trips');
 }
 
 function openTripPlanner() {
@@ -1551,7 +1040,7 @@ function closeModalsAll() {
 
 function navigateTo(screenId, opts = {}) {
   const push = opts.push !== false;
-  if (push && currentScreen && currentScreen !== screenId && !['screen-splash'].includes(currentScreen)) navStack.push(currentScreen);
+  if (push && currentScreen && currentScreen !== screenId && currentScreen !== 'screen-welcome') navStack.push(currentScreen);
   document.querySelectorAll('.screen').forEach((s) => s.classList.remove('active'));
   $(screenId).classList.add('active');
   currentScreen = screenId;
@@ -1562,7 +1051,6 @@ function navigateTo(screenId, opts = {}) {
   if (tab) document.querySelectorAll('.nav-item').forEach((b) => b.classList.toggle('active', b.id === 'nav-' + tab));
   if (screenId === 'screen-map') ensureMap();
   if (screenId === 'screen-saved') renderSaved();
-  if (screenId === 'screen-trips') renderTrips();
 }
 
 function goBack() {
@@ -1587,7 +1075,6 @@ const actions = {
   'skip-auth': skipAuth,
   'forgot-password': forgotPassword,
   'toggle-theme': toggleTheme,
-  'open-trip-modal': openTripModal,
   'open-trip-planner': openTripPlanner,
   'generate-trip': generateTripPlan,
   'save-generated-trip': saveGeneratedTrip,
@@ -1605,19 +1092,8 @@ const actions = {
   'go-welcome': () => { navStack = []; navigateTo('screen-welcome', { push: false }); },
   'clear-data': clearData,
   'open-edit-profile': openEditProfile,
-  'open-payment-methods': () => openAccountPage('screen-payment-methods'),
   'open-notifications': () => openAccountPage('screen-notifications'),
   'open-help': () => openAccountPage('screen-help'),
-  'open-travelers': () => { renderTravelers(); navigateTo('screen-travelers'); },
-  'add-traveler': addTraveler,
-  'remove-traveler': (el) => removeTraveler(el.dataset.id),
-  'open-host-dashboard': openHostDashboard,
-  'save-availability': saveAvailability,
-  'print-current-receipt': () => printReceipt(state.trips[0] && state.trips[0].id),
-  'print-trip-receipt': (el) => printReceipt(el.dataset.id),
-  'open-add-card': openAddCardModal,
-  'add-saved-card': addSavedCard,
-  'remove-payment-method': (el) => removePaymentMethod(el.dataset.id),
   'back-to-profile': () => switchTab('profile'),
   'save-profile': saveProfile,
   'back': goBack,
@@ -1625,15 +1101,6 @@ const actions = {
   'open-review-modal': openReviewModal,
   'submit-review': submitReview,
   'pick-star': (el) => { reviewRating = Number(el.dataset.value); renderStarPicker(); },
-  'proceed-booking': proceedBooking,
-  'open-guest-modal': openGuestModal,
-  'save-guest': saveGuest,
-  'booking-next': bookingNext,
-  'process-payment': processPayment,
-  'finish-booking': finishBooking,
-  'save-trip-settings': saveTripSettings,
-  'view-trip': (el) => viewTrip(el.dataset.id),
-  'cancel-trip': cancelTrip,
   'open-spot': (el) => openSpot(el.dataset.id),
   'toggle-favorite': (el) => toggleFavorite(el.dataset.id),
   'set-image': (el) => { currentGalleryIndex = Number(el.dataset.index) || 0; renderSpotGallery(currentSpot); },
@@ -1646,10 +1113,6 @@ function bindEvents() {
     const closeBtn = e.target.closest('[data-close]');
     if (closeBtn) { closeModal(closeBtn.dataset.close); return; }
     if (e.target.classList && e.target.classList.contains('modal-overlay')) { closeModal(e.target.id); return; }
-    const step = e.target.closest('[data-step]');
-    if (step) { stepValue(step.dataset.step, Number(step.dataset.dir)); return; }
-    const tripTabBtn = e.target.closest('[data-trip-tab]');
-    if (tripTabBtn) { tripTab = tripTabBtn.dataset.tripTab; renderTrips(); return; }
     const cat = e.target.closest('[data-category]');
     if (cat) { setCategory(cat.dataset.category); return; }
     const expFilter = e.target.closest('[data-experience-filter]');
@@ -1658,82 +1121,43 @@ function bindEvents() {
     if (nav) { navigateTo(nav.dataset.nav); return; }
     const tab = e.target.closest('[data-tab]');
     if (tab) { switchTab(tab.dataset.tab); return; }
-    if (e.target.closest('.map-directions-link')) return;
+    if (e.target.closest('a[href]')) return;
     const act = e.target.closest('[data-action]');
     if (act && actions[act.dataset.action]) {
       if (act.dataset.action === 'open-spot' && e.target.closest('[data-action="toggle-favorite"]')) return;
       actions[act.dataset.action](act);
     }
   });
-
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeTopModal();
     if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches('[role="button"][data-action], [role="button"][data-nav]')) {
-      e.preventDefault();
-      e.target.click();
+      e.preventDefault(); e.target.click();
     }
   });
-
   document.addEventListener('error', (e) => {
     if (e.target && e.target.tagName === 'IMG' && e.target.src !== FALLBACK_IMG) e.target.src = FALLBACK_IMG;
   }, true);
-
   $('login-form').addEventListener('submit', handleLogin);
   $('signup-form').addEventListener('submit', handleSignup);
   $('sw-location').addEventListener('input', (e) => handleSearch(e.target.value, 'sw-location'));
   $('map-search').addEventListener('input', (e) => handleSearch(e.target.value, 'map-search'));
   $('saved-search').addEventListener('input', renderSaved);
   $('sort-select').addEventListener('change', (e) => { sortMode = e.target.value; renderDestinations(); });
-  document.querySelectorAll('input[name="paymethod"]').forEach((r) => r.addEventListener('change', syncPaymentMethod));
-  $('tm-checkin').addEventListener('change', () => {
-    const ci = $('tm-checkin').value;
-    if (!ci) return;
-    $('tm-checkout').min = addDays(ci, 1);
-    if (!$('tm-checkout').value || $('tm-checkout').value <= ci) $('tm-checkout').value = addDays(ci, 1);
-  });
-  $('pay-card-number').addEventListener('input', (e) => {
-    const digits = e.target.value.replace(/\D/g, '').slice(0, 19);
-    e.target.value = digits.replace(/(.{4})/g, '$1 ').trim();
-  });
-  const travelerPicker = $('saved-traveler-picker');
-  if (travelerPicker) travelerPicker.addEventListener('change', () => {
-    const person = (state.travelers || []).find((t) => t.id === travelerPicker.value);
-    if (!person) return;
-    state.guestDetails = { name: person.name, email: person.email || '', phone: person.phone || '' };
-    saveState(); renderBooking();
-  });
-  $('saved-card-number').addEventListener('input', (e) => {
-    const digits = e.target.value.replace(/\D/g, '').slice(0, 19);
-    e.target.value = digits.replace(/(.{4})/g, '$1 ').trim();
-  });
-  $('saved-card-expiry').addEventListener('input', (e) => {
-    let d = e.target.value.replace(/\D/g, '').slice(0, 4);
-    if (d.length >= 3) d = d.slice(0, 2) + '/' + d.slice(2);
-    e.target.value = d;
-  });
-  ['bookingUpdates', 'promotions', 'emailUpdates'].forEach((key) => {
+  ['travelTips','emailUpdates'].forEach((key) => {
     const el = $('pref-' + key);
     if (el) el.addEventListener('change', () => savePreference(key, el.checked));
-  });
-  $('pay-card-exp').addEventListener('input', (e) => {
-    let d = e.target.value.replace(/\D/g, '').slice(0, 4);
-    if (d.length >= 3) d = d.slice(0, 2) + '/' + d.slice(2);
-    e.target.value = d;
   });
 }
 
 function init() {
-  ensureTripDefaults();
   applyTheme();
   renderUser();
-  renderSearchWidget();
   bindEvents();
   refreshAll();
   if (window.__pendingFirebaseData) window.onFirebaseDataLoaded(window.__pendingFirebaseData);
-  setTimeout(() => {
-    if (isSignedIn() || state.guest) switchTab('home');
-    else navigateTo('screen-welcome', { push: false });
-  }, 1500);
+  // The native Android launch screen is the only splash; do not replay a web splash.
+  if (isSignedIn() || state.guest) switchTab('home');
+  else navigateTo('screen-welcome', { push: false });
 }
 
 document.addEventListener('DOMContentLoaded', init);

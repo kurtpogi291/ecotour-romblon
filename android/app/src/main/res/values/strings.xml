@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">EcoTour</string>
-    <string name="title_activity_main">EcoTour</string>
+    <string name="app_name">TOURismo Romblon</string>
+    <string name="title_activity_main">TOURismo Romblon</string>
     <string name="package_name">com.ecotour.app</string>
     <string name="custom_url_scheme">com.ecotour.app</string>
 </resources>

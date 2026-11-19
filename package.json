@@ -1,7 +1,7 @@
 {
   "name": "eco-tour-app",
   "version": "1.0.0",
-  "description": "EcoTour Romblon travel and booking application",
+  "description": "TOURismo Romblon destination discovery and travel guide",
   "main": "www/assets/js/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
