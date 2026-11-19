@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#086675" />
+  <meta name="description" content="Explore Romblon islands, destinations, and saved travel guides with TOURismo." />
   <title>TOURismo Romblon | Discover, Explore, Experience</title>
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
   <link rel="icon" type="image/svg+xml" href="assets/images/ecotour-logo.svg" />
@@ -116,6 +118,16 @@
         <span class="eco-leaf">🌱</span><span><strong>Travel a little greener</strong><small>Explore EcoScores and responsible travel tips</small></span><b>Explore ›</b>
       </button>
 
+      <section class="island-filter-panel" aria-labelledby="island-filter-title">
+        <div class="island-filter-heading"><h3 id="island-filter-title">Explore by island</h3><span>Find your next stop</span></div>
+        <div class="island-filters" id="island-filters" role="group" aria-label="Choose island">
+          <button type="button" class="island-chip active" data-island="All" aria-pressed="true">🌊 All</button>
+          <button type="button" class="island-chip" data-island="Tablas" aria-pressed="false">🏝️ Tablas</button>
+          <button type="button" class="island-chip" data-island="Romblon" aria-pressed="false">☀️ Romblon</button>
+          <button type="button" class="island-chip" data-island="Sibuyan" aria-pressed="false">🌿 Sibuyan</button>
+          <button type="button" class="island-chip" data-island="Carabao" aria-pressed="false">🐚 Carabao</button>
+        </div>
+      </section>
       <div class="category-tags" id="category-tags">
         <button class="tag-chip active" data-category="All">All</button>
         <button class="tag-chip" data-category="Resorts">Resorts</button>
@@ -152,6 +164,7 @@
       <div class="search-box" style="margin-bottom: 20px;">
         <input type="search" id="saved-search" placeholder="Filter saved items..." aria-label="Filter saved items" />
       </div>
+      <p class="offline-guide-note">📖 Saved place text remains available offline on this device. Photos, updates, and maps need internet.</p>
       <div class="destinations-grid" id="saved-items-list"></div>
     </div>
   </div>
@@ -174,6 +187,7 @@
       <button class="guide-entry" data-action="open-trip-planner"><span>🗓️</span><span><strong>Build an itinerary</strong><small>Create and save a sample travel plan</small></span><b>›</b></button>
       <button class="guide-entry" data-action="open-experiences"><span>🏝️</span><span><strong>Local experiences</strong><small>Find activities and places worth exploring</small></span><b>›</b></button>
       <button class="guide-entry" data-action="open-ecoscore"><span>🌱</span><span><strong>Responsible travel</strong><small>Explore illustrative sustainability scores</small></span><b>›</b></button>
+      <button class="guide-entry" data-tab="saved"><span>📖</span><span><strong>Offline saved guides</strong><small>Read saved destination details without data</small></span><b>›</b></button>
       <p class="guide-note">TOURismo does not collect bookings or payments. Always confirm visits and current conditions with local contacts.</p>
     </div>
   </div>
@@ -207,7 +221,7 @@
         <h3>Preferences</h3>
         <ul class="menu-list">
           <li><button class="menu-btn" data-action="toggle-theme"><span class="m-icon" id="settings-theme-icon">🌙</span> Dark Mode <span class="setting-status" id="theme-status-text">Off</span></button></li>
-          <li><button class="menu-btn" data-action="open-notifications"><span class="m-icon">🔔</span> Notifications <span class="menu-chevron">›</span></button></li>
+          <li><button class="menu-btn" data-action="open-travel-preferences"><span class="m-icon">🧭</span> Travel Preferences <span class="menu-chevron">›</span></button></li>
           <li><button class="menu-btn" data-action="open-help"><span class="m-icon">❔</span> Help & Support <span class="menu-chevron">›</span></button></li>
 
           <li><button class="menu-btn" data-action="clear-data"><span class="m-icon">🗑️</span> Reset Saved Data <span class="menu-chevron">›</span></button></li>
@@ -220,13 +234,21 @@
   </div>
 
 
-  <div id="screen-notifications" class="screen">
-    <header class="page-header"><button class="icon-btn" aria-label="Back to profile" data-action="back-to-profile">‹</button><h2>Guide Preferences</h2><span style="width:36px;"></span></header>
-    <div class="screen-body">
-      <p class="text-muted" style="margin-bottom:16px;">Set your preferred travel-guide updates.</p>
-      <div class="preference-card"><div><strong>Travel tips</strong><span>Practical reminders and responsible tourism ideas</span></div><input type="checkbox" id="pref-travelTips" /></div>
-      <div class="preference-card"><div><strong>Email updates</strong><span>Receive destination information when available</span></div><input type="checkbox" id="pref-emailUpdates" /></div>
-      <p class="demo-note" style="margin-top:14px;">Preferences are stored locally. Automatic messages are not enabled in this prototype.</p>
+  <div id="screen-travel-preferences" class="screen">
+    <header class="page-header"><button class="icon-btn" aria-label="Back to profile" data-action="back-to-profile">‹</button><h2>Travel Preferences</h2><span style="width:36px;"></span></header>
+    <div class="screen-body travel-preferences-body">
+      <div class="preferences-intro"><span>🧭</span><h3>Make Romblon yours</h3><p>Choose a favorite island and interests to personalize discovery and trip planning.</p></div>
+      <div class="preferences-panel">
+        <div class="input-group"><label for="pref-island">Preferred island</label><select id="pref-island">
+          <option value="All">All islands</option><option value="Tablas">Tablas</option><option value="Romblon">Romblon Island</option><option value="Sibuyan">Sibuyan</option><option value="Carabao">Carabao Island</option>
+        </select></div>
+        <div class="input-group"><label for="pref-interest">Favorite kind of adventure</label><select id="pref-interest">
+          <option value="balanced">A bit of everything</option><option value="beach">Beaches & island life</option><option value="adventure">Adventure & hiking</option><option value="nature">Nature & waterfalls</option><option value="culture">Culture & local communities</option>
+        </select></div>
+        <label class="travel-tip-toggle" for="pref-travelTips"><span><strong>Show responsible travel tips</strong><small>Helpful reminders on destination pages</small></span><input type="checkbox" id="pref-travelTips"></label>
+        <button class="btn btn-primary btn-block" data-action="save-travel-preferences">Save preferences</button>
+      </div>
+      <p class="demo-note">These guide preferences do not make reservations or confirm availability.</p>
     </div>
   </div>
 
@@ -305,6 +327,9 @@
         <span class="location-text">📍 <span id="detail-location"></span></span>
       </div>
 
+      <div class="details-section details-visit-section">
+        <h4>Plan your visit</h4><div id="detail-visit-info" class="visit-info-grid"></div>
+      </div>
       <div class="details-section">
         <h4>About this place</h4>
         <p class="description-p" id="detail-desc"></p>

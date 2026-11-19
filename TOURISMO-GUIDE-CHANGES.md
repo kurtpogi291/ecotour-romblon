@@ -32,3 +32,16 @@ The Android application ID remains `com.ecotour.app` so existing installed build
 Run `npm ci`, `npx cap sync android`, then rebuild/install the Android app. A native rebuild is needed to see the new Android splash/theme and application label. On the web the splash is removed and the welcome/home screen is shown immediately.
 
 **Not yet live-tested on-device.** Confirm external Facebook/Instagram behavior, destination data, authentication, map tiles, and the image carousel before release.
+
+## Guide refinements
+- Filters: Tablas, Romblon Island, Sibuyan, Carabao Island, plus All. Unknown Firebase places are not mislabeled; add a valid `island` value to categorize.
+- "Plan your visit": island, unverified listed cost, placeholder hours, suggested access reminders, and optional responsible travel guidance. Fees and schedules are **not verified**.
+- Profile now includes Travel Preferences (island, preferred interest, display travel tips), replacing unimplemented notifications.
+- Saved text guides have a local snapshot in `localStorage`. Maps, Firebase updates, and remote pictures are **not offline**. Browser use relies on a service worker after first online load over HTTPS; installed Android Capacitor assets already live on-device.
+- Verified municipal info links for Bonbon Beach and Tiamban Beach: https://cms-romblon-lgu.e.gov.ph/tourism ; this is general municipal tourism information, **not** a place's official Facebook page. Tinagong Dagat retains the Calatrava Tourism Council link on https://calatravaromblon.gov.ph/ .
+- Teal/ocean styling, clearer card hierarchy, modern island chips, accessible focus states. Original map and gallery behavior retained.
+
+Example Firebase destination fields:
+```json
+{"island":"Tablas","visitorInfo":{"hours":"Confirm locally","access":"Ask tourism staff for access details"}}
+```

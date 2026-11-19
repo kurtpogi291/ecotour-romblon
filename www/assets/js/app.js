@@ -7,6 +7,7 @@ const romblonSpots =
     image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80',
     gallery: ['https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1506953823976-52e1fdc0149a?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1473116763249-2faaef81ccda?auto=format&fit=crop&w=900&q=85'],
     highlights: ['White Sandbar', 'Sunset Point'], lat: 12.5833, lng: 122.2625,
+    socials: { website: 'https://cms-romblon-lgu.e.gov.ph/tourism' },
     reviews: [{ user: 'Maria S.', stars: 5, comment: 'Breathtaking sandbar!' }]
   },
   {
@@ -79,6 +80,7 @@ const romblonSpots =
     image: 'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=600&q=80',
     gallery: ['https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=900&q=85'],
     highlights: ['Family Friendly', 'Fine Sand'], lat: 12.5700, lng: 122.2541,
+    socials: { website: 'https://cms-romblon-lgu.e.gov.ph/tourism' },
     reviews: [{ user: 'Anna L.', stars: 4, comment: 'Nice beach very near the town proper.' }]
   },
   {
@@ -112,6 +114,68 @@ const romblonSpots =
 ];
 
 const STORE_KEY = 'ecotour-v2';
+const ISLAND_OPTIONS = ['All','Tablas','Romblon','Sibuyan','Carabao'];
+const INTEREST_OPTIONS = ['balanced','beach','adventure','nature','culture'];
+const KNOWN_ISLANDS = {
+  bonbon:'Romblon',binucot:'Tablas',footprints:'Tablas',g2:'Sibuyan',
+  looc:'Tablas',carabao:'Carabao',aglicay:'Tablas',catingas:'Sibuyan',
+  tiamban:'Romblon',mablaran:'Tablas',tinagongdagat:'Tablas'
+};
+const VISIT_TIPS = {
+  bonbon:'Check the tide before walking onto the sandbar. Arrange transport from Romblon town.',
+  binucot:'Travel to Ferrol on Tablas and ask the resort for the current access route.',
+  footprints:'Head toward San Andres, Tablas; confirm the property entrance with its operator.',
+  g2:'Ask local tourism staff about permits, guide requirements, and trail conditions.',
+  looc:'Ask Looc tourism staff about access to the sanctuary and boat arrangements.',
+  carabao:'Confirm boat transfers and weather conditions before traveling to Carabao Island.',
+  aglicay:'Travel to Alcantara on Tablas and check current resort access rules.',
+  catingas:'Check local river and weather conditions before swimming.',
+  tiamban:'Arrange local transport from Romblon town and check site rules.',
+  mablaran:'Check waterfall trail conditions with San Andres tourism staff.',
+  tinagongdagat:'Contact the Calatrava Tourism Council for the current boat and access arrangements.'
+};
+function islandForSpot(spot) {
+  if (!spot) return 'Other';
+  if (ISLAND_OPTIONS.includes(spot.island) && spot.island !== 'All') return spot.island;
+  if (Object.prototype.hasOwnProperty.call(KNOWN_ISLANDS, spot.id)) return KNOWN_ISLANDS[spot.id];
+  const loc = String(spot.location || '').toLowerCase();
+  if (/sibuyan/.test(loc)) return 'Sibuyan';
+  if (/tablas|ferrol|looc|alcantara|calatrava|odiongan/.test(loc)) return 'Tablas';
+  if (/carabao island|hambil/.test(loc)) return 'Carabao';
+  if (/romblon town|romblon island/.test(loc)) return 'Romblon';
+  return 'Other';
+}
+function offlineSnapshot(spot) {
+  return {
+    id:String(spot.id), name:String(spot.name||''), location:String(spot.location||''),
+    category:String(spot.category||'Beaches'), description:String(spot.description||''),
+    price:String(spot.price||'Confirm locally'), rawPrice:Number(spot.rawPrice)||0,
+    rating:Number(spot.rating)||0, island:islandForSpot(spot), image:String(spot.image||''),
+    gallery:Array.isArray(spot.gallery)?spot.gallery.slice(0,5):[],
+    highlights:Array.isArray(spot.highlights)?spot.highlights.slice(0,12):[],
+    lat:spot.lat==null?null:Number(spot.lat), lng:spot.lng==null?null:Number(spot.lng),
+    socials:spot.socials&&typeof spot.socials==='object'?{...spot.socials}:{},
+    visitorInfo:spot.visitorInfo&&typeof spot.visitorInfo==='object'?{...spot.visitorInfo}:{},
+    reviews:[]
+  };
+}
+function cacheSavedGuides() {
+  const stored={...(state.offlineGuides||{})};
+  let changed=false;
+  state.favorites.forEach(id=>{
+    const live=romblonSpots.find(s=>s.id===id);
+    if(!live)return;
+    const snap=offlineSnapshot(live);
+    if(JSON.stringify(stored[id])!==JSON.stringify(snap)){stored[id]=snap;changed=true;}
+  });
+  Object.keys(stored).forEach(id=>{if(!state.favorites.includes(id)){delete stored[id];changed=true;}});
+  if(changed) state.offlineGuides=stored;
+  return changed;
+}
+function allSavedSpots(){
+  return state.favorites.map(id=>romblonSpots.find(s=>s.id===id)||(state.offlineGuides||{})[id]).filter(Boolean);
+}
+
 const TAB_SCREENS = { home: 'screen-home', saved: 'screen-saved', guide: 'screen-guide', map: 'screen-map', profile: 'screen-profile' };
 const NAV_HIDDEN = ['screen-welcome', 'screen-login', 'screen-signup', 'screen-details'];
 const FALLBACK_IMG = 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400"><rect width="100%" height="100%" fill="#CBD5E1"/><text x="50%" y="50%" font-family="sans-serif" font-size="28" fill="#64748B" text-anchor="middle" dominant-baseline="middle">Image unavailable</text></svg>');
@@ -122,12 +186,14 @@ const defaultState = () => ({
   favorites: [],
   localReviews: {},
   savedItineraries: [],
-  preferences: { travelTips: true, emailUpdates: false },
+  offlineGuides: {},
+  preferences: { island:'All', interest:'balanced', travelTips:true },
   theme: 'light'
 });
 
 let state = loadState();
 let activeCategory = 'All';
+let activeIsland = state.preferences.island;
 let searchQuery = '';
 let sortMode = 'featured';
 let currentSpot = null;
@@ -177,7 +243,12 @@ function sanitizeState(raw) {
     favorites: Array.isArray(src.favorites) ? src.favorites : [],
     localReviews: src.localReviews && typeof src.localReviews === 'object' ? src.localReviews : {},
     savedItineraries: Array.isArray(src.savedItineraries) ? src.savedItineraries : [],
-    preferences: { ...base.preferences, ...(src.preferences || {}) },
+    offlineGuides: src.offlineGuides && typeof src.offlineGuides === 'object' && !Array.isArray(src.offlineGuides) ? src.offlineGuides : {},
+    preferences: {
+      island: ISLAND_OPTIONS.includes(src.preferences?.island) ? src.preferences.island : 'All',
+      interest: INTEREST_OPTIONS.includes(src.preferences?.interest) ? src.preferences.interest : 'balanced',
+      travelTips: src.preferences?.travelTips !== false
+    },
     theme: src.theme === 'dark' ? 'dark' : 'light'
   };
 }
@@ -304,6 +375,7 @@ function mergeRemote(data) {
     const existing = romblonSpots.find((x) => x.id === key);
     if (existing) {
       if (s.socials && typeof s.socials === 'object') existing.socials = { ...(existing.socials || {}), ...s.socials };
+      if (s.visitorInfo && typeof s.visitorInfo === 'object') existing.visitorInfo = { ...(existing.visitorInfo || {}), ...s.visitorInfo };
       const known = new Set((existing.reviews || []).map((r) => `${r.user}|${r.stars}|${r.comment}`));
       remoteReviews.forEach((r) => {
         const k = `${r.user}|${r.stars}|${r.comment}`;
@@ -327,7 +399,9 @@ function mergeRemote(data) {
       lat: Number(s.lat) || null,
       lng: Number(s.lng) || null,
       reviews: remoteReviews,
-      socials: s.socials && typeof s.socials === 'object' ? s.socials : {}
+      socials: s.socials && typeof s.socials === 'object' ? s.socials : {},
+      island: ISLAND_OPTIONS.includes(s.island) && s.island !== 'All' ? s.island : '',
+      visitorInfo: s.visitorInfo && typeof s.visitorInfo === 'object' ? s.visitorInfo : {}
     });
   });
 }
@@ -355,6 +429,7 @@ window.onFirebaseAuthChanged = async function (user) {
     if (state.user && !state.user.uid) {
       state.user = null;
       state.guest = false;
+      activeIsland = state.preferences.island;
       saveState();
       renderUser();
       refreshAll();
@@ -508,22 +583,25 @@ function clearData() {
 
 
 function openAccountPage(screenId) {
-  if (screenId === 'screen-notifications') renderPreferences();
+  if (screenId === 'screen-travel-preferences') renderPreferences();
   navigateTo(screenId);
 }
-
 function renderPreferences() {
-  const p = state.preferences || {};
-  ['travelTips', 'emailUpdates'].forEach((key) => {
-    const el = $('pref-' + key);
-    if (el) el.checked = Boolean(p[key]);
-  });
+  $('pref-island').value=state.preferences.island;
+  $('pref-interest').value=state.preferences.interest;
+  $('pref-travelTips').checked=state.preferences.travelTips!==false;
 }
-
-function savePreference(key, value) {
-  state.preferences = { ...defaultState().preferences, ...(state.preferences || {}), [key]: value };
+function saveTravelPreferences() {
+  const island=$('pref-island').value,interest=$('pref-interest').value;
+  state.preferences={
+    island:ISLAND_OPTIONS.includes(island)?island:'All',
+    interest:INTEREST_OPTIONS.includes(interest)?interest:'balanced',
+    travelTips:$('pref-travelTips').checked
+  };
   saveState();
-  toast('Preference updated.', 'success');
+  setIsland(state.preferences.island);
+  toast('Travel preferences saved!', 'success');
+  switchTab('profile');
 }
 
 function openEditProfile() {
@@ -577,7 +655,7 @@ function matchesSearch(spot) {
 }
 
 function filteredSpots() {
-  const list = romblonSpots.filter((s) => (activeCategory === 'All' || s.category === activeCategory) && matchesSearch(s));
+  const list = romblonSpots.filter((s) => (activeIsland === 'All' || islandForSpot(s) === activeIsland) && (activeCategory === 'All' || s.category === activeCategory) && matchesSearch(s));
   if (sortMode === 'rating') list.sort((a, b) => ratingFor(b) - ratingFor(a));
   return list;
 }
@@ -589,6 +667,7 @@ function handleSearch(value, source) {
   clearTimeout(searchTimer);
   searchTimer = setTimeout(() => {
     renderDestinations();
+    renderCarousel();
     updateMarkers();
   }, 120);
 }
@@ -597,7 +676,19 @@ function setCategory(category) {
   activeCategory = category;
   document.querySelectorAll('#category-tags .tag-chip').forEach((c) => c.classList.toggle('active', c.dataset.category === category));
   renderDestinations();
-  updateMarkers();
+  renderCarousel();
+  updateMarkers(true);
+}
+function setIsland(island) {
+  activeIsland=ISLAND_OPTIONS.includes(island)?island:'All';
+  document.querySelectorAll('#island-filters .island-chip').forEach(btn=>{
+    const active=btn.dataset.island===activeIsland;
+    btn.classList.toggle('active',active);
+    btn.setAttribute('aria-pressed',String(active));
+  });
+  renderDestinations();
+  renderCarousel();
+  updateMarkers(true);
 }
 
 function cardHtml(s, withDesc) {
@@ -608,6 +699,7 @@ function cardHtml(s, withDesc) {
       <div class="spot-card-info">
         <h5>${esc(s.name)}</h5>
         <p class="spot-location">📍 ${esc(s.location)}</p>
+        <span class="spot-island-label">🏝 ${islandForSpot(s) === 'Other' ? 'Romblon province' : esc(islandForSpot(s))}</span>
         ${withDesc ? `<p class="spot-desc">${esc(s.description)}</p>` : ''}
         <div class="spot-meta"><span class="spot-rating">★ ${ratingFor(s)}</span><span class="spot-category">${esc(s.category)}</span></div>
       </div>
@@ -631,7 +723,7 @@ function renderDestinations() {
 function renderSaved() {
   const container = $('saved-items-list');
   const filter = $('saved-search').value.trim().toLowerCase();
-  const saved = romblonSpots.filter((s) => state.favorites.includes(s.id) && (s.name + ' ' + s.location).toLowerCase().includes(filter));
+  const saved = allSavedSpots().filter(s => (s.name + ' ' + s.location).toLowerCase().includes(filter));
   if (!saved.length) {
     container.innerHTML = `<div class="empty-state"><span class="emoji">💙</span>${state.favorites.length ? 'No saved places match your filter.' : 'Nothing saved yet. Tap the heart on any place to keep it here.'}<br><button class="btn btn-primary" data-tab="home">Browse places</button></div>`;
     return;
@@ -642,6 +734,7 @@ function renderSaved() {
 function toggleFavorite(id) {
   const i = state.favorites.indexOf(id);
   if (i >= 0) state.favorites.splice(i, 1); else state.favorites.push(id);
+  cacheSavedGuides();
   saveState();
   renderDestinations();
   renderSaved();
@@ -730,7 +823,7 @@ function socialLinksFor(spot) {
   const socials = spot.socials || {};
   const facebook = checkedSocialUrl(socials.facebook, ['facebook.com', 'fb.com']);
   const instagram = checkedSocialUrl(socials.instagram, ['instagram.com']);
-  const website = checkedSocialUrl(socials.website, ['calatravaromblon.gov.ph']);
+  const website = checkedSocialUrl(socials.website, ['calatravaromblon.gov.ph','cms-romblon-lgu.e.gov.ph']);
   const query = encodeURIComponent(spot.name + ' ' + spot.location + ' Romblon');
   const tag = (spot.name + 'Romblon').toLowerCase().normalize('NFKD').replace(/[^a-z0-9]/g, '');
   return {
@@ -745,12 +838,12 @@ function renderSpotSocial(spot) {
   const parts = [];
   if (links.facebook) parts.push('<a class="place-social-link" target="_blank" rel="noopener noreferrer" href="' + esc(links.facebook) + '">ⓕ Local tourism Facebook</a>');
   if (links.instagram) parts.push('<a class="place-social-link" target="_blank" rel="noopener noreferrer" href="' + esc(links.instagram) + '">◎ Instagram page</a>');
-  if (links.website) parts.push('<a class="place-social-link" target="_blank" rel="noopener noreferrer" href="' + esc(links.website) + '">🌐 Tourism website</a>');
+  if (links.website) parts.push('<a class="place-social-link" target="_blank" rel="noopener noreferrer" href="' + esc(links.website) + '">🌐 Official tourism info</a>');
   parts.push('<a class="place-social-link place-social-search" target="_blank" rel="noopener noreferrer" href="' + esc(links.facebookSearch) + '">ⓕ Search Facebook photos</a>');
   if (!links.instagram) parts.push('<a class="place-social-link place-social-search" target="_blank" rel="noopener noreferrer" href="' + esc(links.instagramTag) + '">◎ Explore Instagram tags</a>');
   $('detail-social-links').innerHTML = parts.join('');
-  $('detail-social-footer').href = links.facebook || links.facebookSearch;
-  $('detail-social-footer').textContent = links.facebook ? 'ⓕ Ask / View Photos' : 'ⓕ Find Photos';
+  $('detail-social-footer').href = links.facebook || links.website || links.facebookSearch;
+  $('detail-social-footer').textContent = links.facebook ? 'ⓕ Ask / View Photos' : links.website ? '🌐 Official guide' : 'ⓕ Find Photos';
 }
 
 function setDetailsDirections(spot) {
@@ -760,8 +853,24 @@ function setDetailsDirections(spot) {
     : 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(spot.name + ' ' + spot.location + ' Romblon');
 }
 
+function renderVisitInfo(spot) {
+  const info=spot.visitorInfo&&typeof spot.visitorInfo==='object'?spot.visitorInfo:{};
+  const fee=spot.price && spot.price !== 'See details'?spot.price:'Ask locally';
+  const hours=typeof info.hours==='string'&&info.hours.trim()?info.hours.trim():'Confirm with local tourism staff';
+  const access=typeof info.access==='string'&&info.access.trim()?info.access.trim():(VISIT_TIPS[spot.id]||'Confirm transport and site access with local tourism staff.');
+  const cell=(icon,label,value)=>'<div class="visit-info-item"><span class="visit-info-icon">'+icon+'</span><div><small>'+esc(label)+'</small><strong>'+esc(value)+'</strong></div></div>';
+  const island=islandForSpot(spot);
+  $('detail-visit-info').innerHTML=
+    cell('🏝️','Island',island==='Other'?'Romblon Province':island+' Island')+
+    cell('🎟️','Listed cost · unverified',fee)+
+    cell('🕒','Hours · check locally',hours)+
+    '<div class="visit-access"><b>🧭 Getting there</b><p>'+esc(access)+'</p></div>'+
+    (state.preferences.travelTips!==false?'<div class="visit-travel-tip"><b>🌱 Travel tip</b><p>Respect the community, leave no waste, and check weather and site rules.</p></div>':'')+
+    '<p class="visit-disclaimer">Prototype travel details; fees, routes and opening times may change. Confirm directly with local operators.</p>';
+}
+
 function openSpot(id) {
-  const s = romblonSpots.find((x) => x.id === id);
+  const s = romblonSpots.find((x) => x.id === id) || (state.offlineGuides || {})[id];
   if (!s) return;
   currentSpot = s;
   closeModalsAll();
@@ -779,6 +888,7 @@ function openSpot(id) {
   renderReviews();
   updateFavoriteButton();
   renderSpotSocial(s);
+  renderVisitInfo(s);
   setDetailsDirections(s);
   navigateTo('screen-details');
   $('screen-details').scrollTop = 0;
@@ -869,6 +979,7 @@ function submitReview() {
 
 function openTripPlanner() {
   renderSavedItineraries();
+  $('planner-interest').value=state.preferences.interest;
   $('planner-results').innerHTML = '';
   navigateTo('screen-trip-planner');
 }
@@ -979,13 +1090,14 @@ function renderDetailEcoScore(spot) {
 }
 
 function carouselSpots() {
-  return romblonSpots.slice().sort((a, b) => ratingFor(b) - ratingFor(a)).slice(0, 4);
+  return filteredSpots().slice().sort((a, b) => ratingFor(b) - ratingFor(a)).slice(0, 4);
 }
 
 function renderCarousel() {
   const track = $('carousel-track');
   const spots = carouselSpots();
   if (slideIndex >= spots.length) slideIndex = 0;
+  if (!spots.length) { track.innerHTML='<div class="carousel-empty">No featured places match these filters yet.</div>'; $('carousel-dots').innerHTML=''; stopCarousel(); return; }
   track.innerHTML = spots.map((s) => `
     <div class="carousel-slide" role="button" tabindex="0" style="background-image: url('${esc(safeUrl(s.image))}');" data-action="open-spot" data-id="${esc(s.id)}">
       <div class="banner-content"><h2>${esc(s.name)}</h2><p>📍 ${esc(s.location)}</p></div>
@@ -1017,6 +1129,7 @@ function updateCarousel() {
 
 function moveSlide(dir) {
   const n = carouselSpots().length;
+  if (!n) return;
   slideIndex = (slideIndex + dir + n) % n;
   updateCarousel();
 }
@@ -1063,6 +1176,12 @@ function switchTab(tab) {
 }
 
 function refreshAll() {
+  if(cacheSavedGuides()) saveState();
+  document.querySelectorAll('#island-filters .island-chip').forEach(btn=>{
+    const active=btn.dataset.island===activeIsland;
+    btn.classList.toggle('active',active);
+    btn.setAttribute('aria-pressed',String(active));
+  });
   renderCarousel();
   renderDestinations();
   renderSaved();
@@ -1090,7 +1209,8 @@ const actions = {
   'go-welcome': () => { navStack = []; navigateTo('screen-welcome', { push: false }); },
   'clear-data': clearData,
   'open-edit-profile': openEditProfile,
-  'open-notifications': () => openAccountPage('screen-notifications'),
+  'open-travel-preferences': () => openAccountPage('screen-travel-preferences'),
+  'save-travel-preferences': saveTravelPreferences,
   'open-help': () => openAccountPage('screen-help'),
   'back-to-profile': () => switchTab('profile'),
   'save-profile': saveProfile,
@@ -1111,6 +1231,8 @@ function bindEvents() {
     const closeBtn = e.target.closest('[data-close]');
     if (closeBtn) { closeModal(closeBtn.dataset.close); return; }
     if (e.target.classList && e.target.classList.contains('modal-overlay')) { closeModal(e.target.id); return; }
+    const island=e.target.closest('[data-island]');
+    if(island){setIsland(island.dataset.island);return;}
     const cat = e.target.closest('[data-category]');
     if (cat) { setCategory(cat.dataset.category); return; }
     const expFilter = e.target.closest('[data-experience-filter]');
@@ -1141,13 +1263,11 @@ function bindEvents() {
   $('map-search').addEventListener('input', (e) => handleSearch(e.target.value, 'map-search'));
   $('saved-search').addEventListener('input', renderSaved);
   $('sort-select').addEventListener('change', (e) => { sortMode = e.target.value; renderDestinations(); });
-  ['travelTips','emailUpdates'].forEach((key) => {
-    const el = $('pref-' + key);
-    if (el) el.addEventListener('change', () => savePreference(key, el.checked));
-  });
+  // Travel preferences are persisted by the explicit Save button.
 }
 
 function init() {
+  activeIsland=state.preferences.island;
   applyTheme();
   renderUser();
   bindEvents();
@@ -1159,3 +1279,6 @@ function init() {
 }
 
 document.addEventListener('DOMContentLoaded', init);
+if ('serviceWorker' in navigator && !window.Capacitor?.isNativePlatform?.()) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(e => console.warn('Offline shell unavailable:', e)));
+}

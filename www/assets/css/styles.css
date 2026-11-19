@@ -677,3 +677,80 @@ body { background-color: #000; display: flex; justify-content: center; align-ite
   min-height: 46px;
   margin-top: 0;
 }
+
+/* TOURismo island discovery and polished guide surfaces */
+:root {--primary-brand:#086675;--primary-hover:#074B5B;--primary-green:#117970;--accent-yellow:#F4B84B;--bg-canvas:#F4F8F8;--radius-lg:20px;--radius-md:16px;--radius-sm:11px;--shadow-sm:0 3px 12px rgba(19,56,70,.06);--shadow-md:0 10px 26px rgba(19,56,70,.13)}
+body.dark-mode {--primary-brand:#116C83;--bg-canvas:#101C2A;--card-bg:#1C2B3B;--border-color:#33495B;--text-muted:#A2B3C1}
+.home-hero-bg {background:linear-gradient(132deg,#07526D 2%,#087B83 67%,#139889 120%);border-bottom-left-radius:26px;border-bottom-right-radius:26px}
+.home-hero-title {letter-spacing:-.6px;line-height:1.22}
+.search-widget-card {background:var(--card-bg);padding:7px;margin-top:-37px;margin-bottom:18px;border:1px solid var(--border-color)}
+.search-widget-input {padding:11px 12px}
+.search-widget-card>.btn {margin-top:7px;min-height:43px}
+#screen-home .screen-body {padding-left:16px;padding-right:16px}
+#screen-home .section-header {margin-top:8px}
+.island-filter-panel {margin:8px 0 18px}
+.island-filter-heading {display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:0 0 12px}
+.island-filter-heading h3 {font-size:17px;font-weight:800;color:var(--text-main);letter-spacing:-.3px}
+.island-filter-heading span {font-size:11px;color:var(--text-muted)}
+.island-filters {display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:2px 0 7px;overscroll-behavior-x:contain}
+.island-filters::-webkit-scrollbar {display:none}
+.island-chip {flex:0 0 auto;min-height:42px;padding:10px 14px;border-radius:14px;border:1px solid var(--border-color);background:var(--card-bg);font-size:12px;font-weight:750;color:var(--text-main);cursor:pointer;white-space:nowrap;box-shadow:var(--shadow-sm)}
+.island-chip.active {background:var(--primary-brand);color:#fff;border-color:var(--primary-brand)}
+.island-chip:active {transform:scale(.97)}
+.category-tags {margin-bottom:17px}
+.tag-chip {box-shadow:none}
+.hero-carousel {border-radius:18px;box-shadow:var(--shadow-sm);margin-bottom:22px}
+.carousel-empty {width:100%;height:100%;display:grid;place-items:center;padding:24px;text-align:center;font-size:13px;color:var(--text-muted);background:var(--card-bg)}
+.destinations-grid {gap:13px}
+.spot-card {border-radius:16px;box-shadow:var(--shadow-sm);min-height:130px;transition:transform .2s,box-shadow .2s}
+.spot-card:active {transform:scale(.995)}
+@media(hover:hover){.spot-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}}
+.spot-card>img {width:121px;height:134px;align-self:stretch;object-fit:cover}
+.spot-card-info {padding:12px 38px 12px 13px;min-width:0}
+.spot-card-info h5 {font-size:14px;line-height:1.33;color:var(--text-main)}
+.spot-location {font-size:11px;margin-bottom:4px}
+.spot-island-label {display:inline-flex;align-self:flex-start;background:rgba(10,128,126,.08);color:var(--primary-green);padding:3px 7px;border-radius:7px;font-size:10px;font-weight:800;margin:2px 0 5px}
+body.dark-mode .spot-island-label {background:rgba(133,221,200,.15);color:#A9E4D7}
+.spot-desc {line-height:1.5}
+.spot-meta {gap:10px;flex-wrap:wrap}
+.fav-btn {width:34px;height:34px;top:10px;right:9px}
+.page-header {min-height:61px;box-shadow:none;border-bottom:1px solid var(--border-color)}
+.page-header h2 {font-size:20px;letter-spacing:-.5px}
+.details-body {padding-bottom:18px}
+.details-body #detail-title {letter-spacing:-.65px}
+.details-section {margin-bottom:20px;padding-bottom:20px}
+.details-section h4 {font-size:15px;letter-spacing:-.2px;margin-bottom:10px}
+.visit-info-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.visit-info-item {min-width:0;display:flex;gap:8px;align-items:flex-start;background:var(--card-bg);border:1px solid var(--border-color);border-radius:13px;padding:12px 10px}
+.visit-info-item>div {min-width:0}
+.visit-info-item small {display:block;font-size:10px;line-height:1.3;color:var(--text-muted);margin-bottom:5px}
+.visit-info-item strong {display:block;font-size:11px;line-height:1.45;color:var(--text-main);overflow-wrap:anywhere}
+.visit-info-icon {font-size:18px;line-height:1.2;flex:0 0 auto}
+.visit-access,.visit-travel-tip {grid-column:1/-1;border-radius:13px;padding:13px 14px;background:var(--card-bg);border:1px solid var(--border-color)}
+.visit-access b,.visit-travel-tip b {font-size:12px;color:var(--text-main)}
+.visit-access p,.visit-travel-tip p {margin-top:5px;font-size:12px;color:var(--text-muted);line-height:1.55}
+.visit-travel-tip {background:rgba(17,121,112,.08);border-color:rgba(17,121,112,.18)}
+.visit-disclaimer {grid-column:1/-1;color:var(--text-muted);font-size:10px;line-height:1.55}
+.place-social-links {gap:10px}
+.place-social-link {border-radius:13px;font-size:11px;min-height:46px}
+.sticky-guide-bar {padding-bottom:max(13px,env(safe-area-inset-bottom));gap:9px}
+.guide-cta {border-radius:12px}
+.guide-entry {box-shadow:var(--shadow-sm)}
+.offline-guide-note {display:flex;align-items:flex-start;gap:9px;padding:12px 13px;border:1px solid var(--border-color);border-radius:12px;font-size:11px;line-height:1.5;color:var(--text-muted);background:var(--card-bg);margin-bottom:16px}
+.preferences-intro {padding:18px;border-radius:16px;background:linear-gradient(125deg,rgba(6,124,130,.13),rgba(244,184,75,.13));margin-bottom:14px}
+.preferences-intro>span {font-size:29px}
+.preferences-intro h3 {font-size:20px;margin:8px 0 5px;letter-spacing:-.3px}
+.preferences-intro p {font-size:12px;line-height:1.6;color:var(--text-muted)}
+.preferences-panel {padding:17px 16px;background:var(--card-bg);border:1px solid var(--border-color);border-radius:16px;box-shadow:var(--shadow-sm)}
+.preferences-panel .input-group {margin-bottom:15px}
+.preferences-panel select {min-height:44px;border-radius:11px}
+.travel-tip-toggle {display:flex;justify-content:space-between;gap:12px;align-items:center;padding:12px 0 16px;margin-bottom:5px;border-top:1px solid var(--border-color)}
+.travel-tip-toggle span {display:flex;flex-direction:column;gap:4px;min-width:0}
+.travel-tip-toggle strong {font-size:12px}
+.travel-tip-toggle small {font-size:10px;line-height:1.4;color:var(--text-muted)}
+.travel-tip-toggle input {accent-color:var(--primary-brand);width:18px;height:18px;flex:0 0 18px}
+#screen-profile .menu-card {border:1px solid var(--border-color);border-radius:15px;overflow:hidden}
+#screen-profile .menu-card:last-child {border:none;border-radius:12px}
+#screen-profile .menu-card h3 {font-size:14px}
+:is(.btn,.icon-btn,.nav-item,.island-chip,.tag-chip,.spot-card,.guide-entry,.place-social-link,.guide-cta,select):focus-visible {outline:3px solid var(--accent-yellow);outline-offset:2px}
+@media(max-width:360px){.visit-info-grid{grid-template-columns:1fr}.spot-card>img{width:107px}.spot-card-info{padding-right:38px}.island-chip{font-size:11px;padding:9px 11px}}
