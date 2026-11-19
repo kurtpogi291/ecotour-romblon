@@ -598,3 +598,224 @@ body { background-color: #000; display: flex; justify-content: center; align-ite
   #screen-details .gallery-thumbs-row .thumb-img,
   #screen-details .details-hero > #detail-main-img { transition: none; }
 }
+
+/* TOURismo: guide-first rebrand */
+.header-brand-light {display:flex;align-items:center;gap:8px;letter-spacing:-.4px}
+.header-brand-icon {width:27px;height:27px;border-radius:8px;display:block;box-shadow:0 2px 8px rgba(0,0,0,.13)}
+.sticky-guide-bar {position:sticky;bottom:0;display:flex;gap:10px;z-index:12;padding:13px 16px;background:var(--card-bg);border-top:1px solid var(--border-color);box-shadow:0 -6px 22px rgba(15,23,42,.06)}
+.guide-cta {display:flex;justify-content:center;align-items:center;gap:6px;flex:1;min-height:46px;padding:11px 9px;border-radius:11px;font-size:13px;font-weight:800;text-decoration:none;white-space:nowrap}
+.guide-cta-secondary {background:var(--bg-canvas);color:var(--text-main);border:1px solid var(--border-color)}
+.guide-cta-primary {background:var(--primary-brand);color:white}
+.place-social-links {display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}
+.place-social-link {display:flex;align-items:center;justify-content:center;min-height:44px;padding:10px 8px;border:1px solid var(--border-color);background:var(--card-bg);color:var(--text-main);font-weight:750;text-align:center;text-decoration:none;border-radius:11px;font-size:11px;line-height:1.4}
+.place-social-link:focus-visible,.guide-cta:focus-visible {outline:3px solid var(--primary-brand);outline-offset:2px}
+.place-social-search {border-style:dashed;color:var(--primary-brand)}
+.social-hint,.guide-note {font-size:12px;line-height:1.55;color:var(--text-muted);margin-top:8px}
+.guide-intro {padding:20px 18px;margin-bottom:15px;background:linear-gradient(135deg,#def4ef,#e1f5fc);border-radius:18px;color:#12505d}
+.guide-intro span {font-size:30px;display:block;margin-bottom:9px}
+.guide-intro h3 {font-size:21px;margin-bottom:6px}
+.guide-intro p {font-size:12px;line-height:1.5}
+.guide-entry {display:flex;align-items:center;text-align:left;width:100%;gap:12px;margin-bottom:12px;padding:17px 13px;border:1px solid var(--border-color);border-radius:15px;background:var(--card-bg);color:var(--text-main);cursor:pointer}
+.guide-entry > span:first-child {font-size:24px;flex:none}
+.guide-entry > span:nth-child(2) {flex:1;display:flex;flex-direction:column;gap:4px}
+.guide-entry small {font-size:11px;color:var(--text-muted)}
+.guide-entry b {font-size:20px}
+.spot-category {color:var(--primary-brand);font-size:11px;font-weight:800}
+@media (max-width:360px) {.place-social-links {grid-template-columns:1fr}.guide-cta{font-size:11px}}
+
+/* Profile layout: compact, even vertical rhythm across mobile widths. */
+#screen-profile .page-header {
+  padding: 14px 18px;
+}
+#screen-profile .profile-banner {
+  padding: 18px 16px 16px;
+}
+#screen-profile .profile-header-info {
+  gap: 12px;
+}
+#screen-profile .user-avatar-large {
+  width: 52px;
+  height: 52px;
+  flex: 0 0 52px;
+}
+#screen-profile #profile-name {
+  font-size: 20px;
+  line-height: 1.25;
+}
+#screen-profile #profile-email {
+  margin-top: 3px;
+}
+#screen-profile #member-badge {
+  margin-top: 6px !important;
+  padding: 4px 10px;
+}
+#screen-profile .screen-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px 16px 20px;
+}
+#screen-profile .menu-card {
+  margin-top: 0;
+  padding: 0 14px;
+}
+#screen-profile .menu-card h3 {
+  padding: 12px 0 6px;
+}
+#screen-profile .menu-list li {
+  padding: 0;
+}
+#screen-profile .menu-list li .menu-btn {
+  min-height: 44px;
+  box-sizing: border-box;
+  padding: 10px 0;
+}
+#screen-profile .menu-list li .menu-btn .m-icon {
+  line-height: 1;
+}
+#screen-profile #auth-action-btn {
+  min-height: 46px;
+  margin-top: 0;
+}
+
+/* TOURismo island discovery and polished guide surfaces */
+:root {--primary-brand:#086675;--primary-hover:#074B5B;--primary-green:#117970;--accent-yellow:#F4B84B;--bg-canvas:#F4F8F8;--radius-lg:20px;--radius-md:16px;--radius-sm:11px;--shadow-sm:0 3px 12px rgba(19,56,70,.06);--shadow-md:0 10px 26px rgba(19,56,70,.13)}
+body.dark-mode {--primary-brand:#116C83;--bg-canvas:#101C2A;--card-bg:#1C2B3B;--border-color:#33495B;--text-muted:#A2B3C1}
+.home-hero-bg {background:linear-gradient(132deg,#07526D 2%,#087B83 67%,#139889 120%);border-bottom-left-radius:26px;border-bottom-right-radius:26px}
+.home-hero-title {letter-spacing:-.6px;line-height:1.22}
+.search-widget-card {background:var(--card-bg);padding:7px;margin-top:-37px;margin-bottom:18px;border:1px solid var(--border-color)}
+.search-widget-input {padding:11px 12px}
+.search-widget-card>.btn {margin-top:7px;min-height:43px}
+#screen-home .screen-body {padding-left:16px;padding-right:16px}
+#screen-home .section-header {margin-top:8px}
+.island-filter-panel {margin:8px 0 18px}
+.island-filter-heading {display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:0 0 12px}
+.island-filter-heading h3 {font-size:17px;font-weight:800;color:var(--text-main);letter-spacing:-.3px}
+.island-filter-heading span {font-size:11px;color:var(--text-muted)}
+.island-filters {display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:2px 0 7px;overscroll-behavior-x:contain}
+.island-filters::-webkit-scrollbar {display:none}
+.island-chip {flex:0 0 auto;min-height:42px;padding:10px 14px;border-radius:14px;border:1px solid var(--border-color);background:var(--card-bg);font-size:12px;font-weight:750;color:var(--text-main);cursor:pointer;white-space:nowrap;box-shadow:var(--shadow-sm)}
+.island-chip.active {background:var(--primary-brand);color:#fff;border-color:var(--primary-brand)}
+.island-chip:active {transform:scale(.97)}
+.category-tags {margin-bottom:17px}
+.tag-chip {box-shadow:none}
+.hero-carousel {border-radius:18px;box-shadow:var(--shadow-sm);margin-bottom:22px}
+.carousel-empty {width:100%;height:100%;display:grid;place-items:center;padding:24px;text-align:center;font-size:13px;color:var(--text-muted);background:var(--card-bg)}
+.destinations-grid {gap:13px}
+.spot-card {border-radius:16px;box-shadow:var(--shadow-sm);min-height:130px;transition:transform .2s,box-shadow .2s}
+.spot-card:active {transform:scale(.995)}
+@media(hover:hover){.spot-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}}
+.spot-card>img {width:121px;height:134px;align-self:stretch;object-fit:cover}
+.spot-card-info {padding:12px 38px 12px 13px;min-width:0}
+.spot-card-info h5 {font-size:14px;line-height:1.33;color:var(--text-main)}
+.spot-location {font-size:11px;margin-bottom:4px}
+.spot-island-label {display:inline-flex;align-self:flex-start;background:rgba(10,128,126,.08);color:var(--primary-green);padding:3px 7px;border-radius:7px;font-size:10px;font-weight:800;margin:2px 0 5px}
+body.dark-mode .spot-island-label {background:rgba(133,221,200,.15);color:#A9E4D7}
+.spot-desc {line-height:1.5}
+.spot-meta {gap:10px;flex-wrap:wrap}
+.fav-btn {width:34px;height:34px;top:10px;right:9px}
+.page-header {min-height:61px;box-shadow:none;border-bottom:1px solid var(--border-color)}
+.page-header h2 {font-size:20px;letter-spacing:-.5px}
+.details-body {padding-bottom:18px}
+.details-body #detail-title {letter-spacing:-.65px}
+.details-section {margin-bottom:20px;padding-bottom:20px}
+.details-section h4 {font-size:15px;letter-spacing:-.2px;margin-bottom:10px}
+.visit-info-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.visit-info-item {min-width:0;display:flex;gap:8px;align-items:flex-start;background:var(--card-bg);border:1px solid var(--border-color);border-radius:13px;padding:12px 10px}
+.visit-info-item>div {min-width:0}
+.visit-info-item small {display:block;font-size:10px;line-height:1.3;color:var(--text-muted);margin-bottom:5px}
+.visit-info-item strong {display:block;font-size:11px;line-height:1.45;color:var(--text-main);overflow-wrap:anywhere}
+.visit-info-icon {font-size:18px;line-height:1.2;flex:0 0 auto}
+.visit-access,.visit-travel-tip {grid-column:1/-1;border-radius:13px;padding:13px 14px;background:var(--card-bg);border:1px solid var(--border-color)}
+.visit-access b,.visit-travel-tip b {font-size:12px;color:var(--text-main)}
+.visit-access p,.visit-travel-tip p {margin-top:5px;font-size:12px;color:var(--text-muted);line-height:1.55}
+.visit-travel-tip {background:rgba(17,121,112,.08);border-color:rgba(17,121,112,.18)}
+.visit-disclaimer {grid-column:1/-1;color:var(--text-muted);font-size:10px;line-height:1.55}
+.place-social-links {gap:10px}
+.place-social-link {border-radius:13px;font-size:11px;min-height:46px}
+.sticky-guide-bar {padding-bottom:max(13px,env(safe-area-inset-bottom));gap:9px}
+.guide-cta {border-radius:12px}
+.guide-entry {box-shadow:var(--shadow-sm)}
+.offline-guide-note {display:flex;align-items:flex-start;gap:9px;padding:12px 13px;border:1px solid var(--border-color);border-radius:12px;font-size:11px;line-height:1.5;color:var(--text-muted);background:var(--card-bg);margin-bottom:16px}
+.preferences-intro {padding:18px;border-radius:16px;background:linear-gradient(125deg,rgba(6,124,130,.13),rgba(244,184,75,.13));margin-bottom:14px}
+.preferences-intro>span {font-size:29px}
+.preferences-intro h3 {font-size:20px;margin:8px 0 5px;letter-spacing:-.3px}
+.preferences-intro p {font-size:12px;line-height:1.6;color:var(--text-muted)}
+.preferences-panel {padding:17px 16px;background:var(--card-bg);border:1px solid var(--border-color);border-radius:16px;box-shadow:var(--shadow-sm)}
+.preferences-panel .input-group {margin-bottom:15px}
+.preferences-panel select {min-height:44px;border-radius:11px}
+.travel-tip-toggle {display:flex;justify-content:space-between;gap:12px;align-items:center;padding:12px 0 16px;margin-bottom:5px;border-top:1px solid var(--border-color)}
+.travel-tip-toggle span {display:flex;flex-direction:column;gap:4px;min-width:0}
+.travel-tip-toggle strong {font-size:12px}
+.travel-tip-toggle small {font-size:10px;line-height:1.4;color:var(--text-muted)}
+.travel-tip-toggle input {accent-color:var(--primary-brand);width:18px;height:18px;flex:0 0 18px}
+#screen-profile .menu-card {border:1px solid var(--border-color);border-radius:15px;overflow:hidden}
+#screen-profile .menu-card:last-child {border:none;border-radius:12px}
+#screen-profile .menu-card h3 {font-size:14px}
+:is(.btn,.icon-btn,.nav-item,.island-chip,.tag-chip,.spot-card,.guide-entry,.place-social-link,.guide-cta,select):focus-visible {outline:3px solid var(--accent-yellow);outline-offset:2px}
+@media(max-width:360px){.visit-info-grid{grid-template-columns:1fr}.spot-card>img{width:107px}.spot-card-info{padding-right:38px}.island-chip{font-size:11px;padding:9px 11px}}
+
+/* Keep the brand as one continuous word; spacing applies only after the icon. */
+.header-brand-light { display: inline-flex; align-items: center; column-gap: 8px; white-space: nowrap; }
+.header-brand-wordmark { display: inline-flex; align-items: baseline; gap: 0; white-space: nowrap; letter-spacing: -0.4px; }
+.header-brand-wordmark .brand-highlight { margin: 0; padding: 0; }
+
+
+/* TOURismo search suggestions: keyboard friendly, readable in light and dark themes. */
+.search-combobox { position: relative; overflow: visible; }
+.search-widget-input.search-combobox { position: relative; }
+.search-combobox input { min-width: 0; }
+.search-combobox:focus-within { border-color: var(--primary-brand); }
+.search-suggestions[hidden] { display: none !important; }
+.search-suggestions {
+  position: absolute;
+  top: calc(100% + 7px);
+  left: 0;
+  right: 0;
+  z-index: 900;
+  max-height: min(350px, 44dvh);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 6px;
+  border-radius: 15px;
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  background: var(--card-bg);
+  box-shadow: 0 12px 32px rgba(2, 21, 31, .22);
+}
+#screen-home .search-widget-card { z-index: 50; }
+#screen-map .map-search-overlay { z-index: 550; }
+.search-box.search-combobox { overflow: visible; }
+.search-suggestion {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 51px;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text-main);
+  text-align: left;
+  cursor: pointer;
+  gap: 4px;
+}
+.search-suggestion + .search-suggestion { border-top: 1px solid var(--border-color); }
+.search-suggestion:is(:hover,.active,:focus-visible) { background: var(--bg-canvas); outline: none; }
+.search-suggestion-name { font-size: 13px; font-weight: 800; line-height: 1.35; }
+.search-suggestion-place { font-size: 11px; color: var(--text-muted); line-height: 1.4; }
+.search-no-results { padding: 17px 12px; font-size: 12px; line-height: 1.5; color: var(--text-muted); }
+.sw-icon { display: inline-flex; align-items: center; justify-content: center; color: var(--primary-brand); flex: none; }
+.sw-icon svg { display: block; }
+/* Theme-aware, consistent back arrow for all subpages. */
+.icon-btn.back-btn { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 40px; width: 40px; height: 40px; border-radius: 12px; background: var(--card-bg); color: var(--text-main); border: 1px solid var(--border-color); }
+.icon-btn.back-btn svg { display: block; width: 21px; height: 21px; stroke: currentColor; }
+.page-header .back-btn { box-shadow: none; }
+.auth-header .back-btn { box-shadow: none; }
+#screen-details .details-nav-overlay .back-btn { border-radius: 50%; background: rgba(255,255,255,.96); color: #14263b; }
+#screen-details .details-nav-overlay .back-btn svg { stroke: #14263b; }
+/* Restrained functional icon language in place of decorative emojis. */
+.feature-emoji,.eco-leaf { width: 30px; height: 30px; flex: 0 0 30px; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: var(--primary-brand); background: rgba(8,102,117,.1); border-radius: 9px; }
+.guide-entry-mark { width: 32px; height: 32px; flex: 0 0 32px; border-radius: 9px; display: inline-flex; align-items: center; justify-content: center; font-size: 11px !important; font-weight: 800; color: var(--primary-brand); background: var(--bg-canvas); }
+.guide-mark { display: inline-flex !important; align-items: center; justify-content: center; width: fit-content; min-width: 48px; height: 27px; padding: 3px 10px; font-size: 10px !important; letter-spacing: .1em; font-weight: 800; color: #086675; background: rgba(8,102,117,.11); border-radius: 9px; }
+@media(max-width:360px) {.search-suggestion{padding:10px}.search-suggestions{max-height:38dvh}}

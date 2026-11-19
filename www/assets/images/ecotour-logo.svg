@@ -1,1 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title"><title id="title">EcoTour Romblon</title><defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1f7953"/><stop offset="1" stop-color="#0d4937"/></linearGradient></defs><rect width="128" height="128" rx="30" fill="url(#bg)"/><path d="M64 15c-22 0-40 18-40 40 0 28 40 59 40 59s40-31 40-59c0-22-18-40-40-40Z" fill="#fff"/><path d="M64 30c-14 0-25 11-25 25 0 18 25 39 25 39s25-21 25-39c0-14-11-25-25-25Z" fill="#eaf4ec"/><path d="M44 65c7-17 24-27 43-26-5 18-21 31-43 26Z" fill="#1f7953"/><path d="M47 64c11-4 22-12 31-20" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/><path d="m28 101 16-8m56 8-16-8" stroke="#d8b879" stroke-width="3" stroke-linecap="round"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="logoTitle">
+  <title id="logoTitle">TOURismo Romblon – islands and compass</title>
+  <defs><linearGradient id="sea" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#16b9ad"/><stop offset="1" stop-color="#0564a5"/></linearGradient><clipPath id="pin"><path d="M64 13C38 13 20 32 20 57c0 29 44 59 44 59s44-30 44-59C108 32 90 13 64 13z"/></clipPath></defs>
+  <rect x="4" y="4" width="120" height="120" rx="28" fill="#073E59"/>
+  <path d="M64 13C38 13 20 32 20 57c0 29 44 59 44 59s44-30 44-59C108 32 90 13 64 13z" fill="url(#sea)"/>
+  <g clip-path="url(#pin)">
+    <circle cx="82" cy="41" r="13" fill="#FFC66C"/>
+    <path d="M11 76 40 43l15 17 18-24 42 48v28H11z" fill="#145F60"/>
+    <path d="m22 79 18-21 14 16 20-23 30 31v30H22z" fill="#36A27A"/>
+    <path d="M-2 85c20-13 36 12 56 1 25-13 39-8 78 4v41H-2z" fill="#E5FCFA"/>
+    <path d="M-5 93c26-12 40 11 67 0 23-9 40-5 72 5v34H-5z" fill="#1286B6"/>
+    <path d="M-5 104c22-8 35 7 57 0 20-6 43-7 79 7v23H-5z" fill="#087095"/>
+    <path d="M32 28h7m-3.5-3.5v7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  <path d="M64 13C38 13 20 32 20 57c0 29 44 59 44 59s44-30 44-59C108 32 90 13 64 13z" fill="none" stroke="#ecfffc" stroke-width="4"/>
+  <path d="M64 7v5M60 10h8" stroke="#F8D282" stroke-width="2" stroke-linecap="round"/>
+</svg>

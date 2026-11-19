@@ -6,7 +6,8 @@ const romblonSpots =
     price: 'Free Entry', rawPrice: 0, rating: 4.9, 
     image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80',
     gallery: ['https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1506953823976-52e1fdc0149a?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1473116763249-2faaef81ccda?auto=format&fit=crop&w=900&q=85'],
-    highlights: ['White Sandbar', 'Sunset Point'], lat: 12.5833, lng: 122.2625,
+    highlights: ['White Sandbar', 'Sunset Point'], lat: 12.57254, lng: 122.24461,
+    socials: { website: 'https://cms-romblon-lgu.e.gov.ph/tourism' },
     reviews: [{ user: 'Maria S.', stars: 5, comment: 'Breathtaking sandbar!' }]
   },
   {
@@ -15,7 +16,7 @@ const romblonSpots =
     price: '₱845.50 / Night', rawPrice: 845.50, rating: 4.7, 
     image: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=600&q=80',
     gallery: ['https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=900&q=85'],
-    highlights: ['Pool', 'Beachfront'], lat: 12.3833, lng: 121.9667,
+    highlights: ['Pool', 'Beachfront'], lat: 12.31002, lng: 121.92418,
     reviews: [{ user: 'Erika R.', stars: 4, comment: 'Great coastal drive and calm waters.' }]
   },
   {
@@ -24,7 +25,7 @@ const romblonSpots =
     price: '₱1,120.00 / Night', rawPrice: 1120.00, rating: 4.8, 
     image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80',
     gallery: ['https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=900&q=85'],
-    highlights: ['Bungalows', 'Bar'], lat: 12.5283, lng: 121.9861,
+    highlights: ['Bungalows', 'Bar'], lat: 12.55446, lng: 122.00452,
     reviews: [{ user: 'Leonard F.', stars: 5, comment: 'Awesome relaxing vibe!' }]
   },
   {
@@ -33,7 +34,7 @@ const romblonSpots =
     price: '₱500 Permit', rawPrice: 500.00, rating: 4.8, 
     image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80',
     gallery: ['https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1464278533981-50106e6176b1?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=900&q=85'],
-    highlights: ['Hiking', 'Wildlife'], lat: 12.4161, lng: 122.5694,
+    highlights: ['Hiking', 'Wildlife'], lat: 12.41635, lng: 122.56879,
     reviews: [{ user: 'Alex H.', stars: 5, comment: 'Challenging but unforgettable.' }]
   },
   {
@@ -42,7 +43,7 @@ const romblonSpots =
     price: '₱100 Entry', rawPrice: 100.00, rating: 4.6, 
     image: 'https://images.unsplash.com/photo-1682687220199-d0124f48f95b?auto=format&fit=crop&w=600&q=80',
     gallery: ['https://images.unsplash.com/photo-1682687220199-d0124f48f95b?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1546026423-cc4642628d2b?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=900&q=85'],
-    highlights: ['Snorkeling', 'Marine Life'], lat: 12.2570, lng: 121.9961,
+    highlights: ['Snorkeling', 'Marine Life'], lat: 12.24616, lng: 121.98259,
     reviews: [{ user: 'Samantha', stars: 5, comment: 'Lots of fish right off the dock!' }]
   },
   {
@@ -51,7 +52,7 @@ const romblonSpots =
     price: '₱50 Envi Fee', rawPrice: 50.00, rating: 4.9, 
     image: 'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=600&q=80',
     gallery: ['https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=900&q=85'],
-    highlights: ['Pristine Sand', 'Cliff Diving'], lat: 12.0667, lng: 121.9333,
+    highlights: ['Pristine Sand', 'Cliff Diving'], lat: 12.06394, lng: 121.93669,
     reviews: [{ user: 'Jake M.', stars: 5, comment: 'Just like Boracay before the crowds.' }]
   },
   {
@@ -60,7 +61,7 @@ const romblonSpots =
     price: '₱1,500.00 / Night', rawPrice: 1500.00, rating: 4.5, 
     image: 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=600&q=80',
     gallery: ['https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=900&q=85'],
-    highlights: ['Scenic View', 'White Sand'], lat: 12.2858, lng: 122.0544,
+    highlights: ['Scenic View', 'White Sand'], lat: 12.2225, lng: 122.04631,
     reviews: [{ user: 'Chris P.', stars: 4, comment: 'Great sunset view from the hill.' }]
   },
   {
@@ -69,7 +70,7 @@ const romblonSpots =
     price: '₱30 Entry', rawPrice: 30.00, rating: 4.8, 
     image: 'https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=600&q=80',
     gallery: ['https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=85'],
-    highlights: ['Crystal Clear', 'Cliff Diving'], lat: 12.3551, lng: 122.5684,
+    highlights: ['Crystal Clear', 'Cliff Diving'], lat: 12.32739, lng: 122.57911,
     reviews: [{ user: 'Daniel', stars: 5, comment: 'The water is so cold and refreshing!' }]
   },
   {
@@ -78,7 +79,8 @@ const romblonSpots =
     price: '₱50 Entry', rawPrice: 50.00, rating: 4.4, 
     image: 'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=600&q=80',
     gallery: ['https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=900&q=85'],
-    highlights: ['Family Friendly', 'Fine Sand'], lat: 12.5700, lng: 122.2541,
+    highlights: ['Family Friendly', 'Fine Sand'], lat: 12.5688, lng: 122.24976,
+    socials: { website: 'https://cms-romblon-lgu.e.gov.ph/tourism' },
     reviews: [{ user: 'Anna L.', stars: 4, comment: 'Nice beach very near the town proper.' }]
   },
   {
@@ -87,13 +89,13 @@ const romblonSpots =
     price: '₱20 Entry', rawPrice: 20.00, rating: 4.5, 
     image: 'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=600&q=80',
     gallery: ['https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=85', 'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=900&q=85'],
-    highlights: ['Waterfalls', 'Nature Trail'], lat: 12.5333, lng: 122.0167,
+    highlights: ['Waterfalls', 'Nature Trail'], lat: 12.55957, lng: 122.02916,
     reviews: [{ user: 'Leo', stars: 5, comment: 'Very peaceful and secluded.' }]
   },
   {
     id: 'tinagongdagat', name: 'Tinagong Dagat', location: 'Calatrava, Tablas', category: 'Beaches',
     description: 'A stunning "hidden sea" consisting of saltwater lakes surrounded by dramatic limestone karst cliffs, accessible by boat.',
-    price: '₱500 Boat Tour', rawPrice: 500.00, rating: 4.8, 
+    price: '₱25 entrance (LGU guide; confirm locally)', rawPrice: 25.00, rating: 4.8, 
     // Actual Tinagong Dagat, Calatrava photos (remotely hosted by their publishers).
     // Sources: Municipality of Calatrava tourism portal, Journey Era / Jackson Groves,
     // and Travel Photos PH. Obtain permission/appropriate licenses for public redistribution.
@@ -105,41 +107,100 @@ const romblonSpots =
       'https://www.journeyera.com/wp-content/uploads/2018/04/calatrava-island-hopping-tablas-0038.jpg',
       'https://travelphotosph.wordpress.com/wp-content/uploads/2016/09/romblon-tablas-island-2.jpeg?w=768'
     ],
-    highlights: ['Hidden Lake', 'Limestone Cliffs'], lat: 12.6000, lng: 122.0667,
+    highlights: ['Hidden Lake', 'Limestone Cliffs'], lat: 12.6734, lng: 122.112,
+    socials: { facebook: 'https://www.facebook.com/calatravatourismcouncil', website: 'https://calatravaromblon.gov.ph/destinations.html' },
     reviews: [{ user: 'Sarah J.', stars: 5, comment: 'Reminds me of Palawan or El Nido!' }]
   }
 ];
 
 const STORE_KEY = 'ecotour-v2';
-const MEMBER_DISCOUNT = 0.1;
-const TAB_SCREENS = { home: 'screen-home', saved: 'screen-saved', trips: 'screen-trips', map: 'screen-map', profile: 'screen-profile' };
-const NAV_HIDDEN = ['screen-splash', 'screen-welcome', 'screen-login', 'screen-signup', 'screen-details', 'screen-booking', 'screen-payment', 'screen-confirmation'];
+const ISLAND_OPTIONS = ['All','Tablas','Romblon','Sibuyan','Carabao'];
+const INTEREST_OPTIONS = ['balanced','beach','adventure','nature','culture'];
+const KNOWN_ISLANDS = {
+  bonbon:'Romblon',binucot:'Tablas',footprints:'Tablas',g2:'Sibuyan',
+  looc:'Tablas',carabao:'Carabao',aglicay:'Tablas',catingas:'Sibuyan',
+  tiamban:'Romblon',mablaran:'Tablas',tinagongdagat:'Tablas'
+};
+const VISIT_TIPS = {
+  bonbon:'Check the tide before walking onto the sandbar. Arrange transport from Romblon town.',
+  binucot:'Travel to Ferrol on Tablas and ask the resort for the current access route.',
+  footprints:'Head toward San Andres, Tablas; confirm the property entrance with its operator.',
+  g2:'Ask local tourism staff about permits, guide requirements, and trail conditions.',
+  looc:'Ask Looc tourism staff about access to the sanctuary and boat arrangements.',
+  carabao:'Confirm boat transfers and weather conditions before traveling to Carabao Island.',
+  aglicay:'Travel to Alcantara on Tablas and check current resort access rules.',
+  catingas:'Check local river and weather conditions before swimming.',
+  tiamban:'Arrange local transport from Romblon town and check site rules.',
+  mablaran:'Check waterfall trail conditions with San Andres tourism staff.',
+  tinagongdagat:'Contact the Calatrava Tourism Council for the current boat and access arrangements.'
+};
+function islandForSpot(spot) {
+  if (!spot) return 'Other';
+  if (ISLAND_OPTIONS.includes(spot.island) && spot.island !== 'All') return spot.island;
+  if (Object.prototype.hasOwnProperty.call(KNOWN_ISLANDS, spot.id)) return KNOWN_ISLANDS[spot.id];
+  const loc = String(spot.location || '').toLowerCase();
+  if (/sibuyan/.test(loc)) return 'Sibuyan';
+  if (/tablas|ferrol|looc|alcantara|calatrava|odiongan/.test(loc)) return 'Tablas';
+  if (/carabao island|hambil/.test(loc)) return 'Carabao';
+  if (/romblon town|romblon island/.test(loc)) return 'Romblon';
+  return 'Other';
+}
+function offlineSnapshot(spot) {
+  return {
+    id:String(spot.id), name:String(spot.name||''), location:String(spot.location||''),
+    category:String(spot.category||'Beaches'), description:String(spot.description||''),
+    price:String(spot.price||'Confirm locally'), rawPrice:Number(spot.rawPrice)||0,
+    rating:Number(spot.rating)||0, island:islandForSpot(spot), image:String(spot.image||''),
+    gallery:Array.isArray(spot.gallery)?spot.gallery.slice(0,5):[],
+    highlights:Array.isArray(spot.highlights)?spot.highlights.slice(0,12):[],
+    lat:spot.lat==null?null:Number(spot.lat), lng:spot.lng==null?null:Number(spot.lng),
+    socials:spot.socials&&typeof spot.socials==='object'?{...spot.socials}:{},
+    locationVerified:spot.locationVerified===true,
+    visitorInfo:spot.visitorInfo&&typeof spot.visitorInfo==='object'?{...spot.visitorInfo}:{},
+    reviews:[]
+  };
+}
+function cacheSavedGuides() {
+  const stored={...(state.offlineGuides||{})};
+  let changed=false;
+  state.favorites.forEach(id=>{
+    const live=romblonSpots.find(s=>s.id===id);
+    if(!live)return;
+    const snap=offlineSnapshot(live);
+    if(JSON.stringify(stored[id])!==JSON.stringify(snap)){stored[id]=snap;changed=true;}
+  });
+  Object.keys(stored).forEach(id=>{if(!state.favorites.includes(id)){delete stored[id];changed=true;}});
+  if(changed) state.offlineGuides=stored;
+  return changed;
+}
+function allSavedSpots(){
+  return state.favorites.map(id=>romblonSpots.find(s=>s.id===id)||(state.offlineGuides||{})[id]).filter(Boolean);
+}
+
+const TAB_SCREENS = { home: 'screen-home', saved: 'screen-saved', guide: 'screen-guide', map: 'screen-map', profile: 'screen-profile' };
+const NAV_HIDDEN = ['screen-welcome', 'screen-login', 'screen-signup', 'screen-details'];
 const FALLBACK_IMG = 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400"><rect width="100%" height="100%" fill="#CBD5E1"/><text x="50%" y="50%" font-family="sans-serif" font-size="28" fill="#64748B" text-anchor="middle" dominant-baseline="middle">Image unavailable</text></svg>');
 
 const defaultState = () => ({
   user: null,
   guest: false,
   favorites: [],
-  trips: [],
   localReviews: {},
-  paymentMethods: [],
-  travelers: [],
-  availability: {},
   savedItineraries: [],
-  preferences: { bookingUpdates: true, promotions: false, emailUpdates: true },
-  theme: 'light',
-  trip: { checkIn: '', checkOut: '', guests: 2, rooms: 1 },
-  guestDetails: { name: '', email: '', phone: '' }
+  offlineGuides: {},
+  preferences: { island:'All', interest:'balanced', travelTips:true },
+  theme: 'light'
 });
 
 let state = loadState();
 let activeCategory = 'All';
+let activeIsland = state.preferences.island;
 let searchQuery = '';
 let sortMode = 'featured';
 let currentSpot = null;
 let currentGalleryIndex = 0;
 let navStack = [];
-let currentScreen = 'screen-splash';
+let currentScreen = 'screen-welcome';
 let returnTo = null;
 let leafletMap = null;
 let mapMarkersGroup = [];
@@ -147,8 +208,6 @@ let slideIndex = 0;
 let carouselTimer = null;
 let carouselBound = false;
 let reviewRating = 5;
-let tripDetailId = null;
-let tripTab = 'upcoming';
 let remoteLoaded = false;
 let searchTimer = null;
 let currentGeneratedPlan = null;
@@ -175,26 +234,33 @@ const ecoProfiles = {
   tinagongdagat:{waste:3,nature:4,community:3,resources:3}
 };
 
+function sanitizeState(raw) {
+  const base = defaultState();
+  const src = raw && typeof raw === 'object' ? raw : {};
+  return {
+    ...base,
+    user: src.user && typeof src.user === 'object' ? src.user : null,
+    guest: Boolean(src.guest),
+    favorites: Array.isArray(src.favorites) ? src.favorites : [],
+    localReviews: src.localReviews && typeof src.localReviews === 'object' ? src.localReviews : {},
+    savedItineraries: Array.isArray(src.savedItineraries) ? src.savedItineraries : [],
+    offlineGuides: src.offlineGuides && typeof src.offlineGuides === 'object' && !Array.isArray(src.offlineGuides) ? src.offlineGuides : {},
+    preferences: {
+      island: ISLAND_OPTIONS.includes(src.preferences?.island) ? src.preferences.island : 'All',
+      interest: INTEREST_OPTIONS.includes(src.preferences?.interest) ? src.preferences.interest : 'balanced',
+      travelTips: src.preferences?.travelTips !== false
+    },
+    theme: src.theme === 'dark' ? 'dark' : 'light'
+  };
+}
+
 function loadState() {
-  try {
-    const raw = localStorage.getItem(STORE_KEY);
-    if (!raw) return defaultState();
-    const parsed = JSON.parse(raw);
-    return { ...defaultState(), ...parsed,
-      trip: { ...defaultState().trip, ...(parsed.trip || {}) },
-      guestDetails: { ...defaultState().guestDetails, ...(parsed.guestDetails || {}) },
-      paymentMethods: Array.isArray(parsed.paymentMethods) ? parsed.paymentMethods : [],
-      travelers: Array.isArray(parsed.travelers) ? parsed.travelers : [],
-      availability: parsed.availability && typeof parsed.availability === 'object' ? parsed.availability : {},
-      savedItineraries: Array.isArray(parsed.savedItineraries) ? parsed.savedItineraries : [],
-      preferences: { ...defaultState().preferences, ...(parsed.preferences || {}) }
-    };
-  } catch (e) {
-    return defaultState();
-  }
+  try { return sanitizeState(JSON.parse(localStorage.getItem(STORE_KEY) || '{}')); }
+  catch (e) { return defaultState(); }
 }
 
 function saveState() {
+  state = sanitizeState(state);
   try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) {}
   const uid = state.user && state.user.uid;
   if (uid && window.firebaseAuthApi) {
@@ -250,12 +316,6 @@ function today() {
   return toISO(new Date());
 }
 
-function ensureTripDefaults() {
-  const t = state.trip;
-  if (!t.checkIn || t.checkIn < today()) t.checkIn = addDays(today(), 1);
-  if (!t.checkOut || t.checkOut <= t.checkIn) t.checkOut = addDays(t.checkIn, 1);
-}
-
 function toast(message, type = '') {
   const wrap = $('toast-wrap');
   const el = document.createElement('div');
@@ -307,35 +367,6 @@ function spotReviews(spot) {
   });
 }
 
-function isResort(spot) {
-  return spot.category === 'Resorts';
-}
-
-function priceUnit(spot) {
-  if (spot.rawPrice === 0) return 'free';
-  return isResort(spot) ? 'night' : 'person';
-}
-
-function quote(spot) {
-  const t = state.trip;
-  const unit = priceUnit(spot);
-  const nights = isResort(spot) ? Math.max(1, diffDays(t.checkIn, t.checkOut)) : 1;
-  const rooms = isResort(spot) ? t.rooms : 1;
-  let subtotal = 0;
-  let line = '';
-  if (unit === 'night') {
-    subtotal = spot.rawPrice * nights * rooms;
-    line = `${peso(spot.rawPrice)} × ${nights} night${nights > 1 ? 's' : ''} × ${rooms} room${rooms > 1 ? 's' : ''}`;
-  } else if (unit === 'person') {
-    subtotal = spot.rawPrice * t.guests;
-    line = `${peso(spot.rawPrice)} × ${t.guests} guest${t.guests > 1 ? 's' : ''}`;
-  } else {
-    line = 'No entry fee';
-  }
-  const discount = isSignedIn() && subtotal > 0 ? Math.round(subtotal * MEMBER_DISCOUNT * 100) / 100 : 0;
-  return { unit, nights, rooms, subtotal, discount, total: subtotal - discount, line };
-}
-
 function mergeRemote(data) {
   if (!data || typeof data !== 'object') return;
   Object.keys(data).forEach((key) => {
@@ -344,6 +375,8 @@ function mergeRemote(data) {
     const remoteReviews = s.reviews ? Object.values(s.reviews).filter((r) => r && r.comment) : [];
     const existing = romblonSpots.find((x) => x.id === key);
     if (existing) {
+      if (s.socials && typeof s.socials === 'object') existing.socials = { ...(existing.socials || {}), ...s.socials };
+      if (s.visitorInfo && typeof s.visitorInfo === 'object') existing.visitorInfo = { ...(existing.visitorInfo || {}), ...s.visitorInfo };
       const known = new Set((existing.reviews || []).map((r) => `${r.user}|${r.stars}|${r.comment}`));
       remoteReviews.forEach((r) => {
         const k = `${r.user}|${r.stars}|${r.comment}`;
@@ -366,7 +399,11 @@ function mergeRemote(data) {
       highlights: Array.isArray(s.highlights) ? s.highlights : [],
       lat: Number(s.lat) || null,
       lng: Number(s.lng) || null,
-      reviews: remoteReviews
+      reviews: remoteReviews,
+      socials: s.socials && typeof s.socials === 'object' ? s.socials : {},
+      island: ISLAND_OPTIONS.includes(s.island) && s.island !== 'All' ? s.island : '',
+      visitorInfo: s.visitorInfo && typeof s.visitorInfo === 'object' ? s.visitorInfo : {},
+      locationVerified: s.locationVerified === true
     });
   });
 }
@@ -375,9 +412,10 @@ window.onFirebaseDataLoaded = function (data) {
   mergeRemote(data);
   remoteLoaded = true;
   const badge = $('db-status-badge');
-  badge.textContent = 'Live Deals';
+  badge.textContent = 'Places Loaded';
   badge.classList.add('online');
   refreshAll();
+  if (searchSuggestionState.source) renderSearchSuggestions(searchSuggestionState.source);
   if (currentScreen === 'screen-details' && currentSpot) renderReviews();
 };
 
@@ -394,6 +432,7 @@ window.onFirebaseAuthChanged = async function (user) {
     if (state.user && !state.user.uid) {
       state.user = null;
       state.guest = false;
+      activeIsland = state.preferences.island;
       saveState();
       renderUser();
       refreshAll();
@@ -403,10 +442,10 @@ window.onFirebaseAuthChanged = async function (user) {
   try {
     const cloudState = await window.firebaseAuthApi.loadUserState(user.uid);
     if (!state.user || !state.user.uid || state.user.uid === user.uid) {
-      state = { ...defaultState(), ...(cloudState || state), user: {
+      state = sanitizeState({ ...(cloudState || state), user: {
         name: user.displayName || cloudState?.user?.name || user.email.split('@')[0],
         email: user.email, uid: user.uid
-      }};
+      }});
       state.guest = false;
       saveState();
       renderUser();
@@ -441,7 +480,7 @@ function renderUser() {
   $('profile-name').textContent = signedIn ? state.user.name : 'Traveler';
   $('profile-email').textContent = signedIn ? state.user.email : 'Not signed in';
   $('member-badge').style.display = signedIn ? 'inline-block' : 'none';
-  $('member-badge').textContent = `Member · ${Math.round(MEMBER_DISCOUNT * 100)}% off`;
+  $('member-badge').textContent = 'Romblon Explorer';
   $('profile-edit-btn').style.display = signedIn ? '' : 'none';
   const btn = $('auth-action-btn');
   btn.textContent = signedIn ? 'Sign Out' : 'Sign In or Create Account';
@@ -499,8 +538,6 @@ async function handleLogin(e) {
 function completeSignIn(user) {
   state.user = user;
   state.guest = false;
-  if (!state.guestDetails.name) state.guestDetails.name = user.name;
-  if (!state.guestDetails.email) state.guestDetails.email = user.email;
   saveState();
   renderUser();
   toast(`Welcome, ${firstName()}!`, 'success');
@@ -510,8 +547,7 @@ function completeSignIn(user) {
     navStack = [];
     refreshAll();
     navigateTo(target.screen, { push: false });
-    if (target.screen === 'screen-details' || target.screen === 'screen-booking') navStack = ['screen-home'];
-    if (target.screen === 'screen-booking') prepareBooking();
+    if (target.screen === 'screen-details') navStack = ['screen-home'];
     return;
   }
   switchTab('home');
@@ -537,12 +573,11 @@ function signOut() {
 }
 
 function clearData() {
-  if (!confirm('This removes saved places, bookings and your local account on this device. Continue?')) return;
+  if (!confirm('This removes your saved places, itineraries, and local account details on this device. Continue?')) return;
   try { localStorage.removeItem(STORE_KEY); } catch (e) {}
   state = defaultState();
   applyTheme();
   renderUser();
-  ensureTripDefaults();
   refreshAll();
   navStack = [];
   navigateTo('screen-welcome', { push: false });
@@ -551,98 +586,25 @@ function clearData() {
 
 
 function openAccountPage(screenId) {
-  if (screenId === 'screen-payment-methods') renderPaymentMethods();
-  if (screenId === 'screen-notifications') renderPreferences();
+  if (screenId === 'screen-travel-preferences') renderPreferences();
   navigateTo(screenId);
 }
-
-function cardBrand(number) {
-  if (/^4/.test(number)) return 'Visa';
-  if (/^(5[1-5]|2[2-7])/.test(number)) return 'Mastercard';
-  if (/^3[47]/.test(number)) return 'American Express';
-  return 'Bank card';
-}
-
-function renderPaymentMethods() {
-  const host = $('saved-payment-methods');
-  const methods = state.paymentMethods || [];
-  if (!methods.length) {
-    host.innerHTML = '<div class="empty-state"><span class="emoji">💳</span>No saved payment methods yet.<br>Add a card to make future demo checkouts quicker.</div>';
-    return;
-  }
-  host.innerHTML = methods.map((m) => `
-    <div class="saved-method-card">
-      <div class="saved-method-icon">💳</div>
-      <div class="saved-method-copy">
-        <strong>${esc(m.brand)} •••• ${esc(m.last4)}</strong>
-        <span>Expires ${esc(m.expiry)}${m.default ? ' · Default' : ''}</span>
-      </div>
-      <button class="link-btn danger-link" data-action="remove-payment-method" data-id="${esc(m.id)}">Remove</button>
-    </div>`).join('');
-}
-
-function openAddCardModal() {
-  if (!isSignedIn()) {
-    toast('Sign in to manage payment methods.');
-    navigateTo('screen-welcome');
-    return;
-  }
-  $('saved-card-name').value = state.user.name || '';
-  $('saved-card-number').value = '';
-  $('saved-card-expiry').value = '';
-  $('saved-card-error').textContent = '';
-  openModal('add-card-modal');
-}
-
-function addSavedCard() {
-  const name = $('saved-card-name').value.trim();
-  const number = $('saved-card-number').value.replace(/\D/g, '');
-  const expiry = $('saved-card-expiry').value.trim();
-  const match = /^(\d{2})\/(\d{2})$/.exec(expiry);
-  let error = '';
-  if (name.length < 2) error = 'Enter the cardholder name.';
-  else if (!/^\d{13,19}$/.test(number) || !luhn(number)) error = 'Enter a valid card number.';
-  else if (!match || Number(match[1]) < 1 || Number(match[1]) > 12) error = 'Use MM/YY for expiry.';
-  else {
-    const expiryDate = new Date(2000 + Number(match[2]), Number(match[1]), 0, 23, 59, 59);
-    if (expiryDate < new Date()) error = 'This card has expired.';
-  }
-  if (error) { $('saved-card-error').textContent = error; return; }
-  const method = {
-    id: 'pm_' + Date.now().toString(36),
-    brand: cardBrand(number),
-    last4: number.slice(-4),
-    expiry,
-    holder: name,
-    default: !(state.paymentMethods || []).length
-  };
-  state.paymentMethods = [...(state.paymentMethods || []), method];
-  saveState();
-  closeModal('add-card-modal');
-  renderPaymentMethods();
-  toast('Card added. Only its brand, last four digits and expiry are saved.', 'success');
-}
-
-function removePaymentMethod(id) {
-  state.paymentMethods = (state.paymentMethods || []).filter((m) => m.id !== id);
-  if (state.paymentMethods.length && !state.paymentMethods.some((m) => m.default)) state.paymentMethods[0].default = true;
-  saveState();
-  renderPaymentMethods();
-  toast('Payment method removed.');
-}
-
 function renderPreferences() {
-  const p = state.preferences || {};
-  ['bookingUpdates', 'promotions', 'emailUpdates'].forEach((key) => {
-    const el = $('pref-' + key);
-    if (el) el.checked = Boolean(p[key]);
-  });
+  $('pref-island').value=state.preferences.island;
+  $('pref-interest').value=state.preferences.interest;
+  $('pref-travelTips').checked=state.preferences.travelTips!==false;
 }
-
-function savePreference(key, value) {
-  state.preferences = { ...defaultState().preferences, ...(state.preferences || {}), [key]: value };
+function saveTravelPreferences() {
+  const island=$('pref-island').value,interest=$('pref-interest').value;
+  state.preferences={
+    island:ISLAND_OPTIONS.includes(island)?island:'All',
+    interest:INTEREST_OPTIONS.includes(interest)?interest:'balanced',
+    travelTips:$('pref-travelTips').checked
+  };
   saveState();
-  toast('Preference updated.', 'success');
+  setIsland(state.preferences.island);
+  toast('Travel preferences saved!', 'success');
+  switchTab('profile');
 }
 
 function openEditProfile() {
@@ -661,10 +623,8 @@ async function saveProfile() {
   if (!validEmail(email)) { setError('ep-email', 'Enter a valid email address.'); return; }
   if (!window.firebaseAuthApi || !state.user?.uid) { toast('Sign in again to update your profile.', 'error'); return; }
   try {
-    const previousEmail = state.user.email;
     await window.firebaseAuthApi.updateUserProfile(name, email);
     state.user = { ...state.user, name, email };
-    if (!state.guestDetails.email || state.guestDetails.email === previousEmail) state.guestDetails.email = email;
     saveState();
     renderUser();
     closeModal('edit-profile-modal');
@@ -698,11 +658,109 @@ function matchesSearch(spot) {
 }
 
 function filteredSpots() {
-  const list = romblonSpots.filter((s) => (activeCategory === 'All' || s.category === activeCategory) && matchesSearch(s));
+  const list = romblonSpots.filter((s) => (activeIsland === 'All' || islandForSpot(s) === activeIsland) && (activeCategory === 'All' || s.category === activeCategory) && matchesSearch(s));
   if (sortMode === 'rating') list.sort((a, b) => ratingFor(b) - ratingFor(a));
-  else if (sortMode === 'price-asc') list.sort((a, b) => a.rawPrice - b.rawPrice);
-  else if (sortMode === 'price-desc') list.sort((a, b) => b.rawPrice - a.rawPrice);
   return list;
+}
+
+
+const SEARCH_FIELDS = {
+  home: { input:'sw-location', popup:'home-search-suggestions' },
+  map: { input:'map-search', popup:'map-search-suggestions' },
+  saved: { input:'saved-search', popup:'saved-search-suggestions' }
+};
+let searchSuggestionState = { source:null, items:[], active:-1 };
+
+function normalizeDestinationQuery(value) {
+  return String(value || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim().replace(/\s+/g, ' ');
+}
+
+function matchingDestinations(value, source='home') {
+  const query = normalizeDestinationQuery(value);
+  if (!query) return [];
+  const words = query.split(' ').filter(Boolean);
+  const candidates = source === 'saved' ? allSavedSpots() : romblonSpots;
+  return candidates.map(spot => {
+    const name = normalizeDestinationQuery(spot.name);
+    const place = normalizeDestinationQuery(spot.location);
+    const island = normalizeDestinationQuery(islandForSpot(spot));
+    const other = normalizeDestinationQuery([spot.category, ...(spot.highlights || [])].join(' '));
+    const searchable = [name,place,island,other].join(' ');
+    if (!words.every(word => searchable.includes(word))) return null;
+    let rank = 5;
+    if (name === query) rank = 0;
+    else if (name.startsWith(query)) rank = 1;
+    else if (name.includes(query)) rank = 2;
+    else if (place.startsWith(query)) rank = 3;
+    else if (place.includes(query)) rank = 4;
+    return {spot,rank};
+  }).filter(Boolean).sort((a,b) => a.rank - b.rank || a.spot.name.localeCompare(b.spot.name)).slice(0,6).map(x => x.spot);
+}
+
+function closeSearchSuggestions() {
+  Object.values(SEARCH_FIELDS).forEach(field => {
+    const input = $(field.input), popup = $(field.popup);
+    if (popup) { popup.hidden = true; popup.innerHTML = ''; }
+    if (input) { input.setAttribute('aria-expanded','false'); input.removeAttribute('aria-activedescendant'); }
+  });
+  searchSuggestionState = {source:null,items:[],active:-1};
+}
+
+function renderSearchSuggestions(source) {
+  const field = SEARCH_FIELDS[source];
+  if (!field) return;
+  const input = $(field.input);
+  const value = input.value.trim();
+  if (!value) { closeSearchSuggestions(); return; }
+  const matches = matchingDestinations(value,source);
+  closeSearchSuggestions();
+  const popup = $(field.popup);
+  searchSuggestionState = {source,items:matches,active:-1};
+  popup.innerHTML = matches.length
+    ? matches.map((spot,i) => `<button type="button" role="option" aria-selected="false" tabindex="-1" class="search-suggestion" id="${field.popup}-option-${i}" data-action="search-pick" data-search-source="${source}" data-id="${esc(spot.id)}"><span class="search-suggestion-name">${esc(spot.name)}</span><span class="search-suggestion-place">${esc(spot.location)} · ${esc(islandForSpot(spot))}</span></button>`).join('')
+    : '<div class="search-no-results">No matching places. Try another name or island.</div>';
+  popup.hidden = false;
+  input.setAttribute('aria-expanded','true');
+}
+
+function chooseSearchSuggestion(source,id) {
+  const spot = (source === 'saved' ? allSavedSpots() : romblonSpots).find(item => String(item.id) === String(id));
+  if (!spot) return;
+  closeSearchSuggestions();
+  const input = $(SEARCH_FIELDS[source].input);
+  if (input && input.blur) input.blur();
+  openSpot(spot.id);
+}
+
+function handleSearchSuggestionKeys(event,source) {
+  const state = searchSuggestionState;
+  if (event.key === 'Escape') {
+    if (state.source === source) { event.preventDefault(); event.stopPropagation(); closeSearchSuggestions(); }
+    return;
+  }
+  if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp' && event.key !== 'Enter') return;
+  if (state.source !== source || !state.items.length) {
+    if (event.key === 'ArrowDown' && $(SEARCH_FIELDS[source].input).value.trim()) {
+      event.preventDefault(); renderSearchSuggestions(source);
+    }
+    return;
+  }
+  event.preventDefault();
+  if (event.key === 'Enter') {
+    chooseSearchSuggestion(source,state.items[Math.max(0,state.active)].id);
+    return;
+  }
+  const next = event.key === 'ArrowDown' ? (state.active + 1) % state.items.length
+    : (state.active - 1 + state.items.length) % state.items.length;
+  state.active = next;
+  const field = SEARCH_FIELDS[source];
+  const input = $(field.input), popup = $(field.popup);
+  input.setAttribute('aria-activedescendant',field.popup+'-option-'+next);
+  popup.querySelectorAll('[role="option"]').forEach((node,i) => {
+    node.classList.toggle('active', i===next);
+    node.setAttribute('aria-selected',String(i===next));
+    if (i===next) node.scrollIntoView?.({block:'nearest'});
+  });
 }
 
 function handleSearch(value, source) {
@@ -712,6 +770,7 @@ function handleSearch(value, source) {
   clearTimeout(searchTimer);
   searchTimer = setTimeout(() => {
     renderDestinations();
+    renderCarousel();
     updateMarkers();
   }, 120);
 }
@@ -720,7 +779,19 @@ function setCategory(category) {
   activeCategory = category;
   document.querySelectorAll('#category-tags .tag-chip').forEach((c) => c.classList.toggle('active', c.dataset.category === category));
   renderDestinations();
-  updateMarkers();
+  renderCarousel();
+  updateMarkers(true);
+}
+function setIsland(island) {
+  activeIsland=ISLAND_OPTIONS.includes(island)?island:'All';
+  document.querySelectorAll('#island-filters .island-chip').forEach(btn=>{
+    const active=btn.dataset.island===activeIsland;
+    btn.classList.toggle('active',active);
+    btn.setAttribute('aria-pressed',String(active));
+  });
+  renderDestinations();
+  renderCarousel();
+  updateMarkers(true);
 }
 
 function cardHtml(s, withDesc) {
@@ -730,9 +801,10 @@ function cardHtml(s, withDesc) {
       <img src="${esc(safeUrl(s.image))}" alt="${esc(s.name)}" loading="lazy" data-fallback />
       <div class="spot-card-info">
         <h5>${esc(s.name)}</h5>
-        <p class="spot-location">📍 ${esc(s.location)}</p>
+        <p class="spot-location">${esc(s.location)}</p>
+        <span class="spot-island-label">${islandForSpot(s) === 'Other' ? 'Romblon province' : esc(islandForSpot(s))}</span>
         ${withDesc ? `<p class="spot-desc">${esc(s.description)}</p>` : ''}
-        <div class="spot-meta"><span class="spot-rating">★ ${ratingFor(s)}</span><span class="spot-price">${esc(s.price)}</span></div>
+        <div class="spot-meta"><span class="spot-rating">★ ${ratingFor(s)}</span><span class="spot-category">${esc(s.category)}</span></div>
       </div>
       <button class="fav-btn ${fav ? 'active' : ''}" aria-label="${fav ? 'Remove from saved' : 'Save'}" aria-pressed="${fav}" data-action="toggle-favorite" data-id="${esc(s.id)}">
         <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
@@ -754,7 +826,7 @@ function renderDestinations() {
 function renderSaved() {
   const container = $('saved-items-list');
   const filter = $('saved-search').value.trim().toLowerCase();
-  const saved = romblonSpots.filter((s) => state.favorites.includes(s.id) && (s.name + ' ' + s.location).toLowerCase().includes(filter));
+  const saved = allSavedSpots().filter(s => (s.name + ' ' + s.location).toLowerCase().includes(filter));
   if (!saved.length) {
     container.innerHTML = `<div class="empty-state"><span class="emoji">💙</span>${state.favorites.length ? 'No saved places match your filter.' : 'Nothing saved yet. Tap the heart on any place to keep it here.'}<br><button class="btn btn-primary" data-tab="home">Browse places</button></div>`;
     return;
@@ -765,6 +837,7 @@ function renderSaved() {
 function toggleFavorite(id) {
   const i = state.favorites.indexOf(id);
   if (i >= 0) state.favorites.splice(i, 1); else state.favorites.push(id);
+  cacheSavedGuides();
   saveState();
   renderDestinations();
   renderSaved();
@@ -778,161 +851,102 @@ function updateFavoriteButton() {
   b.setAttribute('aria-pressed', String(on));
 }
 
-function tripStatus(t) {
-  if (t.status === 'Cancelled') return 'Cancelled';
-  if (t.status === 'Refund requested') return 'Refund requested';
-  return t.checkOut < today() ? 'Past' : 'Upcoming';
-}
-
-function renderTrips() {
-  const container = $('trips-list');
-  document.querySelectorAll('.trip-tab').forEach((t) => {
-    const on = t.dataset.tripTab === tripTab;
-    t.classList.toggle('active', on);
-    t.style.borderBottomColor = on ? 'var(--primary-brand)' : 'transparent';
-    t.setAttribute('aria-selected', String(on));
-  });
-  const trips = state.trips.filter((t) => (tripTab === 'upcoming' ? tripStatus(t) === 'Upcoming' : tripStatus(t) !== 'Upcoming'));
-  if (!trips.length) {
-    container.innerHTML = `<div class="empty-state"><span class="emoji">🧳</span>No ${tripTab === 'upcoming' ? 'upcoming' : 'past or cancelled'} trips.${tripTab === 'upcoming' ? '<br><button class="btn btn-primary" data-tab="home">Find a place to stay</button>' : ''}</div>`;
-    return;
+// Navigation policy for mapped places, reviewed against named OSM / Mapcarta features.
+// GPS points represent attractions; Looc Sanctuary's floating platform position is approximate
+// pending local confirmation. Its road route ends at the verified Port of Looc.
+// Never send a road-navigation engine directly to floating platforms, summits, offshore lakes,
+// or an island interior. Routes stop at a verified road/port access point whenever possible.
+const ROUTE_ACCESS = Object.freeze({
+  bonbon: {
+    kind:'road', lat:12.57239, lng:122.24816,
+    label:'Directions to beach entrance',
+    note:'Pin shows Bonbon Beach, not the offshore sandbar. Directions end at a mapped beach entrance; continue on foot and check tides.'
+  },
+  binucot: { kind:'road', label:'Directions to resort', note:'Pin matches the mapped Binucot Beach Resort location in Ferrol, Tablas.' },
+  footprints: { kind:'road', label:'Directions to resort', note:'Pin matches the mapped Footprints Beach Resort in Agpudlos, San Andres.' },
+  g2: {
+    kind:'lookup', query:'DENR Guiting Guiting Natural Park Office Tampayan Magdiwang Sibuyan Romblon',
+    label:'Find park registration office',
+    note:'This pin shows the mountain summit, NOT a road destination. Arrange permits and a local guide with DENR before hiking.'
+  },
+  looc: {
+    kind:'road', lat:12.25495, lng:121.99104,
+    label:'Directions to Looc Port',
+    note:'Pin approximately marks the floating fish sanctuary in Looc Bay. Driving directions go to Looc Port, then take an arranged boat; do not navigate by road to the pin.'
+  },
+  carabao: {
+    kind:'lookup', query:'San Jose Port Carabao Island Hambil Romblon',
+    label:'Find island arrival port',
+    note:'This pin marks Carabao Island generally, not a road address. Confirm the boat landing and schedules before traveling.'
+  },
+  aglicay: { kind:'road', label:'Directions to resort', note:'Pin matches the mapped Aglicay Beach Resort in Alcantara, Tablas.' },
+  catingas: {
+    kind:'road', label:'Directions to river resort',
+    note:'Pin marks the mapped Cantingas River Resort visitor area near San Fernando; verify river access and conditions locally.'
+  },
+  tiamban: { kind:'road', label:'Directions to Tiamban Beach', note:'Pin matches the mapped Tiamban Beach area. Confirm the actual public entrance when you arrive.' },
+  mablaran: {
+    kind:'lookup', query:'Mablaran Falls Linawan San Andres Romblon',
+    label:'Find falls access route',
+    note:'Pin marks the mapped Mablaran Falls park. The last road/trail entrance needs local confirmation; do not drive to the falls coordinates.'
+  },
+  tinagongdagat: {
+    kind:'road', lat:12.62173, lng:122.06818,
+    label:'Directions to Calatrava Port',
+    note:'Pin shows the actual Tinagong Dagat lake. Directions go to Calatrava Port; arrange the onward pump-boat ride with local tourism staff.'
   }
-  container.innerHTML = trips.map((t) => {
-    const st = tripStatus(t);
-    const cls = st === 'Upcoming' ? 'status-upcoming' : st === 'Cancelled' ? 'status-cancelled' : 'status-past';
-    const dates = t.nights > 0 && t.isStay ? `${fmtShort(t.checkIn)} - ${fmtDate(t.checkOut)}` : fmtDate(t.checkIn);
-    return `
-      <div class="trip-card">
-        <div class="trip-header">
-          <span style="font-size:12px; font-weight:700;">Ref: #${esc(t.id)}</span>
-          <span class="trip-status ${cls}">${st}</span>
-        </div>
-        <div class="trip-body">
-          <h3>${esc(t.prop)}</h3>
-          <p>📅 ${dates}</p>
-          <p>👥 ${t.guests} guest${t.guests > 1 ? 's' : ''}</p>
-          <p style="font-weight:700; color:var(--primary-brand); margin-top:4px;">Total: ${peso(t.total)}</p>
-          <div class="trip-actions"><button class="btn btn-secondary" data-action="view-trip" data-id="${esc(t.id)}">Manage Booking</button></div>
-        </div>
-      </div>`;
-  }).join('');
+});
+
+function isValidMapPoint(lat, lng) {
+  return Number.isFinite(Number(lat)) && Number.isFinite(Number(lng)) &&
+    lat !== null && lng !== null && lat !== '' && lng !== '' &&
+    Number(lat) >= -90 && Number(lat) <= 90 &&
+    Number(lng) >= -180 && Number(lng) <= 180 &&
+    !(Number(lat) === 0 && Number(lng) === 0);
 }
 
-function viewTrip(id) {
-  const t = state.trips.find((x) => x.id === id);
-  if (!t) return;
-  tripDetailId = id;
-  const st = tripStatus(t);
-  const rows = [
-    ['Reference', '#' + t.id],
-    ['Status', st],
-    ['Place', t.prop],
-    [t.isStay ? 'Check-in' : 'Visit date', fmtDate(t.checkIn)]
-  ];
-  if (t.isStay) rows.push(['Check-out', fmtDate(t.checkOut)], ['Rooms', t.rooms]);
-  rows.push(['Guests', t.guests], ['Guest name', t.guestName], ['Payment', t.method], ['Total', peso(t.total)], ['Refund', t.refundStatus || (t.status === 'Cancelled' ? 'Not specified' : 'Not requested')]);
-  if (t.cardLast4) rows.push(['Card', '•••• ' + t.cardLast4]);
-  $('trip-detail-body').innerHTML = rows.map((r) => `<div class="detail-kv"><span>${esc(r[0])}</span><span>${esc(r[1])}</span></div>`).join('');
-  $('trip-cancel-btn').style.display = st === 'Upcoming' ? '' : 'none';
-  $('trip-cancel-btn').textContent = 'Request cancellation / refund';
-  let extra = $('trip-receipt-btn');
-  if (!extra) { extra = document.createElement('button'); extra.id = 'trip-receipt-btn'; extra.className = 'btn btn-secondary'; extra.textContent = 'Print receipt'; extra.dataset.action = 'print-trip-receipt'; $('trip-detail-modal').querySelector('.modal-actions').prepend(extra); }
-  extra.dataset.id = t.id;
-  openModal('trip-detail-modal');
+function routeForSpot(spot) {
+  const policy = ROUTE_ACCESS[spot.id];
+  const search = (term) => 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(term);
+  // New Firebase destinations must be deliberately checked before auto-routing to entered coordinates.
+  if (!policy) {
+    const name = String(spot.name || '') + ' ' + String(spot.location || '') + ' Romblon Philippines';
+    if (spot.locationVerified === true && isValidMapPoint(spot.lat,spot.lng)) {
+      return {
+        kind:'road', label:'Get directions', note:'Confirm the final entrance and road conditions locally.',
+        lat:Number(spot.lat), lng:Number(spot.lng),
+        url:'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(spot.lat+','+spot.lng) + '&travelmode=driving'
+      };
+    }
+    return {kind:'lookup',label:'Find verified access',note:'Location has not been field-verified; confirm with the operator before departing.',url:search(name)};
+  }
+  if (policy.kind==='lookup') return {...policy,url:search(policy.query+' Philippines')};
+  const lat=policy.lat ?? spot.lat, lng=policy.lng ?? spot.lng;
+  if (!isValidMapPoint(lat,lng)) return {kind:'lookup',label:'Find destination',note:'An exact navigation waypoint is not available.',url:search(spot.name+' '+spot.location+' Romblon Philippines')};
+  return {...policy,lat:Number(lat),lng:Number(lng),
+    url:'https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(lat+','+lng)+'&travelmode=driving'
+  };
 }
 
-function cancelTrip() {
-  const t = state.trips.find((x) => x.id === tripDetailId);
-  if (!t) return;
-  const checkDate = t.checkIn ? fromISO(t.checkIn) : new Date();
-  const hoursUntil = (checkDate - new Date()) / 3600000;
-  const policy = hoursUntil >= 48 ? 'This booking is within the demo free-cancellation window (48+ hours before check-in). A refund request will be marked for review.' : 'This booking is inside the 48-hour window. Cancellation can be requested, but a refund is not guaranteed.';
-  if (!confirm(policy + '\n\nContinue?')) return;
-  t.status = 'Cancelled';
-  t.refundStatus = hoursUntil >= 48 ? 'Refund requested · eligible for review' : 'Refund not guaranteed · review required';
-  t.cancelledAt = new Date().toISOString();
-  saveState();
-  closeModal('trip-detail-modal');
-  renderTrips();
-  toast('Cancellation saved. Refund status is recorded for review.');
-}
-
-function isAvailable(spotId, checkIn, checkOut, isStay) {
-  const overrides = state.availability || {};
-  const dates = [];
-  let d = checkIn;
-  const end = isStay ? checkOut : addDays(checkIn, 1);
-  while (d < end) { dates.push(d); d = addDays(d, 1); }
-  const manuallyBlocked = dates.some((date) => overrides[spotId + ':' + date] === 'blocked');
-  if (manuallyBlocked) return false;
-  if (!isStay) return true;
-  return !state.trips.some((booking) => {
-    if (booking.spotId !== spotId || booking.status === 'Cancelled') return false;
-    const bookingEnd = booking.isStay ? booking.checkOut : addDays(booking.checkIn, 1);
-    return checkIn < bookingEnd && end > booking.checkIn;
-  });
-}
-
-function renderTravelers() {
-  const host = $('traveler-list');
-  const list = state.travelers || [];
-  host.innerHTML = list.length ? list.map((t) => `<div class="saved-method-card"><div class="saved-method-icon">👤</div><div class="saved-method-copy"><strong>${esc(t.name)}</strong><span>${esc(t.email || 'No email')} · ${esc(t.phone || 'No phone')}</span></div><button class="link-btn danger-link" data-action="remove-traveler" data-id="${esc(t.id)}">Remove</button></div>`).join('') : '<div class="empty-state">No saved travelers yet.</div>';
-}
-
-function addTraveler() {
-  const name = $('traveler-name').value.trim();
-  const email = $('traveler-email').value.trim();
-  const phone = $('traveler-phone').value.trim();
-  if (name.length < 2 || (email && !validEmail(email))) { toast('Enter a valid name and email.', 'error'); return; }
-  state.travelers = [...(state.travelers || []), { id: 'trav_' + Date.now().toString(36), name, email, phone }];
-  saveState(); $('traveler-name').value = ''; $('traveler-email').value = ''; $('traveler-phone').value = '';
-  renderTravelers(); toast('Traveler profile saved.', 'success');
-}
-
-function removeTraveler(id) {
-  state.travelers = (state.travelers || []).filter((t) => t.id !== id); saveState(); renderTravelers();
-}
-
-function openHostDashboard() {
-  const stats = $('host-stats');
-  const active = state.trips.filter((t) => t.status !== 'Cancelled');
-  const revenue = active.reduce((sum, t) => sum + Number(t.total || 0), 0);
-  stats.innerHTML = `<div class="host-stat"><strong>${state.trips.length}</strong><span>Total bookings</span></div><div class="host-stat"><strong>${active.length}</strong><span>Active bookings</span></div><div class="host-stat"><strong>${peso(revenue)}</strong><span>Booked value</span></div>`;
-  $('host-spot').innerHTML = romblonSpots.map((spot) => `<option value="${esc(spot.id)}">${esc(spot.name)}</option>`).join('');
-  $('host-date').min = today(); $('host-date').value = addDays(today(), 1);
-  $('host-bookings').innerHTML = state.trips.length ? state.trips.slice(0, 10).map((t) => `<div class="saved-method-card"><div class="saved-method-icon">🧾</div><div class="saved-method-copy"><strong>${esc(t.prop)}</strong><span>#${esc(t.id)} · ${esc(t.status || 'Confirmed')} · ${peso(t.total)}</span></div></div>`).join('') : '<div class="empty-state">No bookings yet.</div>';
-  navigateTo('screen-host-dashboard');
-}
-
-function saveAvailability() {
-  const spot = $('host-spot').value, date = $('host-date').value, status = $('host-status').value;
-  if (!spot || !date || date < today()) { toast('Choose a valid future date.', 'error'); return; }
-  state.availability = state.availability || {};
-  state.availability[spot + ':' + date] = status;
-  saveState(); toast('Availability updated for this browser.', 'success');
-}
-
-function receiptHtml(t) {
-  const rows = [['Booking reference', '#' + t.id], ['Property / experience', t.prop], ['Guest', t.guestName], ['Email', t.guestEmail], ['Visit / check-in', fmtDate(t.checkIn)], ...(t.isStay ? [['Check-out', fmtDate(t.checkOut)], ['Rooms', t.rooms]] : []), ['Guests', t.guests], ['Payment method', t.method], ['Status', t.status || 'Confirmed'], ['Total', peso(t.total)]];
-  return `<!doctype html><html><head><meta charset="utf-8"><title>EcoTour receipt ${esc(t.id)}</title><style>body{font:14px Arial,sans-serif;max-width:680px;margin:40px auto;padding:24px;color:#172033}h1{color:#1e6b43}p{color:#64748b}.row{display:flex;justify-content:space-between;gap:24px;padding:12px 0;border-bottom:1px solid #e2e8f0}.row span:first-child{color:#64748b}.total{font-size:18px;font-weight:bold}@media print{button{display:none}}</style></head><body><h1>EcoTour</h1><h2>Booking receipt</h2><p>Thank you for choosing local experiences in Romblon.</p>${rows.map((r) => `<div class="row"><span>${esc(r[0])}</span><strong>${esc(r[1])}</strong></div>`).join('')}<p>Prototype receipt only. This is not a tax invoice or proof of a processed payment.</p><button onclick="window.print()">Print / Save as PDF</button></body></html>`;
-}
-
-function printReceipt(id) {
-  const t = state.trips.find((x) => x.id === id) || state.trips[0];
-  if (!t) { toast('No booking receipt found.', 'error'); return; }
-  const win = window.open('', '_blank');
-  if (!win) { toast('Allow pop-ups to print the receipt.', 'error'); return; }
-  win.document.open(); win.document.write(receiptHtml(t)); win.document.close();
+// The visible attraction coordinates and the navigation endpoint may deliberately differ.
+// The map pin represents the attraction, while the navigation target may be a road/boat access point.
+function mappedPointForSpot(spot) {
+  if (!isValidMapPoint(spot.lat,spot.lng)) return null;
+  // Local seed listings have source-reviewed points. New Firebase records need explicit confirmation.
+  if (!Object.prototype.hasOwnProperty.call(ROUTE_ACCESS,spot.id) && spot.locationVerified !== true) return null;
+  return {lat:Number(spot.lat),lng:Number(spot.lng)};
 }
 
 function mapPopup(s) {
+  const route = routeForSpot(s);
   return `
     <div class="map-popup-card" data-action="open-spot" data-id="${esc(s.id)}">
       <img src="${esc(safeUrl(s.image))}" class="map-popup-img" alt="" />
       <div class="map-popup-info">
         <strong>${esc(s.name)}</strong>
         <p class="map-popup-loc">📍 ${esc(s.location)}</p>
-        <button class="map-popup-btn" type="button">View Details</button><a class="map-directions-link" href="https://www.google.com/maps/dir/?api=1&destination=${Number(s.lat)},${Number(s.lng)}" target="_blank" rel="noopener">Get directions ↗</a>
+        <p class="map-popup-loc">${esc(route.note)}</p>
+        <button class="map-popup-btn" type="button">View Details</button><a class="map-directions-link" href="${esc(route.url)}" target="_blank" rel="noopener noreferrer">${esc(route.label)} ↗</a>
       </div>
     </div>`;
 }
@@ -973,50 +987,83 @@ function updateMarkers(fit) {
   const bounds = new maplibregl.LngLatBounds();
   let count = 0;
   filteredSpots().forEach((spot) => {
-    if (typeof spot.lat !== 'number' || typeof spot.lng !== 'number') return;
+    const point = mappedPointForSpot(spot);
+    if (!point) return; // No inaccurate or unreviewed pins for newly added places.
     const popup = new maplibregl.Popup({ offset: 24, maxWidth: '260px' }).setHTML(mapPopup(spot));
     const marker = new maplibregl.Marker({ color: '#B85C38' })
-      .setLngLat([spot.lng, spot.lat])
+      .setLngLat([point.lng, point.lat])
       .setPopup(popup)
       .addTo(leafletMap);
     mapMarkersGroup.push(marker);
-    bounds.extend([spot.lng, spot.lat]);
+    bounds.extend([point.lng, point.lat]);
     count += 1;
   });
   if (fit && count > 0) leafletMap.fitBounds(bounds, { padding: 50, maxZoom: 11, duration: 500 });
 }
 
-function tripSummaryText(spot) {
-  const t = state.trip;
-  if (isResort(spot)) {
-    const n = Math.max(1, diffDays(t.checkIn, t.checkOut));
-    return `${fmtShort(t.checkIn)} - ${fmtShort(t.checkOut)} · ${n} night${n > 1 ? 's' : ''} · ${t.guests} guest${t.guests > 1 ? 's' : ''} · ${t.rooms} room${t.rooms > 1 ? 's' : ''}`;
-  }
-  return `${fmtDate(t.checkIn)} · ${t.guests} guest${t.guests > 1 ? 's' : ''}`;
+// Per-place Facebook/Instagram pages may be set in the Firebase destinations/{id}/socials object.
+// Only the Tinagong Dagat tourism-office link is prefilled from an official municipal site.
+function checkedSocialUrl(value, hosts) {
+  try {
+    const url = new URL(String(value || ''));
+    if (url.protocol !== 'https:') return '';
+    return hosts.some(host => url.hostname === host || url.hostname.endsWith('.' + host)) ? url.href : '';
+  } catch (e) { return ''; }
 }
 
-function renderSearchWidget() {
-  const t = state.trip;
-  $('sw-dates').textContent = `${fmtShort(t.checkIn)} - ${fmtShort(t.checkOut)}`;
-  $('sw-guests').textContent = `${t.rooms} Room${t.rooms > 1 ? 's' : ''}, ${t.guests} Guest${t.guests > 1 ? 's' : ''}`;
+function socialLinksFor(spot) {
+  const socials = spot.socials || {};
+  const facebook = checkedSocialUrl(socials.facebook, ['facebook.com', 'fb.com']);
+  const instagram = checkedSocialUrl(socials.instagram, ['instagram.com']);
+  const website = checkedSocialUrl(socials.website, ['calatravaromblon.gov.ph','cms-romblon-lgu.e.gov.ph']);
+  const query = encodeURIComponent(spot.name + ' ' + spot.location + ' Romblon');
+  const tag = (spot.name + 'Romblon').toLowerCase().normalize('NFKD').replace(/[^a-z0-9]/g, '');
+  return {
+    facebook, instagram, website,
+    facebookSearch: 'https://www.facebook.com/search/top/?q=' + query,
+    instagramTag: 'https://www.instagram.com/explore/tags/' + encodeURIComponent(tag || 'romblon') + '/'
+  };
 }
 
-function refreshDetailPricing() {
-  if (!currentSpot) return;
-  const q = quote(currentSpot);
-  $('detail-trip-summary').textContent = tripSummaryText(currentSpot);
-  if (q.unit === 'free') {
-    $('bar-price-label').textContent = 'Entry';
-    $('bar-price').textContent = 'Free';
-  } else {
-    $('bar-price-label').textContent = q.discount ? `Total (after ${Math.round(MEMBER_DISCOUNT * 100)}% member discount)` : 'Total';
-    $('bar-price').textContent = peso(q.total);
-  }
-  $('reserve-btn').textContent = isResort(currentSpot) ? 'Reserve' : (q.unit === 'free' ? 'Plan Visit' : 'Book Visit');
+function renderSpotSocial(spot) {
+  const links = socialLinksFor(spot);
+  const parts = [];
+  if (links.facebook) parts.push('<a class="place-social-link" target="_blank" rel="noopener noreferrer" href="' + esc(links.facebook) + '">ⓕ Local tourism Facebook</a>');
+  if (links.instagram) parts.push('<a class="place-social-link" target="_blank" rel="noopener noreferrer" href="' + esc(links.instagram) + '">◎ Instagram page</a>');
+  if (links.website) parts.push('<a class="place-social-link" target="_blank" rel="noopener noreferrer" href="' + esc(links.website) + '">🌐 Official tourism info</a>');
+  parts.push('<a class="place-social-link place-social-search" target="_blank" rel="noopener noreferrer" href="' + esc(links.facebookSearch) + '">ⓕ Search Facebook photos</a>');
+  if (!links.instagram) parts.push('<a class="place-social-link place-social-search" target="_blank" rel="noopener noreferrer" href="' + esc(links.instagramTag) + '">◎ Explore Instagram tags</a>');
+  $('detail-social-links').innerHTML = parts.join('');
+  $('detail-social-footer').href = links.facebook || links.website || links.facebookSearch;
+  $('detail-social-footer').textContent = links.facebook ? 'ⓕ Ask / View Photos' : links.website ? '🌐 Official guide' : 'ⓕ Find Photos';
+}
+
+function setDetailsDirections(spot) {
+  const route = routeForSpot(spot);
+  const button = $('detail-directions-link');
+  button.href = route.url;
+  button.textContent = '🧭 ' + route.label;
+  button.title = route.note;
+}
+
+function renderVisitInfo(spot) {
+  const info=spot.visitorInfo&&typeof spot.visitorInfo==='object'?spot.visitorInfo:{};
+  const fee=spot.price && spot.price !== 'See details'?spot.price:'Ask locally';
+  const hours=typeof info.hours==='string'&&info.hours.trim()?info.hours.trim():'Confirm with local tourism staff';
+  const access=typeof info.access==='string'&&info.access.trim()?info.access.trim():(VISIT_TIPS[spot.id]||'Confirm transport and site access with local tourism staff.');
+  const cell=(icon,label,value)=>'<div class="visit-info-item"><span class="visit-info-icon">'+icon+'</span><div><small>'+esc(label)+'</small><strong>'+esc(value)+'</strong></div></div>';
+  const island=islandForSpot(spot);
+  $('detail-visit-info').innerHTML=
+    cell('🏝️','Island',island==='Other'?'Romblon Province':island+' Island')+
+    cell('🎟️','Listed cost · unverified',fee)+
+    cell('🕒','Hours · check locally',hours)+
+    '<div class="visit-access"><b>🧭 Getting there</b><p>'+esc(access)+'</p></div>'+
+    (state.preferences.travelTips!==false?'<div class="visit-travel-tip"><b>🌱 Travel tip</b><p>Respect the community, leave no waste, and check weather and site rules.</p></div>':'')+
+    '<p class="visit-disclaimer">Prototype travel details; fees, routes and opening times may change. Confirm directly with local operators.</p>';
 }
 
 function openSpot(id) {
-  const s = romblonSpots.find((x) => x.id === id);
+  const s = romblonSpots.find((x) => x.id === id) || (state.offlineGuides || {})[id];
   if (!s) return;
   currentSpot = s;
   closeModalsAll();
@@ -1033,7 +1080,9 @@ function openSpot(id) {
   $('detail-highlights').innerHTML = (s.highlights || []).map((h) => `<span class="tag">✓ ${esc(h)}</span>`).join('') || '<span class="text-muted">No highlights listed.</span>';
   renderReviews();
   updateFavoriteButton();
-  refreshDetailPricing();
+  renderSpotSocial(s);
+  renderVisitInfo(s);
+  setDetailsDirections(s);
   navigateTo('screen-details');
   $('screen-details').scrollTop = 0;
 }
@@ -1121,267 +1170,9 @@ function submitReview() {
   toast('Thanks for your review!', 'success');
 }
 
-function openTripModal() {
-  ensureTripDefaults();
-  $('tm-checkin').min = today();
-  $('tm-checkin').value = state.trip.checkIn;
-  $('tm-checkout').min = addDays(state.trip.checkIn, 1);
-  $('tm-checkout').value = state.trip.checkOut;
-  $('tm-guests').textContent = state.trip.guests;
-  $('tm-rooms').textContent = state.trip.rooms;
-  $('tm-error').textContent = '';
-  syncStepperButtons();
-  openModal('trip-modal');
-}
-
-function syncStepperButtons() {
-  const g = Number($('tm-guests').textContent);
-  const r = Number($('tm-rooms').textContent);
-  document.querySelector('[data-step="guests"][data-dir="-1"]').disabled = g <= 1;
-  document.querySelector('[data-step="guests"][data-dir="1"]').disabled = g >= 12;
-  document.querySelector('[data-step="rooms"][data-dir="-1"]').disabled = r <= 1;
-  document.querySelector('[data-step="rooms"][data-dir="1"]').disabled = r >= Math.min(6, g);
-}
-
-function stepValue(kind, dir) {
-  const el = $(kind === 'guests' ? 'tm-guests' : 'tm-rooms');
-  let v = Number(el.textContent) + dir;
-  const g = kind === 'guests' ? v : Number($('tm-guests').textContent);
-  if (kind === 'guests') v = Math.min(12, Math.max(1, v));
-  else v = Math.min(6, Math.max(1, v), g);
-  el.textContent = v;
-  if (kind === 'guests' && Number($('tm-rooms').textContent) > v) $('tm-rooms').textContent = v;
-  syncStepperButtons();
-}
-
-function saveTripSettings() {
-  const ci = $('tm-checkin').value;
-  const co = $('tm-checkout').value;
-  if (!ci || ci < today()) { $('tm-error').textContent = 'Choose a date that is today or later.'; return; }
-  if (!co || co <= ci) { $('tm-error').textContent = 'Check-out must be after check-in.'; return; }
-  if (diffDays(ci, co) > 30) { $('tm-error').textContent = 'Stays are limited to 30 nights.'; return; }
-  state.trip = { checkIn: ci, checkOut: co, guests: Number($('tm-guests').textContent), rooms: Number($('tm-rooms').textContent) };
-  saveState();
-  closeModal('trip-modal');
-  renderSearchWidget();
-  refreshDetailPricing();
-  if (currentScreen === 'screen-booking') renderBooking();
-}
-
-function proceedBooking() {
-  if (currentSpot && !isAvailable(currentSpot.id, state.trip.checkIn, state.trip.checkOut, isResort(currentSpot))) { toast('Those dates are currently marked unavailable. Choose another date.', 'error'); return; }
-  if (!isSignedIn()) {
-    returnTo = { screen: 'screen-booking' };
-    toast('Sign in to complete your booking.');
-    navigateTo('screen-login');
-    return;
-  }
-  prepareBooking();
-}
-
-function prepareBooking() {
-  if (!state.guestDetails.name) state.guestDetails.name = state.user.name;
-  if (!state.guestDetails.email) state.guestDetails.email = state.user.email;
-  renderBooking();
-  navigateTo('screen-booking');
-}
-
-function renderBooking() {
-  const s = currentSpot;
-  const q = quote(s);
-  const t = state.trip;
-  $('summary-title').textContent = s.name;
-  $('summary-img').src = safeUrl(s.image);
-  $('summary-sub').textContent = tripSummaryText(s);
-  $('guest-name-val').textContent = state.guestDetails.name;
-  $('guest-email-val').textContent = state.guestDetails.email;
-  $('guest-phone-val').textContent = state.guestDetails.phone || 'No phone number added';
-  const travelerPicker = $('saved-traveler-picker');
-  if (travelerPicker) {
-    travelerPicker.innerHTML = '<option value="">Current booking details</option>' + (state.travelers || []).map((person) => `<option value="${esc(person.id)}">${esc(person.name)}</option>`).join('');
-    travelerPicker.value = '';
-  }
-  const rows = [`<div class="pricing-row"><span>${esc(q.line)}</span><span>${peso(q.subtotal)}</span></div>`];
-  if (q.discount) rows.push(`<div class="pricing-row text-success"><span>Member discount (${Math.round(MEMBER_DISCOUNT * 100)}%)</span><span>- ${peso(q.discount)}</span></div>`);
-  rows.push('<hr class="price-divider"/>', `<div class="pricing-total-row"><span>Total Price</span><strong class="total-price">${peso(q.total)}</strong></div>`);
-  $('pricing-card').innerHTML = rows.join('');
-  $('booking-next-btn').textContent = q.total === 0 ? 'Confirm Visit' : 'Next: Payment';
-  $('pay-final-amount').textContent = peso(q.total);
-  $('pm-property').style.display = isResort(s) ? '' : 'none';
-}
-
-function openGuestModal() {
-  clearErrors($('guest-modal'));
-  $('edit-guest-name').value = state.guestDetails.name;
-  $('edit-guest-email').value = state.guestDetails.email;
-  $('edit-guest-phone').value = state.guestDetails.phone;
-  openModal('guest-modal');
-}
-
-function saveGuest() {
-  clearErrors($('guest-modal'));
-  const name = $('edit-guest-name').value.trim();
-  const email = $('edit-guest-email').value.trim();
-  const phone = $('edit-guest-phone').value.trim();
-  let ok = true;
-  if (name.length < 2) { setError('edit-guest-name', 'Enter the guest name.'); ok = false; }
-  if (!validEmail(email)) { setError('edit-guest-email', 'Enter a valid email address.'); ok = false; }
-  if (phone && !validPhone(phone)) { setError('edit-guest-phone', 'Enter a valid phone number.'); ok = false; }
-  if (!ok) return;
-  state.guestDetails = { name, email, phone };
-  saveState();
-  closeModal('guest-modal');
-  renderBooking();
-}
-
-function bookingNext() {
-  const q = quote(currentSpot);
-  if (!validEmail(state.guestDetails.email) || state.guestDetails.name.length < 2) {
-    toast('Complete the guest details first.', 'error');
-    openGuestModal();
-    return;
-  }
-  if (q.total === 0) { completeBooking('No payment required', ''); return; }
-  clearErrors($('screen-payment'));
-  $('pay-card-name').value = state.guestDetails.name;
-  $('pay-card-number').value = '';
-  $('pay-card-exp').value = '';
-  $('pay-card-cvv').value = '';
-  syncPaymentMethod();
-  navigateTo('screen-payment');
-}
-
-function selectedMethod() {
-  return document.querySelector('input[name="paymethod"]:checked').value;
-}
-
-function syncPaymentMethod() {
-  const m = selectedMethod();
-  ['card', 'gcash', 'property'].forEach((k) => $('pm-' + k).classList.toggle('active', k === m));
-  $('pm-card-body').classList.toggle('hidden', m !== 'card');
-}
-
-function luhn(num) {
-  let sum = 0;
-  let alt = false;
-  for (let i = num.length - 1; i >= 0; i--) {
-    let n = Number(num[i]);
-    if (alt) { n *= 2; if (n > 9) n -= 9; }
-    sum += n;
-    alt = !alt;
-  }
-  return sum % 10 === 0;
-}
-
-function validateCard() {
-  clearErrors($('pm-card'));
-  let ok = true;
-  const name = $('pay-card-name').value.trim();
-  const num = $('pay-card-number').value.replace(/\s/g, '');
-  const exp = $('pay-card-exp').value.trim();
-  const cvv = $('pay-card-cvv').value.trim();
-  if (name.length < 2) { setError('pay-card-name', 'Enter the name on the card.'); ok = false; }
-  if (!/^\d{13,19}$/.test(num) || !luhn(num)) { setError('pay-card-number', 'Enter a valid card number.'); ok = false; }
-  const em = /^(\d{2})\/(\d{2})$/.exec(exp);
-  if (!em || Number(em[1]) < 1 || Number(em[1]) > 12) {
-    setError('pay-card-exp', 'Use MM/YY.');
-    ok = false;
-  } else {
-    const now = new Date();
-    const expDate = new Date(2000 + Number(em[2]), Number(em[1]), 0, 23, 59, 59);
-    if (expDate < now) { setError('pay-card-exp', 'This card has expired.'); ok = false; }
-  }
-  if (!/^\d{3,4}$/.test(cvv)) { setError('pay-card-cvv', 'Enter the 3 or 4 digit code.'); ok = false; }
-  return ok ? num.slice(-4) : null;
-}
-
-function processPayment() {
-  const method = selectedMethod();
-  let label = 'Pay at property';
-  let last4 = '';
-  if (method === 'card') {
-    last4 = validateCard();
-    if (!last4) return;
-    label = `Card ending ${last4}`;
-  } else if (method === 'gcash') {
-    label = 'GCash (simulated)';
-  }
-  const btn = $('pay-btn');
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span> Processing';
-  setTimeout(() => {
-    btn.disabled = false;
-    btn.textContent = 'Pay Now';
-    completeBooking(label, last4);
-  }, 1200);
-}
-
-function newReference() {
-  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-  let id;
-  do {
-    id = 'ET' + Array.from({ length: 6 }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
-  } while (state.trips.some((t) => t.id === id));
-  return id;
-}
-
-function completeBooking(methodLabel, last4) {
-  const s = currentSpot;
-  if (!s || !isAvailable(s.id, state.trip.checkIn, state.trip.checkOut, isResort(s))) {
-    toast('Availability changed. Please choose another date.', 'error');
-    if (s) navigateTo('screen-details');
-    return;
-  }
-  const q = quote(s);
-  const t = state.trip;
-  const stay = isResort(s);
-  const booking = {
-    id: newReference(),
-    spotId: s.id,
-    prop: s.name,
-    isStay: stay,
-    checkIn: t.checkIn,
-    checkOut: stay ? t.checkOut : t.checkIn,
-    nights: q.nights,
-    guests: t.guests,
-    rooms: q.rooms,
-    total: q.total,
-    discount: q.discount,
-    method: methodLabel,
-    cardLast4: last4,
-    guestName: state.guestDetails.name,
-    guestEmail: state.guestDetails.email,
-    guestPhone: state.guestDetails.phone,
-    status: 'Confirmed',
-    createdAt: new Date().toISOString()
-  };
-  state.trips.unshift(booking);
-  saveState();
-  renderConfirmation(booking);
-  navStack = [];
-  navigateTo('screen-confirmation', { push: false });
-}
-
-function renderConfirmation(b) {
-  $('conf-sub').textContent = `We've saved your booking. A confirmation would be sent to ${b.guestEmail} once email delivery is connected.`;
-  const rows = [
-    ['Guest', b.guestName],
-    ['Place', b.prop],
-    [b.isStay ? 'Check-in' : 'Visit date', fmtDate(b.checkIn)]
-  ];
-  if (b.isStay) rows.push(['Check-out', fmtDate(b.checkOut)]);
-  rows.push(['Guests', b.guests], ['Total', peso(b.total)]);
-  $('conf-card').innerHTML = `<h4 style="margin-bottom: 12px; border-bottom:1px solid var(--border-color); padding-bottom:8px;">Booking Reference: <span class="text-primary">#${esc(b.id)}</span></h4>` +
-    rows.map((r) => `<div class="c-row"><span class="c-lbl">${esc(r[0])}</span><span class="c-val">${esc(r[1])}</span></div>`).join('');
-}
-
-function finishBooking() {
-  tripTab = 'upcoming';
-  switchTab('trips');
-}
-
 function openTripPlanner() {
   renderSavedItineraries();
+  $('planner-interest').value=state.preferences.interest;
   $('planner-results').innerHTML = '';
   navigateTo('screen-trip-planner');
 }
@@ -1430,9 +1221,21 @@ function generateTripPlan() {
 function openPlanRoute() {
   if (!currentGeneratedPlan || !currentGeneratedPlan.items.length) { toast('Generate an itinerary first.', 'error'); return; }
   const places = currentGeneratedPlan.items.map(item => romblonSpots.find(s => s.id === item.spotId)).filter(Boolean);
-  const coords = places.map(s => `${s.lat},${s.lng}`);
-  const url = `https://www.google.com/maps/dir/${coords.map(encodeURIComponent).join('/')}`;
-  window.open(url, '_blank', 'noopener');
+  if (!places.length) return;
+  const islands = new Set(places.map(s=>islandForSpot(s)));
+  const routes = places.map(routeForSpot);
+  // Never invent a continuous driving journey across islands, offshore destinations, or mountain trails.
+  if (islands.size !== 1 || routes.some(r=>r.kind!=='road')) {
+    toast('This itinerary includes a ferry/boat/trail or island transfer. Open each place’s directions individually for verified access.', 'error');
+    return;
+  }
+  if (routes.length === 1) { window.open(routes[0].url, '_blank', 'noopener'); return; }
+  const coords = routes.map(r=>r.lat+','+r.lng);
+  const url = 'https://www.google.com/maps/dir/?api=1&origin=' + encodeURIComponent(coords[0]) +
+    '&destination=' + encodeURIComponent(coords[coords.length-1]) +
+    (coords.length>2 ? '&waypoints=' + encodeURIComponent(coords.slice(1,-1).join('|')) : '') +
+    '&travelmode=driving';
+  window.open(url,'_blank','noopener');
 }
 
 function saveGeneratedTrip() {
@@ -1492,13 +1295,14 @@ function renderDetailEcoScore(spot) {
 }
 
 function carouselSpots() {
-  return romblonSpots.slice().sort((a, b) => ratingFor(b) - ratingFor(a)).slice(0, 4);
+  return filteredSpots().slice().sort((a, b) => ratingFor(b) - ratingFor(a)).slice(0, 4);
 }
 
 function renderCarousel() {
   const track = $('carousel-track');
   const spots = carouselSpots();
   if (slideIndex >= spots.length) slideIndex = 0;
+  if (!spots.length) { track.innerHTML='<div class="carousel-empty">No featured places match these filters yet.</div>'; $('carousel-dots').innerHTML=''; stopCarousel(); return; }
   track.innerHTML = spots.map((s) => `
     <div class="carousel-slide" role="button" tabindex="0" style="background-image: url('${esc(safeUrl(s.image))}');" data-action="open-spot" data-id="${esc(s.id)}">
       <div class="banner-content"><h2>${esc(s.name)}</h2><p>📍 ${esc(s.location)}</p></div>
@@ -1530,6 +1334,7 @@ function updateCarousel() {
 
 function moveSlide(dir) {
   const n = carouselSpots().length;
+  if (!n) return;
   slideIndex = (slideIndex + dir + n) % n;
   updateCarousel();
 }
@@ -1550,8 +1355,9 @@ function closeModalsAll() {
 }
 
 function navigateTo(screenId, opts = {}) {
+  closeSearchSuggestions();
   const push = opts.push !== false;
-  if (push && currentScreen && currentScreen !== screenId && !['screen-splash'].includes(currentScreen)) navStack.push(currentScreen);
+  if (push && currentScreen && currentScreen !== screenId && currentScreen !== 'screen-welcome') navStack.push(currentScreen);
   document.querySelectorAll('.screen').forEach((s) => s.classList.remove('active'));
   $(screenId).classList.add('active');
   currentScreen = screenId;
@@ -1562,7 +1368,6 @@ function navigateTo(screenId, opts = {}) {
   if (tab) document.querySelectorAll('.nav-item').forEach((b) => b.classList.toggle('active', b.id === 'nav-' + tab));
   if (screenId === 'screen-map') ensureMap();
   if (screenId === 'screen-saved') renderSaved();
-  if (screenId === 'screen-trips') renderTrips();
 }
 
 function goBack() {
@@ -1577,6 +1382,12 @@ function switchTab(tab) {
 }
 
 function refreshAll() {
+  if(cacheSavedGuides()) saveState();
+  document.querySelectorAll('#island-filters .island-chip').forEach(btn=>{
+    const active=btn.dataset.island===activeIsland;
+    btn.classList.toggle('active',active);
+    btn.setAttribute('aria-pressed',String(active));
+  });
   renderCarousel();
   renderDestinations();
   renderSaved();
@@ -1587,7 +1398,6 @@ const actions = {
   'skip-auth': skipAuth,
   'forgot-password': forgotPassword,
   'toggle-theme': toggleTheme,
-  'open-trip-modal': openTripModal,
   'open-trip-planner': openTripPlanner,
   'generate-trip': generateTripPlan,
   'save-generated-trip': saveGeneratedTrip,
@@ -1605,19 +1415,9 @@ const actions = {
   'go-welcome': () => { navStack = []; navigateTo('screen-welcome', { push: false }); },
   'clear-data': clearData,
   'open-edit-profile': openEditProfile,
-  'open-payment-methods': () => openAccountPage('screen-payment-methods'),
-  'open-notifications': () => openAccountPage('screen-notifications'),
+  'open-travel-preferences': () => openAccountPage('screen-travel-preferences'),
+  'save-travel-preferences': saveTravelPreferences,
   'open-help': () => openAccountPage('screen-help'),
-  'open-travelers': () => { renderTravelers(); navigateTo('screen-travelers'); },
-  'add-traveler': addTraveler,
-  'remove-traveler': (el) => removeTraveler(el.dataset.id),
-  'open-host-dashboard': openHostDashboard,
-  'save-availability': saveAvailability,
-  'print-current-receipt': () => printReceipt(state.trips[0] && state.trips[0].id),
-  'print-trip-receipt': (el) => printReceipt(el.dataset.id),
-  'open-add-card': openAddCardModal,
-  'add-saved-card': addSavedCard,
-  'remove-payment-method': (el) => removePaymentMethod(el.dataset.id),
   'back-to-profile': () => switchTab('profile'),
   'save-profile': saveProfile,
   'back': goBack,
@@ -1625,16 +1425,8 @@ const actions = {
   'open-review-modal': openReviewModal,
   'submit-review': submitReview,
   'pick-star': (el) => { reviewRating = Number(el.dataset.value); renderStarPicker(); },
-  'proceed-booking': proceedBooking,
-  'open-guest-modal': openGuestModal,
-  'save-guest': saveGuest,
-  'booking-next': bookingNext,
-  'process-payment': processPayment,
-  'finish-booking': finishBooking,
-  'save-trip-settings': saveTripSettings,
-  'view-trip': (el) => viewTrip(el.dataset.id),
-  'cancel-trip': cancelTrip,
   'open-spot': (el) => openSpot(el.dataset.id),
+  'search-pick': (el) => chooseSearchSuggestion(el.dataset.searchSource, el.dataset.id),
   'toggle-favorite': (el) => toggleFavorite(el.dataset.id),
   'set-image': (el) => { currentGalleryIndex = Number(el.dataset.index) || 0; renderSpotGallery(currentSpot); },
   'prev-image': () => changeSpotGalleryImage(-1),
@@ -1643,13 +1435,12 @@ const actions = {
 
 function bindEvents() {
   document.addEventListener('click', (e) => {
+    if (!e.target.closest('.search-combobox')) closeSearchSuggestions();
     const closeBtn = e.target.closest('[data-close]');
     if (closeBtn) { closeModal(closeBtn.dataset.close); return; }
     if (e.target.classList && e.target.classList.contains('modal-overlay')) { closeModal(e.target.id); return; }
-    const step = e.target.closest('[data-step]');
-    if (step) { stepValue(step.dataset.step, Number(step.dataset.dir)); return; }
-    const tripTabBtn = e.target.closest('[data-trip-tab]');
-    if (tripTabBtn) { tripTab = tripTabBtn.dataset.tripTab; renderTrips(); return; }
+    const island=e.target.closest('[data-island]');
+    if(island){setIsland(island.dataset.island);return;}
     const cat = e.target.closest('[data-category]');
     if (cat) { setCategory(cat.dataset.category); return; }
     const expFilter = e.target.closest('[data-experience-filter]');
@@ -1658,82 +1449,51 @@ function bindEvents() {
     if (nav) { navigateTo(nav.dataset.nav); return; }
     const tab = e.target.closest('[data-tab]');
     if (tab) { switchTab(tab.dataset.tab); return; }
-    if (e.target.closest('.map-directions-link')) return;
+    if (e.target.closest('a[href]')) return;
     const act = e.target.closest('[data-action]');
     if (act && actions[act.dataset.action]) {
       if (act.dataset.action === 'open-spot' && e.target.closest('[data-action="toggle-favorite"]')) return;
       actions[act.dataset.action](act);
     }
   });
-
   document.addEventListener('keydown', (e) => {
+    const source = Object.keys(SEARCH_FIELDS).find(key => SEARCH_FIELDS[key].input === e.target.id);
+    if (source) { handleSearchSuggestionKeys(e,source); if (e.defaultPrevented) return; }
     if (e.key === 'Escape') closeTopModal();
     if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches('[role="button"][data-action], [role="button"][data-nav]')) {
-      e.preventDefault();
-      e.target.click();
+      e.preventDefault(); e.target.click();
     }
   });
-
   document.addEventListener('error', (e) => {
     if (e.target && e.target.tagName === 'IMG' && e.target.src !== FALLBACK_IMG) e.target.src = FALLBACK_IMG;
   }, true);
-
   $('login-form').addEventListener('submit', handleLogin);
   $('signup-form').addEventListener('submit', handleSignup);
-  $('sw-location').addEventListener('input', (e) => handleSearch(e.target.value, 'sw-location'));
-  $('map-search').addEventListener('input', (e) => handleSearch(e.target.value, 'map-search'));
-  $('saved-search').addEventListener('input', renderSaved);
+  $('sw-location').addEventListener('input', (e) => { handleSearch(e.target.value, 'sw-location'); renderSearchSuggestions('home'); });
+  $('map-search').addEventListener('input', (e) => { handleSearch(e.target.value, 'map-search'); renderSearchSuggestions('map'); });
+  $('saved-search').addEventListener('input', () => { renderSaved(); renderSearchSuggestions('saved'); });
+  Object.keys(SEARCH_FIELDS).forEach(source => {
+    $(SEARCH_FIELDS[source].input).addEventListener('focus', () => {
+      if ($(SEARCH_FIELDS[source].input).value.trim()) renderSearchSuggestions(source);
+    });
+  });
   $('sort-select').addEventListener('change', (e) => { sortMode = e.target.value; renderDestinations(); });
-  document.querySelectorAll('input[name="paymethod"]').forEach((r) => r.addEventListener('change', syncPaymentMethod));
-  $('tm-checkin').addEventListener('change', () => {
-    const ci = $('tm-checkin').value;
-    if (!ci) return;
-    $('tm-checkout').min = addDays(ci, 1);
-    if (!$('tm-checkout').value || $('tm-checkout').value <= ci) $('tm-checkout').value = addDays(ci, 1);
-  });
-  $('pay-card-number').addEventListener('input', (e) => {
-    const digits = e.target.value.replace(/\D/g, '').slice(0, 19);
-    e.target.value = digits.replace(/(.{4})/g, '$1 ').trim();
-  });
-  const travelerPicker = $('saved-traveler-picker');
-  if (travelerPicker) travelerPicker.addEventListener('change', () => {
-    const person = (state.travelers || []).find((t) => t.id === travelerPicker.value);
-    if (!person) return;
-    state.guestDetails = { name: person.name, email: person.email || '', phone: person.phone || '' };
-    saveState(); renderBooking();
-  });
-  $('saved-card-number').addEventListener('input', (e) => {
-    const digits = e.target.value.replace(/\D/g, '').slice(0, 19);
-    e.target.value = digits.replace(/(.{4})/g, '$1 ').trim();
-  });
-  $('saved-card-expiry').addEventListener('input', (e) => {
-    let d = e.target.value.replace(/\D/g, '').slice(0, 4);
-    if (d.length >= 3) d = d.slice(0, 2) + '/' + d.slice(2);
-    e.target.value = d;
-  });
-  ['bookingUpdates', 'promotions', 'emailUpdates'].forEach((key) => {
-    const el = $('pref-' + key);
-    if (el) el.addEventListener('change', () => savePreference(key, el.checked));
-  });
-  $('pay-card-exp').addEventListener('input', (e) => {
-    let d = e.target.value.replace(/\D/g, '').slice(0, 4);
-    if (d.length >= 3) d = d.slice(0, 2) + '/' + d.slice(2);
-    e.target.value = d;
-  });
+  // Travel preferences are persisted by the explicit Save button.
 }
 
 function init() {
-  ensureTripDefaults();
+  activeIsland=state.preferences.island;
   applyTheme();
   renderUser();
-  renderSearchWidget();
   bindEvents();
   refreshAll();
   if (window.__pendingFirebaseData) window.onFirebaseDataLoaded(window.__pendingFirebaseData);
-  setTimeout(() => {
-    if (isSignedIn() || state.guest) switchTab('home');
-    else navigateTo('screen-welcome', { push: false });
-  }, 1500);
+  // The native Android launch screen is the only splash; do not replay a web splash.
+  if (isSignedIn() || state.guest) switchTab('home');
+  else navigateTo('screen-welcome', { push: false });
 }
 
 document.addEventListener('DOMContentLoaded', init);
+if ('serviceWorker' in navigator && !window.Capacitor?.isNativePlatform?.()) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(e => console.warn('Offline shell unavailable:', e)));
+}
